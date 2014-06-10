@@ -11,8 +11,22 @@ $account_deactivated = (User::$info['deactivated'] == 'Y');
 $account_locked = (User::$info['locked'] == 'Y');
 $token1 = ereg_replace("[^0-9]", "",$_REQUEST['token']);
 $authcode1 = $_REQUEST['authcode'];
+
+API::add('User','getInfo',array($_SESSION['session_id']));
+API::add('User','getCountries');
+$query = API::send();
+$countries = $query['User']['getCountries']['results'][0];
+
+$personal = new Form('settings',false,false,'form1','site_users');
+$personal->get($query['User']['getInfo']['results'][0]);
+$personal->info['pass'] = ereg_replace("[^0-9a-zA-Z!@#$%&*?\.\-\_]", "",$personal->info['pass']);
+$personal->info['first_name'] = ereg_replace("/[^\da-z  ]/i", "",$personal->info['first_name']);
+$personal->info['last_name'] = ereg_replace("/[^\da-z ]/i", "",$personal->info['last_name']);
+$personal->info['country'] = ereg_replace("[^0-9]", "",$personal->info['country']);
+$personal->info['email'] = ereg_replace("[^0-9a-zA-Z@\.\!#\$%\&\*+_\~\?\-]", "",$personal->info['email']);
+$personal->verify();
 	
-if ($_REQUEST['submitted'] && !$token1) {
+if ($_REQUEST['submitted'] && !$token1 && !is_array($personal->errors)) {
 	if ($_REQUEST['request_2fa']) {
 		if (!($token1 > 0)) {
 			$no_token = true;
@@ -21,7 +35,7 @@ if ($_REQUEST['submitted'] && !$token1) {
 		}
 	}
 	
-	if (User::$info['verified_authy'] == 'Y') {
+	if (User::$info['verified_authy'] == 'Y' || User::$info['verified_google'] == 'Y') {
 		if ($_REQUEST['send_sms'] || User::$info['using_sms'] == 'Y') {
 			if (User::sendSMS()) {
 				$sent_sms = true;
@@ -46,25 +60,13 @@ if ($authcode1) {
 	if ($query['User']['getSettingsChangeRequest']['results'][0]) {
 		$_REQUEST = unserialize(base64_decode($query['User']['getSettingsChangeRequest']['results'][0]));
 	}
+	else
+		Errors::add(Lang::string('settings-request-expired'));
 }
 
 if ($_REQUEST['ex_request'])
 	$_REQUEST = unserialize(urldecode($_REQUEST['ex_request']));
 
-
-API::add('User','getInfo',array($_SESSION['session_id']));
-API::add('User','getCountries');
-$query = API::send();
-$countries = $query['User']['getCountries']['results'][0];
-
-$personal = new Form('settings',false,false,'form1','site_users');
-$personal->get($query['User']['getInfo']['results'][0]);
-$personal->info['pass'] = ereg_replace("[^0-9a-zA-Z!@#$%&*?\.\-\_]", "",$personal->info['pass']);
-$personal->info['first_name'] = ereg_replace("/[^\da-z  ]/i", "",$personal->info['first_name']);
-$personal->info['last_name'] = ereg_replace("/[^\da-z ]/i", "",$personal->info['last_name']);
-$personal->info['country'] = ereg_replace("[^0-9]", "",$personal->info['country']);
-$personal->info['email'] = ereg_replace("[^0-9a-zA-Z@\.\!#\$%\&\*+_\~\?\-]", "",$personal->info['email']);
-$personal->verify();
 
 if ($_REQUEST['settings'] && is_array($personal->errors)) {
 	$errors = array();
@@ -97,6 +99,9 @@ elseif (($_REQUEST['settings']) && !is_array($personal->errors)) {
 		
 		if ($query['error'] == 'request-expired')
 			Errors::add(Lang::string('settings-request-expired'));
+		
+		if ($query['error'] == 'security-incorrect-token')
+			Errors::add(Lang::string('security-incorrect-token'));
 
 		if (!is_array(Errors::$errors)) {
 			Link::redirect('settings.php?message=settings-personal-message');
@@ -140,6 +145,9 @@ if ($_REQUEST['prefs']) {
 			
 		if ($query['error'] == 'request-expired')
 			Errors::add(Lang::string('settings-request-expired'));
+		
+		if ($query['error'] == 'security-incorrect-token')
+			Errors::add(Lang::string('security-incorrect-token'));
 			
 		if (!is_array(Errors::$errors)) {
 			Link::redirect('settings.php?message=settings-settings-message');
@@ -174,6 +182,9 @@ if ($_REQUEST['deactivate_account']) {
 			if ($query['error'] == 'request-expired')
 				Errors::add(Lang::string('settings-request-expired'));
 			
+			if ($query['error'] == 'security-incorrect-token')
+				Errors::add(Lang::string('security-incorrect-token'));
+			
 			if (!is_array(Errors::$errors)) {
 				Link::redirect('settings.php?message=settings-account-deactivated');
 			}
@@ -198,6 +209,9 @@ if ($_REQUEST['reactivate_account']) {
 			
 		if ($query['error'] == 'request-expired')
 			Errors::add(Lang::string('settings-request-expired'));
+		
+		if ($query['error'] == 'security-incorrect-token')
+			Errors::add(Lang::string('security-incorrect-token'));
 			
 		if (!is_array(Errors::$errors)) {
 			Link::redirect('settings.php?message=settings-account-reactivated');
@@ -222,6 +236,9 @@ if ($_REQUEST['lock_account']) {
 			
 		if ($query['error'] == 'request-expired')
 			Errors::add(Lang::string('settings-request-expired'));
+		
+		if ($query['error'] == 'security-incorrect-token')
+			Errors::add(Lang::string('security-incorrect-token'));
 			
 		if (!is_array(Errors::$errors)) {
 			Link::redirect('settings.php?message=settings-account-locked');
@@ -246,6 +263,9 @@ if ($_REQUEST['unlock_account']) {
 			
 		if ($query['error'] == 'request-expired')
 			Errors::add(Lang::string('settings-request-expired'));
+		
+		if ($query['error'] == 'security-incorrect-token')
+			Errors::add(Lang::string('security-incorrect-token'));
 			
 		if (!is_array(Errors::$errors)) {
 			Link::redirect('settings.php?message=settings-account-unlocked');
@@ -322,7 +342,7 @@ include 'includes/head.php';
 					<input type="hidden" name="submitted" value="1" />
 					<div class="buyform">
 						<div class="spacer"></div>
-						<? if (User::$info['verified_authy'] == 'Y') { ?>
+						<? if (User::$info['verified_authy'] == 'Y' || User::$info['verified_google'] == 'Y') { ?>
 						<div class="param lessbottom marginleft">
 							<input class="checkbox" name="confirm_withdrawal_2fa_btc" id="confirm_withdrawal_2fa_btc" type="checkbox" value="Y" <?= ($confirm_withdrawal_2fa_btc1 == 'Y') ? 'checked="checked"' : '' ?> />
 							<label for="confirm_withdrawal_2fa_btc"><?= Lang::string('settings-withdrawal-2fa-btc') ?></label>
@@ -334,7 +354,7 @@ include 'includes/head.php';
 							<label for="confirm_withdrawal_email_btc"><?= Lang::string('settings-withdrawal-email-btc') ?></label>
 							<div class="clear"></div>
 						</div>
-						<? if (User::$info['verified_authy'] == 'Y') { ?>
+						<? if (User::$info['verified_authy'] == 'Y' || User::$info['verified_google'] == 'Y') { ?>
 						<div class="param lessbottom marginleft">
 							<input class="checkbox" name="confirm_withdrawal_2fa_bank" id="confirm_withdrawal_2fa_bank" type="checkbox" value="Y" <?= ($confirm_withdrawal_2fa_bank1 == 'Y') ? 'checked="checked"' : '' ?> />
 							<label for="confirm_withdrawal_2fa_bank"><?= Lang::string('settings-withdrawal-2fa-bank') ?></label>
@@ -449,8 +469,8 @@ include 'includes/head.php';
 							<div class="spacer"></div>
 							<div class="spacer"></div>
 							<div class="param">
-								<label for="authy-token"><?= Lang::string('security-token') ?></label>
-								<input name="token" id="authy-token" type="text" value="<?= $token1 ?>" />
+								<label for="token"><?= Lang::string('security-token') ?></label>
+								<input name="token" id="token" type="text" value="<?= $token1 ?>" />
 								<div class="clear"></div>
 							</div>
 							 <div class="mar_top2"></div>
