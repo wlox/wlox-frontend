@@ -62,11 +62,9 @@ if (!User::isLoggedIn()) {
         
 						<ul>    
                             <!-- SLIDE 1 -->
-							<li data-transition="fade" data-slotamount="9" data-thumb="images/slider-bg1.jpg">
+							<li data-transition="fade" data-slotamount="9" data-thumb="images/bg1.jpg">
 								
-                                <img src="images/slider-bg1.jpg" alt="" />
-                                
-                                <div class="caption sfb" data-x="658" data-y="0" data-speed="900" data-start="900" data-easing="easeOutSine"><img src="images/slide1.png" alt="" /></div>
+                                <img src="images/bg1.jpg" alt="" />
 
                                 <!--  div class="caption lft big_white"  data-x="10" data-y="90" data-speed="900" data-start="700" data-easing="easeOutExpo">Business, Corporate, Creative &amp; Onepage Websites</div -->
                                 
