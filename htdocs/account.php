@@ -28,7 +28,8 @@ $fee_bracket = $query['FeeSchedule']['getRecord']['results'][0];
 $referer = substr($_SERVER['HTTP_REFERER'],strrpos($_SERVER['HTTP_REFERER'],'/')+1);
 if ($referer == 'login.php' || $referer == 'verify-token.php' || $referer == 'first-login.php') {
 	if (User::$info['notify_login'] == 'Y') {
-		API::add('User','notifyLogin',array($_SERVER['REMOTE_ADDR']));
+		$remote_ip = ($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+		API::add('User','notifyLogin',array($remote_ip));
 		$query = API::send();
 	}
 }
