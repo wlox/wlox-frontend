@@ -2,6 +2,9 @@
 
 include '../cfg/cfg.php';
 
+if (stristr($_SERVER["SERVER_NAME"],'www.'))
+	Link::redirect('http://beta.1btcxe.com/login.php',$_REQUEST);
+
 $page_title = Lang::string('home-login');
 $user1 = ereg_replace("[^0-9]", "",$_REQUEST['login']['user']);
 $pass1 = ereg_replace("[^0-9a-zA-Z!@#$%&*?\.\-\_]", "",$_REQUEST['login']['pass']);
