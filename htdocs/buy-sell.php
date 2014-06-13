@@ -38,7 +38,7 @@ $bids = $query['Orders']['get']['results'][0];
 $asks = $query['Orders']['get']['results'][1];
 
 // fees temporarily zero!
-$user_fee['fee'] = 0;
+//$user_fee['fee'] = 0;
 
 $buy_amount1 = ($_REQUEST['buy_amount'] > 0) ? ereg_replace("[^0-9.]", "",$_REQUEST['buy_amount']) : 0;
 $buy_price1 = ($_REQUEST['buy_price'] > 0) ? ereg_replace("[^0-9.]", "",$_REQUEST['buy_price']) : $current_ask;
