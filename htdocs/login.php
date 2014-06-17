@@ -91,7 +91,7 @@ include 'includes/head.php';
 	    		<input type="submit" name="submit" value="<?= Lang::string('home-login') ?>" class="but_user" />
 	    	</div>
     	</form>
-    	<a class="forgot" href="how-to-register.php"><?= Lang::string('login-dont-have') ?></a>
+    	<a class="forgot" href="register.php"><?= Lang::string('login-dont-have') ?></a>
     </div>
     <div class="clearfix mar_top8"></div>
 </div>
