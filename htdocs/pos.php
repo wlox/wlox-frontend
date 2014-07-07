@@ -15,7 +15,7 @@ echo "<table border='1'>
 
 while($row = mysqli_fetch_array($result)) {
   $user=$row['user'].$row['email'];
-  $hash=hash('sha256',$user);
+  $hash=hash('sha512',$user);
   echo "<tr>";
   echo "<td>" . $hash . "</td>";
   echo "<td>" . $row['btc'] . "</td>";
