@@ -206,7 +206,7 @@ if (!$bypass) {
 							</div>
 							<div class="param lessbottom">
 								<input class="checkbox" name="buy_market_price" id="buy_market_price" type="checkbox" value="1" <?= ($buy_market_price1 && !$buy_stop) ? 'checked="checked"' : '' ?> <?= (!$asks) ? 'readonly="readonly"' : '' ?> <?= ($buy_stop) ? 'disabled="disabled"' : '' ?> />
-								<label for="buy_market_price"><?= Lang::string('buy-market-price') ?> <a title="<?= Lang::string('buy-market-rates-info') ?>" href="https://1btcxe.freshdesk.com/solution/articles/1000023402-what-are-market-price"><i class="fa fa-question-circle"><i class="fa fa-question-circle"></i></a></label>
+								<label for="buy_market_price"><?= Lang::string('buy-market-price') ?> <a title="<?= Lang::string('buy-market-rates-info') ?>" href="https://1btcxe.freshdesk.com/solution/articles/1000023402-what-are-market-price"><i class="fa fa-question-circle"></i></a></label>
 								<div class="clear"></div>
 							</div>
 							<div class="param lessbottom">
