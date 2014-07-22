@@ -72,7 +72,7 @@ if (!User::isLoggedIn()) {
                                 
                                 <div class="caption lfb h_line"  data-x="10" data-y="214" data-speed="900" data-start="2000" data-easing="easeOutExpo"></div>
                                 
-                                <p class="caption lfb small_text"  data-x="10" data-y="238" data-speed="900" data-start="2700" data-easing="easeOutExpo"><?= wordwrap(strip_tags($content['content']),80,'<br/>') ?></p>
+                                <p class="caption lfb small_text"  data-x="10" data-y="238" data-speed="900" data-start="2700" data-easing="easeOutExpo"><?= wordwrap(strip_tags($content['content']),80,'<br/>') ?> <a href="about.php">>></a></p>
                                 
                                 <div class="caption lfb h_line"  data-x="10" data-y="344" data-speed="900" data-start="3400" data-easing="easeOutExpo"></div>
                                 
