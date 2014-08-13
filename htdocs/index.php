@@ -94,7 +94,7 @@ if (!User::isLoggedIn()) {
 
 <div class="punch_text">
 
-	<div class="container"><b><?= Lang::string('home-trading') ?></b> <a href="how-to-register.php"><?= Lang::string('home-more') ?></a></div>
+	<div class="container"><b><?= Lang::string('home-trading') ?></b> <a href="our-security.php"><?= Lang::string('home-more') ?></a></div>
 
 </div><!-- end punch text -->
 

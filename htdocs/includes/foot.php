@@ -25,21 +25,20 @@
              	<li><a href="index.php"><?= Lang::string('home') ?></a></li>
                 <li><a href="order-book.php"><?= Lang::string('order-book') ?></a></li>
                 <li><a href="help.php"><?= Lang::string('help') ?></a></li>
-                <li><a href="news.php"><?= Lang::string('news') ?></a></li>
                 <li><a href="contact.php"><?= Lang::string('contact') ?></a></li>
                 <li><a href="terms.php"><?= Lang::string('terms') ?></a></li>
             </ul>
          </div>
          <div class="one_fifth">
-            <h2><?= Lang::string('home-about-bitcoin') ?></h2>
-            <ul class="list">   
-                <li><a href="what-are-bitcoins.php"><?= Lang::string('what-are-bitcoins') ?></a></li>
-                <li><a href="how-bitcoin-works.php"><?= Lang::string('how-bitcoin-works') ?></a></li>
-                <li><a href="trading-bitcoins.php"><?= Lang::string('trading-bitcoins') ?></a></li>
-                <li><a href="how-to-register.php"><?= Lang::string('how-to-register') ?></a></li>
-                <li><a href="fee-schedule.php"><?= Lang::string('fee-schedule') ?></a></li>
+            <h2><?= Lang::string('about') ?></h2>
+            <ul class="list">
+             	<li><a href="about.php"><?= Lang::string('about') ?></a></li>
+             	<li><a href="our-security.php"><?= Lang::string('our-security') ?></a></li>
+             	<li><a href="news.php"><?= Lang::string('news') ?></a></li>
+             	<li><a href="fee-schedule.php"><?= Lang::string('fee-schedule') ?></a></li>
             </ul>
          </div>
+         <? if (User::isLoggedIn()) { ?>
          <div class="one_fifth last">
             <h2><?= Lang::string('home-account-functions') ?></h2>
             <ul class="list"> 
@@ -52,6 +51,17 @@
                 <li><a href="withdraw.php"><?= Lang::string('withdraw') ?></a></li>
             </ul>
         </div>
+        <? } else { ?>
+         <div class="one_fifth last">
+            <h2><?= Lang::string('home-about-bitcoin') ?></h2>
+            <ul class="list">   
+                <li><a href="what-are-bitcoins.php"><?= Lang::string('what-are-bitcoins') ?></a></li>
+                <li><a href="how-bitcoin-works.php"><?= Lang::string('how-bitcoin-works') ?></a></li>
+                <li><a href="trading-bitcoins.php"><?= Lang::string('trading-bitcoins') ?></a></li>
+                <li><a href="how-to-register.php"><?= Lang::string('how-to-register') ?></a></li>
+            </ul>
+         </div>
+         <? } ?>
     </div>
 	
     <div class="clearfix mar_top5"></div>
