@@ -127,7 +127,7 @@ include 'includes/head.php';
             	<div class="clear"></div>
             </div>
             <div class="mar_top3"></div>
-            <div class="content1">
+            <!-- div class="content1">
 	            <h3 class="section_label">
 					<span class="left"><i class="fa fa-info fa-2x"></i></span>
 					<span class="right"><?= Lang::string('account-fee-structure') ?></span>
@@ -153,7 +153,7 @@ include 'includes/head.php';
 		            <div class="clear"></div>
 	            </div>
 	            <div class="clear"></div>
-            </div>
+            </div -->
             <div class="mar_top8"></div>
         </div>
 	</div>

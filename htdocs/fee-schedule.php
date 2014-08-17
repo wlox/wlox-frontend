@@ -29,7 +29,7 @@ include 'includes/head.php';
 	<div class="content_right">
     	<div class="text"><?= $content['content'] ?></div>
     	<div class="clearfix mar_top2"></div>
-    	<div class="table-style">
+    	<!-- div class="table-style">
     		<table class="table-list trades">
 				<tr>
 					<th><?= Lang::string('fee-schedule-fee1') ?></th>
@@ -71,7 +71,7 @@ include 'includes/head.php';
 				}
 				?>
 			</table>
-    	</div>
+    	</div -->
     </div>
 	<div class="clearfix mar_top8"></div>
 </div>
