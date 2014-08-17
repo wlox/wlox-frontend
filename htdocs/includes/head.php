@@ -126,7 +126,7 @@
         <div class="container">
         
             <ul class="tci_list_left">
-                <li><a href="help.php"><?= Lang::string('help') ?></a></li>
+                <li><a href="<?= (User::isLoggedIn()) ? 'help.php' : 'https://1btcxe.freshdesk.com' ?>"><?= Lang::string('help') ?></a></li>
                 <li>|</li>
                 <li><a href="contact.php"><?= Lang::string('contact') ?></a></li>
             </ul>

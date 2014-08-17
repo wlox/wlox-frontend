@@ -81,7 +81,7 @@ include 'includes/head.php';
                 <?
                 $register->textInput('first_name',Lang::string('settings-first-name'),1);
                 $register->textInput('last_name',Lang::string('settings-last-name'),1);
-                $register->selectInput('country',Lang::string('settings-country'),1,false,$countries,false,array('name'));
+                $register->selectInput('country',Lang::string('settings-country'),0,false,$countries,false,array('name'));
                 $register->textInput('email',Lang::string('settings-email'),'email');
                 $register->checkBox('terms',Lang::string('settings-terms-accept'),false,false,false,false,false,false,'checkbox_label');
                 $register->captcha(Lang::string('settings-capcha'));
