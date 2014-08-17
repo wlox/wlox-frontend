@@ -280,7 +280,7 @@ if (!$_REQUEST['bypass']) {
 								<?
 								if ($bank_accounts) {
 									foreach ($bank_accounts as $account) {
-										echo '<option '.(($bank_account['id'] == $account['id']) ? 'selected="selected"' : '').' value="'.$account['id'].'">'.$account['account_number'].' - ('.$account['description'].')</option>';
+										echo '<option '.(($bank_account['id'] == $account['id']) ? 'selected="selected"' : '').' value="'.$account['id'].'">'.$account['account_number'].' - ('.$account['currency'].')</option>';
 									}
 								}	
 								?>
