@@ -23,7 +23,6 @@ include 'includes/head.php';
 	<? include 'includes/sidebar_topics.php'; ?>
 	<div class="content_right">
 		<h1><?= Lang::string('trading-competition-hello') ?></h1>
-		<div class="one_half">
 			<? if (time() < strtotime('2014-09-01 00:00:00')) { ?>
 			<div class="starting_in"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-starting-in') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-01 00:00:00') * 1000) ?>" /></div>
    			<? } elseif (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-06 00:00:00')) { ?>
@@ -31,10 +30,14 @@ include 'includes/head.php';
    			<? } else { ?>
    			<div class="starting_in"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="prize"><?= Lang::string('competition-finished') ?></span></div>
    			<? } ?>
+   		<div class="one_third">
+			<div class="starting_in"><i class="fa fa-trophy fa-2x"></i> <?= Lang::string('competition-first-place') ?> <span class="prize">5 BTC</span></div>
    		</div>
-   		<div class="one_half last">
-   		
-			<div class="starting_in"><i class="fa fa-trophy fa-2x"></i> <?= Lang::string('competition-prize') ?></div>
+   		<div class="one_third">
+			<div class="starting_in"><i class="fa fa-trophy fa-2x"></i> <?= Lang::string('competition-second-place') ?> <span class="prize">3 BTC</span></div>
+   		</div>
+   		<div class="one_third last">
+			<div class="starting_in"><i class="fa fa-trophy fa-2x"></i> <?= Lang::string('competition-third-place') ?> <span class="prize">2 BTC</span></div>
    		</div>
    		<div class="testimonials-4">
    			<div class="content">
@@ -98,6 +101,11 @@ include 'includes/head.php';
    		<ul class="list_empty">
 			<li><a href="register.php" class="but_user"><i class="fa fa-user fa-lg"></i> <?= Lang::string('home-register') ?></a></li>
 			<li><a href="login.php" class="but_user"><i class="fa fa-key fa-lg"></i> <?= Lang::string('home-login') ?></a></li>
+		</ul>
+		<? } else { ?>
+		<div class="clearfix mar_top3"></div>
+   		<ul class="list_empty">
+			<li><a href="contest-status.php" class="but_user"><i class="fa fa-user fa-lg"></i> <?= Lang::string('competition-status') ?></a></li>
 		</ul>
 		<? } ?>
     </div>

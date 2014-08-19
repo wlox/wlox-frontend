@@ -37,6 +37,9 @@ include 'includes/head.php';
    			<div class="starting_in rank"><i class="fa fa-user fa-2x"></i> <?= Lang::string('competition-my-rank') ?>: <span class="prize"><b><?= $user_rank['rank']?></b> <small>(<?= (($user_rank['usd_gain'] >= 0) ? '+' : '').number_format($user_rank['usd_gain'],2) ?> USD)</small></span></div>
    		</div>
    		<? } ?>
+   		<div class="clear"></div>
+	   	<a href="contest-explain.php" style="font-size:15px;text-decoration:underline;"><?= Lang::string('competition-rules') ?></a>
+   		<div class="clearfix mar_top3"></div>
    		<div class="table-style">
    			<table class="table-list trades competition">
         		<tr id="table_first">

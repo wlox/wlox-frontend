@@ -389,6 +389,7 @@ a.button_slider:hover {
 .starting_in.rank{
 	font-size:20px;
 }
+.sim{font-size: 12px;}
 .starting_in.rank small{font-size: 12px;}
 .starting_in i{color: #BD6767;display:inline-block;position:relative;top:8px;}
 .starting_in .time_until, .starting_in .prize{

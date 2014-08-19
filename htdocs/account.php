@@ -85,12 +85,14 @@ include 'includes/head.php';
 	   			<div class="starting_in rank"><i class="fa fa-user fa-2x"></i> <?= Lang::string('competition-my-rank') ?>: <span class="prize"><b><?= $user_rank['rank']?></b> <small>(<?= (($user_rank['usd_gain'] >= 0) ? '+' : '').number_format($user_rank['usd_gain'],2) ?> USD)</small></span></div>
 	   		</div>
 	   		<? } ?>
+	   		<div class="clear"></div>
+	   		<a href="contest-status.php" style="font-size:15px;text-decoration:underline;"><?= Lang::string('competition-status') ?></a>
 	   		<div class="clearfix mar_top2"></div><div class="clear"></div>
 	   		<? } ?>
             <div class="content">
             	<h3 class="section_label">
                     <span class="left"><i class="fa fa-check fa-2x"></i></span>
-                    <span class="right"><?= Lang::string('account-balance') ?></span>
+                    <span class="right"><?= Lang::string('account-balance').((time() < strtotime('2014-09-12 00:00:00')) ? ' <span class="sim">('.Lang::string('simulation').')</span>' : '') ?></span>
                 </h3>
                 <div class="clear"></div>
                 <div class="balances">

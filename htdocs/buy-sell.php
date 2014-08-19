@@ -105,6 +105,8 @@ if ($_REQUEST['buy']) {
 		Errors::add(str_replace('[percent]',$CFG->orders_under_market_percent,Lang::string('buy-errors-under-market')));
 	if ($self_stops)
 		Errors::add(Lang::string('buy-limit-under-stops').(($currency_info['id'] != $self_stops_currency) ? str_replace('[price]',$currency_info['fa_symbol'].number_format($self_stops,2),' '.Lang::string('limit-min-price')) : ''));
+	if (time() < strtotime('2014-09-01 00:00:00'))
+		Errors::add(Lang::string('competition-feature-before-start'));
 	
 	if (!is_array(Errors::$errors) && !$cancel) {
 		if ($confirmed) {
@@ -157,6 +159,8 @@ if ($_REQUEST['sell']) {
 		Errors::add(Lang::string('buy-errors-no-stop'));
 	if ($self_limits)
 		Errors::add(Lang::string('sell-limit-under-stops').(($currency_info['id'] != $self_limits_currency) ? str_replace('[price]',$currency_info['fa_symbol'].number_format($self_limits,2),' '.Lang::string('limit-max-price')) : ''));
+	if (time() < strtotime('2014-09-01 00:00:00'))
+		Errors::add(Lang::string('competition-feature-before-start'));
 	
 	if (!is_array(Errors::$errors) && !$cancel) {
 		if ($confirmed) {
@@ -220,6 +224,8 @@ if (!$bypass) {
    			<div class="starting_in rank"><i class="fa fa-user fa-2x"></i> <?= Lang::string('competition-my-rank') ?>: <span class="prize"><b><?= $user_rank['rank']?></b> <small>(<?= (($user_rank['usd_gain'] >= 0) ? '+' : '').number_format($user_rank['usd_gain'],2) ?> USD)</small></span></div>
    		</div>
    		<? } ?>
+   		<div class="clear"></div>
+	   	<a href="contest-status.php" style="font-size:15px;text-decoration:underline;"><?= Lang::string('competition-status') ?></a>
    		<div class="clearfix mar_top2"></div><div class="clear"></div>
    		<? } ?>
 	
@@ -238,17 +244,9 @@ if (!$bypass) {
 					<div class="clear"></div>
 					<form id="buy_form" action="buy-sell.php" method="POST">
 						<div class="buyform">
-							<? if (time() < strtotime('2014-09-01 00:00:00')) { ?>
-							<div class="spacer"></div>
-							<div class="calc">
-								<div class="text"><?= Lang::string('competition-feature-before-start') ?></div>
-								<div class="mar_top2"></div>
-								<div class="clear"></div>
-							</div>
-							<? } else { ?>
 							<div class="spacer"></div>
 							<div class="calc dotted">
-								<div class="label"><?= str_replace('[currency]','<span class="sell_currency_label">'.$currency_info['currency'].'</span>',Lang::string('buy-fiat-available')) ?></div>
+								<div class="label"><?= str_replace('[currency]','<span class="sell_currency_label">'.$currency_info['currency'].'</span>',Lang::string('buy-fiat-available')).((time() < strtotime('2014-09-12 00:00:00')) ? ' <span class="sim">('.Lang::string('simulation').')</span>' : '') ?></div>
 								<div class="value"><span class="buy_currency_char"><?= $currency_info['fa_symbol'] ?></span><span id="buy_user_available"><?= number_format($user_available[strtoupper($currency1)],2) ?></span></div>
 								<div class="clear"></div>
 							</div>
@@ -320,7 +318,6 @@ if (!$bypass) {
 							</div>
 							<input type="hidden" name="buy" value="1" />
 							<input type="submit" name="submit" value="<?= Lang::string('buy-bitcoins') ?>" class="but_user" />
-							<? } ?>
 						</div>
 					</form>
 				</div>
@@ -334,17 +331,9 @@ if (!$bypass) {
 					<div class="clear"></div>
 					<form id="sell_form" action="buy-sell.php" method="POST">
 						<div class="buyform">
-							<? if (time() < strtotime('2014-09-01 00:00:00')) { ?>
-							<div class="spacer"></div>
-							<div class="calc">
-								<div class="text"><?= Lang::string('competition-feature-before-start') ?></div>
-								<div class="mar_top2"></div>
-								<div class="clear"></div>
-							</div>
-							<? } else { ?>
 							<div class="spacer"></div>
 							<div class="calc dotted">
-								<div class="label"><?= Lang::string('sell-btc-available') ?></div>
+								<div class="label"><?= Lang::string('sell-btc-available').((time() < strtotime('2014-09-12 00:00:00')) ? ' <span class="sim">('.Lang::string('simulation').')</span>' : '') ?></div>
 								<div class="value"><span id="sell_user_available"><?= number_format($user_available['BTC'],8) ?></span> BTC</div>
 								<div class="clear"></div>
 							</div>
@@ -416,7 +405,6 @@ if (!$bypass) {
 							</div>
 							<input type="hidden" name="sell" value="1" />
 							<input type="submit" name="submit" value="<?= Lang::string('sell-bitcoins') ?>" class="but_user" />
-							<? } ?>
 						</div>
 					</form>
 				</div>
