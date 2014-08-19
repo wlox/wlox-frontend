@@ -238,6 +238,14 @@ if (!$bypass) {
 					<div class="clear"></div>
 					<form id="buy_form" action="buy-sell.php" method="POST">
 						<div class="buyform">
+							<? if (time() < strtotime('2014-09-01 00:00:00')) { ?>
+							<div class="spacer"></div>
+							<div class="calc">
+								<div class="text"><?= Lang::string('competition-feature-before-start') ?></div>
+								<div class="mar_top2"></div>
+								<div class="clear"></div>
+							</div>
+							<? } else { ?>
 							<div class="spacer"></div>
 							<div class="calc dotted">
 								<div class="label"><?= str_replace('[currency]','<span class="sell_currency_label">'.$currency_info['currency'].'</span>',Lang::string('buy-fiat-available')) ?></div>
@@ -312,6 +320,7 @@ if (!$bypass) {
 							</div>
 							<input type="hidden" name="buy" value="1" />
 							<input type="submit" name="submit" value="<?= Lang::string('buy-bitcoins') ?>" class="but_user" />
+							<? } ?>
 						</div>
 					</form>
 				</div>
@@ -325,6 +334,14 @@ if (!$bypass) {
 					<div class="clear"></div>
 					<form id="sell_form" action="buy-sell.php" method="POST">
 						<div class="buyform">
+							<? if (time() < strtotime('2014-09-01 00:00:00')) { ?>
+							<div class="spacer"></div>
+							<div class="calc">
+								<div class="text"><?= Lang::string('competition-feature-before-start') ?></div>
+								<div class="mar_top2"></div>
+								<div class="clear"></div>
+							</div>
+							<? } else { ?>
 							<div class="spacer"></div>
 							<div class="calc dotted">
 								<div class="label"><?= Lang::string('sell-btc-available') ?></div>
@@ -399,6 +416,7 @@ if (!$bypass) {
 							</div>
 							<input type="hidden" name="sell" value="1" />
 							<input type="submit" name="submit" value="<?= Lang::string('sell-bitcoins') ?>" class="but_user" />
+							<? } ?>
 						</div>
 					</form>
 				</div>
