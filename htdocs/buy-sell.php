@@ -31,6 +31,9 @@ API::add('Orders','get',array(false,false,10,$currency1,false,false,1));
 API::add('Orders','get',array(false,false,10,$currency1,false,false,false,false,1));
 API::add('BankAccounts','get',array($currency_info['id']));
 
+if (time() < strtotime('2014-09-6 00:00:00'))
+	API::add('Competition','getUserRank');
+
 if ($_REQUEST['buy'] && !$_REQUEST['buy_market_price']) {
 	API::add('Orders','checkOutbidSelf',array($_REQUEST['buy_price'],$currency1));
 	API::add('Orders','checkOutbidStops',array($_REQUEST['buy_price'],$currency1));
@@ -56,9 +59,8 @@ $self_stops_currency = $query['Orders']['checkOutbidStops']['results'][0][0]['cu
 $self_limits_currency = $query['Orders']['checkStopsOverBid']['results'][0][0]['currency'];
 $user_fee_bid = (($_REQUEST['buy_amount'] > 0 && $_REQUEST['buy_price'] >= $asks[0]['btc_price']) || $_REQUEST['buy_market_price'] || !$_REQUEST['buy_amount']) ? $query['FeeSchedule']['getRecord']['results'][0]['fee'] : $query['FeeSchedule']['getRecord']['results'][0]['fee1'];
 $user_fee_ask = (($_REQUEST['sell_amount'] > 0 && $_REQUEST['sell_price'] <= $bids[0]['btc_price']) || $_REQUEST['sell_market_price'] || !$_REQUEST['sell_amount']) ? $query['FeeSchedule']['getRecord']['results'][0]['fee'] : $query['FeeSchedule']['getRecord']['results'][0]['fee1'];
+$user_rank = $query['Competition']['getUserRank']['results'][0];
 
-// fees temporarily zero!
-//$user_fee['fee'] = 0;
 
 $buy_amount1 = ($_REQUEST['buy_amount'] > 0) ? ereg_replace("[^0-9.]", "",$_REQUEST['buy_amount']) : 0;
 $buy_price1 = ($_REQUEST['buy_price'] > 0) ? ereg_replace("[^0-9.]", "",$_REQUEST['buy_price']) : $current_ask;
@@ -201,6 +203,26 @@ if (!$bypass) {
 <div class="container">
 	<? include 'includes/sidebar_account.php'; ?>
 	<div class="content_right">
+	
+		<? if (time() < strtotime('2014-09-6 00:00:00')) { ?>
+		<h3><?= Lang::string('trading-competition-status') ?></h3>
+		<div class="one_half">
+			<? if (time() < strtotime('2014-09-01 00:00:00')) { ?>
+			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-starting-in') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-01 00:00:00') * 1000) ?>" /></div>
+   			<? } elseif (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-06 00:00:00')) { ?>
+   			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-06 00:00:00') * 1000) ?>" /></div>
+   			<? } elseif (time() >= strtotime('2014-09-06 00:00:00') && time() < strtotime('2014-09-12 00:00:00')) { ?>
+   			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="prize"><?= Lang::string('competition-finished') ?></span></div>
+   			<? } ?>
+   		</div>
+   		<? if (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-12 00:00:00')) { ?>
+   		<div class="one_half last">
+   			<div class="starting_in rank"><i class="fa fa-user fa-2x"></i> <?= Lang::string('competition-my-rank') ?>: <span class="prize"><b><?= $user_rank['rank']?></b> <small>(<?= (($user_rank['usd_gain'] >= 0) ? '+' : '').number_format($user_rank['usd_gain'],2) ?> USD)</small></span></div>
+   		</div>
+   		<? } ?>
+   		<div class="clearfix mar_top2"></div><div class="clear"></div>
+   		<? } ?>
+	
 		<? Errors::display(); ?>
 		<?= ($notice) ? '<div class="notice">'.$notice.'</div>' : '' ?>
 		<div class="testimonials-4">

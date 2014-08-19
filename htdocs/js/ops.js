@@ -955,6 +955,20 @@ function timeSince(elem) {
 	});
 }
 
+function timeUntil(elem) {
+	var miliseconds = $(elem).siblings('.time_until_seconds').val();
+	var date = new Date(parseInt(miliseconds));
+	var offset = date.getTimezoneOffset() * 60;
+	var date1 = new Date(parseInt(miliseconds) + (parseInt(offset)*1000));
+	var time_unit;
+	
+	$(elem).countdown({ 
+	    until: date1,
+	    significant: 1,
+	    layout: '{o<}{on} {ol}{o>}{w<}{wn} {wl}{w>}{d<}{dn} {dl}{d>}{h<}{hn} {hl}{h>}{m<}{mn} {ml}{m>}{s<}{sn} {sl}{s>}'
+	});
+}
+
 function startFileSortable() {
 	
 }
@@ -1049,6 +1063,12 @@ $(document).ready(function() {
 		});
 	}
 	
+	if ($('.time_until').length > 0) {
+		$('.time_until').each(function() {
+			timeUntil(this);
+		});
+	}
+	
 	$('#language_selector').bind("keyup change", function(){
 		window.location.href = 'index.php?lang='+$(this).val();
 	});
@@ -1099,4 +1119,5 @@ $(document).ready(function() {
 	switchAccount1();
 	//expireSession();
 	updateTransactionsList();
+	timeUntil();
 });

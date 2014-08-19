@@ -93,8 +93,13 @@ if (!User::isLoggedIn()) {
 <div class="clearfix"></div>
 
 <div class="punch_text">
-
+	<? if (time() < strtotime('2014-09-01 00:00:00')) { ?>
+	<div class="container"><b><i class="fa fa-asterisk"></i> <?= str_replace('[time]','<span class="time_until"></span><input type="hidden" class="time_until_seconds" value="'.(strtotime('2014-09-01 00:00:00')*1000).'" />',Lang::string('trading-competition-banner')) ?></b> <a href="contest-explain.php"><?= Lang::string('home-more') ?></a></div>
+	<? } elseif (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-06 00:00:00')) { ?>
+	<div class="container"><b><i class="fa fa-asterisk"></i> <?= str_replace('[time]','<span class="time_until"></span><input type="hidden" class="time_until_seconds" value="'.(strtotime('2014-09-06 00:00:00')*1000).'" />',Lang::string('trading-competition-started')) ?></b> <a href="contest-status.php"><?= Lang::string('contest-ranking') ?></a></div>
+	<? } else { ?>
 	<div class="container"><b><?= Lang::string('home-trading') ?></b> <a href="our-security.php"><?= Lang::string('home-more') ?></a></div>
+	<? } ?>
 
 </div><!-- end punch text -->
 

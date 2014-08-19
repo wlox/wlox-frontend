@@ -10,7 +10,7 @@
 	height:34px;
 	margin-top:20px;
 	text-indent:-999em;
-	background:url(../images/logo1.png) no-repeat left bottom !important;
+	background:url(../images/logo1b.png) no-repeat left bottom !important;
 }
 
 .clear{clear:both;}
@@ -379,7 +379,24 @@ a.button_slider:hover {
 	color: #fff;
 	background-color: #454545;
 }
-
+.punch_text .time_until{
+	font-weight: bold;
+}
+.starting_in{
+	font-size: 25px;
+    padding: 10px 0;
+    margin-bottom: 22px;}
+.starting_in.rank{
+	font-size:20px;
+}
+.starting_in.rank small{font-size: 12px;}
+.starting_in i{color: #BD6767;display:inline-block;position:relative;top:8px;}
+.starting_in .time_until, .starting_in .prize{
+    background-color: #666666;
+    padding: 5px 10px;
+    color: #FFF;
+    border-radius: 3px;}
+.one_third .starting_in{font-size: 14px; }
 /* punch text 02 */
 .punch_text02 {
 	float: left;
@@ -3222,7 +3239,11 @@ p.error {
 	border: none;
 }
 .info strong, .error strong, .notice strong, .success strong {
-	font-size: 16px;
+	
+}
+.info a, .error a, .notice a, .success a {
+	font-weight:bold;
+	text-decoration: underline;
 }
 .message-box-wrap {
 	border: 0px solid #fff;
@@ -3233,21 +3254,25 @@ p.error {
 	border-color: #c6e3ff;
 	background-color: #e6f3ff;
 }
+.info a{color: #4a84bc;}
 .error {
 	color: #bd6767;
 	border-color: #f1bdbd;
 	background-color: #ffdddd;
 }
+.error a{color: #bd6767;}
 .notice {
 	color: #a79a30;
 	border-color: #d7d099;
 	background-color: #f6f2d2;
 }
+.notice a{color: #a79a30;}
 .success {
 	color: #1ea133;
 	border-color: #a9ecb4;
 	background-color: #dffbe4;
 }
+.success a{color:#1ea133;}
 .close-but {
 	width: 10px;
 	height: 10px;
@@ -3528,6 +3553,11 @@ h3 .highlight{
 .trades td .oco{color:#727272;font-size: 11px;}
 .trades td .fa-exchange{color:#727272;font-size: 10px;margin-left: 2px;}
 .trades td.inactive{background-color:#FFF;}
+
+.competition{font-size: 18px;}
+.competition th{padding:15px;}
+.competition td{padding:15px;}
+
 ul.list_empty {
 	float: left;
 	padding: 0px;
@@ -3981,6 +4011,12 @@ ul.list_empty.form_buttons {
     display: block;
     font-size: 28px !important;
     margin: 7px 0 0;
+}
+.section_label .left b{
+	color: #FFF;
+    font-weight: 900;
+    margin-top: -5px;
+    display: block;
 }
 .section_label .right{
 	float: left;

@@ -18,6 +18,8 @@ API::add('User','getAvailable');
 API::add('User','getVolume');
 API::add('FeeSchedule','getRecord',array(User::$info['fee_schedule']));
 API::add('Stats','getBTCTraded');
+if (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-12 00:00:00'))
+	API::add('Competition','getUserRank');
 $query = API::send();
 
 $currencies = $CFG->currencies;
@@ -26,6 +28,7 @@ $available = $query['User']['getAvailable']['results'][0];
 $volume = $query['User']['getVolume']['results'][0];
 $fee_bracket = $query['FeeSchedule']['getRecord']['results'][0];
 $total_btc_volume = $query['Stats']['getBTCTraded']['results'][0][0]['total_btc_traded'];
+$user_rank = $query['Competition']['getUserRank']['results'][0];
 
 $referer = substr($_SERVER['HTTP_REFERER'],strrpos($_SERVER['HTTP_REFERER'],'/')+1);
 if ($referer == 'login.php' || $referer == 'verify-token.php' || $referer == 'first-login.php') {
@@ -57,6 +60,7 @@ include 'includes/head.php';
 				echo '<div class="notice"><div class="message-box-wrap">'.Lang::string('account-security-notify').'</div></div>';
 			}
 			?>
+			
 			<div class="mar_top2"></div>
 			<ul class="list_empty">
 				<li><a href="buy-sell.php" class="but_user"><i class="fa fa-btc fa-lg"></i> <?= Lang::string('buy-sell') ?></a></li>
@@ -64,6 +68,25 @@ include 'includes/head.php';
 				<li><a href="withdraw.php" class="but_user"><i class="fa fa-upload fa-lg"></i> <?= Lang::string('withdraw') ?></a></li>
 			</ul>
 			<div class="clear"></div>
+			<? if (time() < strtotime('2014-09-12 00:00:00')) { ?>
+			<div class="clearfix divider_line4"></div>
+			<h3><?= Lang::string('trading-competition-status') ?></h3>
+			<div class="one_half">
+				<? if (time() < strtotime('2014-09-01 00:00:00')) { ?>
+				<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-starting-in') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-01 00:00:00') * 1000) ?>" /></div>
+	   			<? } elseif (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-06 00:00:00')) { ?>
+	   			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-06 00:00:00') * 1000) ?>" /></div>
+	   			<? } elseif (time() >= strtotime('2014-09-06 00:00:00') && time() < strtotime('2014-09-12 00:00:00')) { ?>
+	   			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="prize"><?= Lang::string('competition-finished') ?></span></div>
+	   			<? } ?>
+	   		</div>
+	   		<? if (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-12 00:00:00')) { ?>
+	   		<div class="one_half last">
+	   			<div class="starting_in rank"><i class="fa fa-user fa-2x"></i> <?= Lang::string('competition-my-rank') ?>: <span class="prize"><b><?= $user_rank['rank']?></b> <small>(<?= (($user_rank['usd_gain'] >= 0) ? '+' : '').number_format($user_rank['usd_gain'],2) ?> USD)</small></span></div>
+	   		</div>
+	   		<? } ?>
+	   		<div class="clearfix mar_top2"></div><div class="clear"></div>
+	   		<? } ?>
             <div class="content">
             	<h3 class="section_label">
                     <span class="left"><i class="fa fa-check fa-2x"></i></span>

@@ -50,9 +50,20 @@ elseif ($_REQUEST['register'] && !is_array($register->errors)) {
 	Link::redirect('login.php?message=registered');
 }
 
+if (time() < strtotime('2014-09-01 00:00:00')) {
+	API::add('Content','getRecord',array('trading-competition-register1'));
+}
+elseif (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-06 00:00:00')) {
+	API::add('Content','getRecord',array('trading-competition-register2'));
+}
+elseif (time() >= strtotime('2014-09-06 00:00:00') && time() < strtotime('2014-09-12 00:00:00')) {
+	API::add('Content','getRecord',array('trading-competition-register3'));
+}
+
 API::add('User','getCountries');
 $query = API::send();
 $countries = $query['User']['getCountries']['results'][0];
+$content = $query['Content']['getRecord']['results'][0];
 
 $page_title = Lang::string('home-register');
 
@@ -67,6 +78,20 @@ include 'includes/head.php';
 <div class="container">
 	<? include 'includes/sidebar_account.php'; ?>
 	<div class="content_right">
+		<? if (time() < strtotime('2014-09-01 00:00:00')) { ?>
+		<h2><?= $content['title'] ?></h2>
+		<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-starting-in') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-01 00:00:00') * 1000) ?>" /></div>
+   		<div class="info"><div class="message-box-wrap"><?= $content['content'] ?></div></div>
+   		<div class="clearfix mar_top3"></div>
+   		<? } elseif (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-06 00:00:00')) { ?>
+   		<h2><?= $content['title'] ?></h2>
+   		<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-06 00:00:00') * 1000) ?>" /></div>
+   		<div class="info"><div class="message-box-wrap"><?= $content['content'] ?></div></div>
+   		<div class="clearfix mar_top3"></div>
+   		<? } elseif (time() >= strtotime('2014-09-06 00:00:00') && time() < strtotime('2014-09-12 00:00:00')) { ?>
+   		<div class="info"><div class="message-box-wrap"><?= $content['content'] ?></div></div>
+   		<div class="clearfix mar_top3"></div>
+   		<? } ?>
 		<div class="testimonials-4">
 			<? 
             Errors::display(); 
@@ -81,9 +106,9 @@ include 'includes/head.php';
                 <?
                 $register->textInput('first_name',Lang::string('settings-first-name'),1);
                 $register->textInput('last_name',Lang::string('settings-last-name'),1);
-                $register->selectInput('country',Lang::string('settings-country'),0,false,$countries,false,array('name'));
+                $register->selectInput('country',Lang::string('settings-country'),1,false,$countries,false,array('name'));
                 $register->textInput('email',Lang::string('settings-email'),'email');
-                $register->selectInput('default_currency',Lang::string('default-currency'),0,false,$CFG->currencies,false,array('currency'));
+                $register->selectInput('default_currency',Lang::string('default-currency'),1,false,$CFG->currencies,false,array('currency'));
                 $register->checkBox('terms',Lang::string('settings-terms-accept'),false,false,false,false,false,false,'checkbox_label');
                 $register->captcha(Lang::string('settings-capcha'));
                 $register->HTML('<div class="form_button"><input type="submit" name="submit" value="'.Lang::string('home-register').'" class="but_user" /></div>');

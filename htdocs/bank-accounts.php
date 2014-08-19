@@ -82,9 +82,11 @@ include 'includes/head.php';
     	<? Errors::display(); ?>
     	<? Messages::display(); ?>
     	<div class="clear"></div>
+    	<? if (time() >= strtotime('2014-09-06 00:00:00')) { ?>
     	<ul class="list_empty">
 			<li><a href="bank-accounts.php?action=add" class="but_user"><i class="fa fa-plus fa-lg"></i> <?= Lang::string('bank-accounts-add') ?></a></li>
 		</ul>
+		<? } ?>
     	<div class="table-style">
     		<table class="table-list trades">
 				<tr>
@@ -94,20 +96,25 @@ include 'includes/head.php';
 					<th></th>
 				</tr>
 				<? 
-				if ($bank_accounts) {
-					foreach ($bank_accounts as $account) {
-				?>
-				<tr>
-					<td><?= $account['account_number'] ?></td>
-					<td><?= $account['currency'] ?></td>
-					<td><?= $account['description'] ?></td>
-					<td><a href="bank-accounts.php?remove_id=<?= $account['id'] ?>"><i class="fa fa-minus-circle"></i> <?= Lang::string('bank-accounts-remove') ?></a></td>
-				</tr>
-				<?
-					}
+				if (time() < strtotime('2014-09-06 00:00:00')) {
+					echo '<tr><td colspan="4">'.Lang::string('competition-feature-disabled').'</td></tr>';
 				}
 				else {
-					echo '<tr><td colspan="4">'.Lang::string('bank-accounts-no').'</td></tr>';
+					if ($bank_accounts) {
+						foreach ($bank_accounts as $account) {
+					?>
+					<tr>
+						<td><?= $account['account_number'] ?></td>
+						<td><?= $account['currency'] ?></td>
+						<td><?= $account['description'] ?></td>
+						<td><a href="bank-accounts.php?remove_id=<?= $account['id'] ?>"><i class="fa fa-minus-circle"></i> <?= Lang::string('bank-accounts-remove') ?></a></td>
+					</tr>
+					<?
+						}
+					}
+					else {
+						echo '<tr><td colspan="4">'.Lang::string('bank-accounts-no').'</td></tr>';
+					}
 				}
 				?>
 			</table>

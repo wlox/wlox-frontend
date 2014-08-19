@@ -229,6 +229,14 @@ if (!$_REQUEST['bypass']) {
 					<div class="clear"></div>
 					<form id="buy_form" action="withdraw.php" method="POST">
 						<div class="buyform">
+							<? if (time() < strtotime('2014-09-06 00:00:00')) { ?>
+							<div class="spacer"></div>
+							<div class="calc">
+								<div class="text"><?= Lang::string('competition-feature-disabled') ?></div>
+								<div class="mar_top2"></div>
+								<div class="clear"></div>
+							</div>
+							<? } else { ?>
 							<div class="spacer"></div>
 							<div class="calc dotted">
 								<div class="label"><?= Lang::string('sell-btc-available') ?></div>
@@ -252,6 +260,7 @@ if (!$_REQUEST['bypass']) {
 							<div class="spacer"></div>
 							<input type="hidden" name="bitcoins" value="1" />
 							<input type="submit" name="submit" value="<?= Lang::string('withdraw-send-bitcoins') ?>" class="but_user" />
+							<? } ?>
 						</div>
 					</form>
 					<div class="clear"></div>
@@ -266,6 +275,14 @@ if (!$_REQUEST['bypass']) {
 					<div class="clear"></div>
 					<form id="buy_form" action="withdraw.php" method="POST">
 						<div class="buyform">
+							<? if (time() < strtotime('2014-09-06 00:00:00')) { ?>
+							<div class="spacer"></div>
+							<div class="calc">
+								<div class="text"><?= Lang::string('competition-feature-disabled') ?></div>
+								<div class="mar_top2"></div>
+								<div class="clear"></div>
+							</div>
+							<? } else { ?>
 							<div class="spacer"></div>
 							<? if ($bank_accounts) { ?>
 							<div class="calc dotted">
@@ -305,6 +322,7 @@ if (!$_REQUEST['bypass']) {
 								<a class="item_label" href="bank-accounts.php"><i class="fa fa-cog"></i> <?= Lang::string('deposit-manage-bank-accounts') ?></a>
 								<div class="clear"></div>
 							</div>
+							<? } ?>
 							<? } ?>
 						</div>
 					</form>

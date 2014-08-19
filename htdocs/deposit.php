@@ -57,6 +57,14 @@ if (!$_REQUEST['bypass']) {
 					</h3>
 					<div class="clear"></div>
 					<div class="buyform">
+						<? if (time() < strtotime('2014-09-06 00:00:00')) { ?>
+						<div class="spacer"></div>
+						<div class="calc">
+							<div class="text"><?= Lang::string('competition-feature-disabled') ?></div>
+							<div class="mar_top2"></div>
+							<div class="clear"></div>
+						</div>
+						<? } else { ?>
 						<div class="spacer"></div>
 						<div class="param">
 							<label for="deposit_address"><?= Lang::string('deposit-send-to-address') ?></label>
@@ -72,6 +80,7 @@ if (!$_REQUEST['bypass']) {
 							<a class="item_label" href="bitcoin-addresses.php"><i class="fa fa-cog"></i> <?= Lang::string('deposit-manage-addresses') ?></a>
 							<div class="clear"></div>
 						</div>
+						<? } ?>
 					</div>
 				</div>
 			</div>
@@ -83,6 +92,14 @@ if (!$_REQUEST['bypass']) {
 					</h3>
 					<div class="clear"></div>
 					<div class="buyform">
+						<? if (time() < strtotime('2014-09-06 00:00:00')) { ?>
+						<div class="spacer"></div>
+						<div class="calc">
+							<div class="text"><?= Lang::string('competition-feature-disabled') ?></div>
+							<div class="mar_top2"></div>
+							<div class="clear"></div>
+						</div>
+						<? } else { ?>
 						<div class="spacer"></div>
 						<? if ($bank_accounts) { ?>
 						<div class="param">
@@ -114,6 +131,7 @@ if (!$_REQUEST['bypass']) {
 							<a class="item_label" href="bank-accounts.php"><i class="fa fa-cog"></i> <?= Lang::string('deposit-manage-bank-accounts') ?></a>
 							<div class="clear"></div>
 						</div>
+						<? } ?>
 						<? } ?>
 					</div>
 				</div>
