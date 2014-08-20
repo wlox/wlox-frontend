@@ -958,12 +958,9 @@ function timeSince(elem) {
 function timeUntil(elem) {
 	var miliseconds = $(elem).siblings('.time_until_seconds').val();
 	var date = new Date(parseInt(miliseconds));
-	var offset = date.getTimezoneOffset() * 60;
-	var date1 = new Date(parseInt(miliseconds) + (parseInt(offset)*1000));
-	var time_unit;
 	
 	$(elem).countdown({ 
-	    until: date1,
+	    until: date,
 	    significant: 1,
 	    onExpiry: pageRefresh,
 	    layout: '{o<}{on} {ol}{o>}{w<}{wn} {wl}{w>}{d<}{dn} {dl}{d>}{h<}{hn} {hl}{h>}{m<}{mn} {ml}{m>}{s<}{sn} {sl}{s>}'
