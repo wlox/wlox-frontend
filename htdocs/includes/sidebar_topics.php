@@ -11,7 +11,7 @@
 			<li><a href="reset_2fa.php" <?= ($CFG->self == 'reset_2fa.php') ? 'class="active"' : '' ?>><i class="fa fa-angle-right"></i> <?= Lang::string('reset-2fa') ?></a></li>
 			<!-- li><a href="funding-account.php" <?= ($CFG->self == 'funding-account.php') ? 'class="active"' : '' ?>><i class="fa fa-angle-right"></i> <?= Lang::string('funding-account') ?></a></li -->
             <!-- li><a href="withdrawing-account.php" <?= ($CFG->self == 'withdrawing-account.php') ? 'class="active"' : '' ?>><i class="fa fa-angle-right"></i> <?= Lang::string('withdrawing-account') ?></a></li -->
-            <li><a href="trading-bitcoins.php" <?= ($CFG->self == 'trading-bitcoins.php') ? 'class="active"' : '' ?>><i class="fa fa-angle-right"></i> <?= Lang::string('trading-bitcoins') ?></a></li>
+            <!-- li><a href="trading-bitcoins.php" <?= ($CFG->self == 'trading-bitcoins.php') ? 'class="active"' : '' ?>><i class="fa fa-angle-right"></i> <?= Lang::string('trading-bitcoins') ?></a></li -->
             <li><a href="fee-schedule.php" <?= ($CFG->self == 'fee-schedule.php') ? 'class="active"' : '' ?>><i class="fa fa-angle-right"></i> <?= Lang::string('fee-schedule') ?></a></li>
             <li><a href="help.php" <?= ($CFG->self == 'help.php') ? 'class="active"' : '' ?>><i class="fa fa-angle-right"></i> <?= Lang::string('help') ?></a></li>
             <li><a href="news.php" <?= ($CFG->self == 'news.php') ? 'class="active"' : '' ?>><i class="fa fa-angle-right"></i> <?= Lang::string('news') ?></a></li>
