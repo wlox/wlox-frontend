@@ -965,8 +965,13 @@ function timeUntil(elem) {
 	$(elem).countdown({ 
 	    until: date1,
 	    significant: 1,
+	    onExpiry: pageRefresh,
 	    layout: '{o<}{on} {ol}{o>}{w<}{wn} {wl}{w>}{d<}{dn} {dl}{d>}{h<}{hn} {hl}{h>}{m<}{mn} {ml}{m>}{s<}{sn} {sl}{s>}'
 	});
+}
+
+function pageRefresh() {
+	location.reload(); 
 }
 
 function startFileSortable() {

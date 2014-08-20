@@ -105,7 +105,7 @@ if ($_REQUEST['buy']) {
 		Errors::add(str_replace('[percent]',$CFG->orders_under_market_percent,Lang::string('buy-errors-under-market')));
 	if ($self_stops)
 		Errors::add(Lang::string('buy-limit-under-stops').(($currency_info['id'] != $self_stops_currency) ? str_replace('[price]',$currency_info['fa_symbol'].number_format($self_stops,2),' '.Lang::string('limit-min-price')) : ''));
-	if (time() < strtotime('2014-09-01 00:00:00'))
+	if (time() < strtotime('2014-08-20 11:20:00'))
 		Errors::add(Lang::string('competition-feature-before-start'));
 	
 	if (!is_array(Errors::$errors) && !$cancel) {
@@ -159,7 +159,7 @@ if ($_REQUEST['sell']) {
 		Errors::add(Lang::string('buy-errors-no-stop'));
 	if ($self_limits)
 		Errors::add(Lang::string('sell-limit-under-stops').(($currency_info['id'] != $self_limits_currency) ? str_replace('[price]',$currency_info['fa_symbol'].number_format($self_limits,2),' '.Lang::string('limit-max-price')) : ''));
-	if (time() < strtotime('2014-09-01 00:00:00'))
+	if (time() < strtotime('2014-08-20 11:20:00'))
 		Errors::add(Lang::string('competition-feature-before-start'));
 	
 	if (!is_array(Errors::$errors) && !$cancel) {
@@ -211,15 +211,15 @@ if (!$bypass) {
 		<? if (time() < strtotime('2014-09-6 00:00:00')) { ?>
 		<h3><?= Lang::string('trading-competition-status') ?></h3>
 		<div class="one_half">
-			<? if (time() < strtotime('2014-09-01 00:00:00')) { ?>
-			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-starting-in') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-01 00:00:00') * 1000) ?>" /></div>
-   			<? } elseif (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-06 00:00:00')) { ?>
+			<? if (time() < strtotime('2014-08-20 11:20:00')) { ?>
+			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-starting-in') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-08-20 11:20:00') * 1000) ?>" /></div>
+   			<? } elseif (time() >= strtotime('2014-08-20 11:20:00') && time() < strtotime('2014-09-06 00:00:00')) { ?>
    			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-06 00:00:00') * 1000) ?>" /></div>
    			<? } elseif (time() >= strtotime('2014-09-06 00:00:00') && time() < strtotime('2014-09-12 00:00:00')) { ?>
    			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="prize"><?= Lang::string('competition-finished') ?></span></div>
    			<? } ?>
    		</div>
-   		<? if (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-12 00:00:00')) { ?>
+   		<? if (time() >= strtotime('2014-08-20 11:20:00') && time() < strtotime('2014-09-12 00:00:00')) { ?>
    		<div class="one_half last">
    			<div class="starting_in rank"><i class="fa fa-user fa-2x"></i> <?= Lang::string('competition-my-rank') ?>: <span class="prize"><b><?= $user_rank['rank']?></b> <small>(<?= (($user_rank['usd_gain'] >= 0) ? '+' : '').number_format($user_rank['usd_gain'],2) ?> USD)</small></span></div>
    		</div>

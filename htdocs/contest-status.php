@@ -23,16 +23,19 @@ include 'includes/head.php';
 	<? include 'includes/sidebar_topics.php'; ?>
 	<div class="content_right">
 		<h1><?= Lang::string('trading-competition-board') ?></h1>
+		<div class="sponsored" style="background-color: #000;font-size: 15px;color: #FFF; font-weight: bold;padding: 10px;">
+   		<?= Lang::string('sponsored-by') ?>: <a href="https://cryptocapital.co/"><img style="width: 300px;margin-bottom:-9px" src="images/crypto.png" /></a>
+   		</div>
 		<div class="one_half">
-			<? if (time() < strtotime('2014-09-01 00:00:00')) { ?>
-			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-starting-in') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-01 00:00:00') * 1000) ?>" /></div>
-   			<? } elseif (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-06 00:00:00')) { ?>
+			<? if (time() < strtotime('2014-08-20 11:20:00')) { ?>
+			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-starting-in') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-08-20 11:20:00') * 1000) ?>" /></div>
+   			<? } elseif (time() >= strtotime('2014-08-20 11:20:00') && time() < strtotime('2014-09-06 00:00:00')) { ?>
    			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-06 00:00:00') * 1000) ?>" /></div>
    			<? } else { ?>
    			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="prize"><?= Lang::string('competition-finished') ?></span></div>
    			<? } ?>
    		</div>
-   		<? if (User::isLoggedIn() && time() >= strtotime('2014-09-01 00:00:00')) { ?>
+   		<? if (User::isLoggedIn() && time() >= strtotime('2014-08-20 11:20:00')) { ?>
    		<div class="one_half last">
    			<div class="starting_in rank"><i class="fa fa-user fa-2x"></i> <?= Lang::string('competition-my-rank') ?>: <span class="prize"><b><?= $user_rank['rank']?></b> <small>(<?= (($user_rank['usd_gain'] >= 0) ? '+' : '').number_format($user_rank['usd_gain'],2) ?> USD)</small></span></div>
    		</div>
@@ -47,7 +50,7 @@ include 'includes/head.php';
         			<th><?= Lang::string('competition-profit') ?></th>
         		</tr>
         		<? 
-        		if ($leaders && time() >= strtotime('2014-09-01 00:00:00')) {
+        		if ($leaders && time() >= strtotime('2014-08-20 11:20:00')) {
 					$i = 1;
 					foreach ($leaders as $leader) {
 						$trophy = ($i == 1) ? '<i class="fa fa-trophy"></i> ' : '';
