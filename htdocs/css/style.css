@@ -26,10 +26,11 @@
 .text1 ol li { list-style-position:outside;border-left:3px solid #00BDBD;padding:0 8px;}
 .text1 ol li span { font-style:normal;font-weight:normal;color:#727272; }
 .text1 ol li span em { display:block; }
-.text1 ul { font-style:italic;font-weight:bold; margin-left:0;color:#00BDBD;margin-left:5px; }
+.text1 ul { margin-left:5px; }
 .text1 ul li { list-style-position:outside;border-left:3px solid #00BDBD;padding:5px 5px 5px 8px;margin-bottom:8px;border-right:1px solid #E6F7F7;border-bottom:1px solid #d2eeee;border-top:1px solid #d2eeee;background-color:#f3fafa;}
 .text1 ul li span { font-style:normal;font-weight:normal;color:#727272; }
 .text1 ul li span em { display:block; }
+.text1 strong{border-radius: 3px;color: #FFFFFF;padding: 2px 5px;background: none repeat scroll 0 0 #AAAAAA;}
 
 /*------------------*/
 /*	SITE STRUCTURE
