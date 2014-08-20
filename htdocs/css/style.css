@@ -16,8 +16,20 @@
 .clear{clear:both;}
 .text{}
 .text p{margin-bottom: 10px;}
+.text1{font-size: 16px;line-height: 28px;}
+.text1 p{margin-bottom: 28px;font-size: 16px;line-height: 28px;}
 .text ul{margin-left: 20px;}
 .text ul li {list-style-type: disc;}
+.text1 h1,.text1 h2,.text1 h3,.text1 h4,.text1 h5 {margin-bottom: 28px;}
+.text1 a,.text a{text-decoration:underline;}
+.text1 ol { font-style:italic;font-weight:bold; margin-left:35px;color:#00BDBD; }
+.text1 ol li { list-style-position:outside;border-left:3px solid #00BDBD;padding:0 8px;}
+.text1 ol li span { font-style:normal;font-weight:normal;color:#727272; }
+.text1 ol li span em { display:block; }
+.text1 ul { font-style:italic;font-weight:bold; margin-left:0;color:#00BDBD;margin-left:5px; }
+.text1 ul li { list-style-position:outside;border-left:3px solid #00BDBD;padding:5px 5px 5px 8px;margin-bottom:8px;border-right:1px solid #E6F7F7;border-bottom:1px solid #d2eeee;border-top:1px solid #d2eeee;background-color:#f3fafa;}
+.text1 ul li span { font-style:normal;font-weight:normal;color:#727272; }
+.text1 ul li span em { display:block; }
 
 /*------------------*/
 /*	SITE STRUCTURE
