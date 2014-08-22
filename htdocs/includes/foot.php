@@ -24,7 +24,7 @@
             <ul class="list">
              	<li><a href="index.php"><?= Lang::string('home') ?></a></li>
                 <li><a href="order-book.php"><?= Lang::string('order-book') ?></a></li>
-                <li><a href="<?= (User::isLoggedIn()) ? 'help.php' : 'https://1btcxe.freshdesk.com' ?>"><?= Lang::string('help') ?></a></li>
+                <li><a href="<?= (User::isLoggedIn()) ? 'help.php' : 'https://support.1btcxe.com' ?>"><?= Lang::string('help') ?></a></li>
                 <li><a href="contact.php"><?= Lang::string('contact') ?></a></li>
                 <li><a href="terms.php"><?= Lang::string('terms') ?></a></li>
             </ul>
