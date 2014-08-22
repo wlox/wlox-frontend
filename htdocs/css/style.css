@@ -416,10 +416,9 @@ a.button_slider:hover {
 .starting_in.rank small{font-size: 12px;}
 .starting_in i{color:#00BDBD;display:inline-block;position:relative;top:8px;}
 .starting_in .time_until, .starting_in .prize{
-    background-color: #666666;
     padding: 5px 10px;
-    color: #FFF;
-    border-radius: 3px;}
+    border-radius: 3px;
+	border: 1px solid #666666;}
 .one_third .starting_in{font-size: 14px; }
 /* punch text 02 */
 .punch_text02 {
