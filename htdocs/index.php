@@ -55,9 +55,29 @@ if (!User::isLoggedIn()) {
 ======================================= -->  
 
 <div class="container_full">
-    
     <div class="fullwidthbanner-container">
-    
+    	<? if (time() < strtotime('2014-09-06 00:00:00')) { ?>
+	    <div class="popup">
+	    	<div class="contain">
+	    		<div class="contain1">
+			    	<a href="#" onclick="return false;" class="close">&#10006;</a>
+			    	<? if (time() < strtotime('2014-09-01 00:00:00')) { ?>
+			    	<h1><?= Lang::string('contest-join') ?></h1>
+			    	<div class="starting_in"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-starting-in') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-01 00:00:00') * 1000) ?>" /></div>
+					<div class="text1"><?= Lang::string('contest-catchline') ?></div>
+					<a href="contest-explain.php" class="button_slider"><?= Lang::string('contest-get-started') ?></a>
+					<? } elseif (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-06 00:00:00')) { ?>
+					<h1><?= Lang::string('contest-started') ?></h1>
+					<div class="starting_in"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-06 00:00:00') * 1000) ?>" /></div>
+					<div class="text1"><?= Lang::string('contest-catchline') ?></div>
+					<a href="contest-explain.php" class="button_slider"><?= Lang::string('contest-get-started') ?></a>
+					<? } ?>
+				</div>
+			</div>
+			<div class="bg"></div>
+			<div class="clear"></div>
+		</div>
+	    <? } ?>
 		<div class="fullwidthbanner">
         
 						<ul>    

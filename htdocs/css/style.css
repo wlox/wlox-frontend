@@ -32,6 +32,16 @@
 .text1 ul li span em { display:block; }
 .text1 p s{border-radius: 3px;color: #FFFFFF;padding: 2px 5px;background: none repeat scroll 0 0 #AAAAAA;text-decoration:none;}
 
+.popup{position:absolute;width:100%;height:100%;z-index:1000;}
+.popup .contain{position:relative;}
+.popup .contain1{z-index:2;position:relative;text-align:center;color:#FFF;padding-top:150px;}
+.popup .bg{position:absolute;top:0;right:0;left:0;bottom:0;z-index:1;background-color:#000000;-moz-opacity: 0.8;-khtml-opacity: 0.8;opacity: 0.8;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha"(Opacity=8);filter: progid:DXImageTransform.Microsoft.Alpha(opacity=8);}
+.popup .close{position:absolute;top:0;right:0;color:#FFF;border:1px solid #FFF;font-size:22px;padding:5px 10px;}
+.popup .starting_in{}
+.popup .button_slider{float:none;background-color:#00BDBD;border:none;color:#000;padding:10px 55px;}
+.popup .text1{font-size:20px;margin-bottom:48px;margint-top:35px;}
+.popup h1{color:#FFF;font-weight:400;font-size:50px;}
+
 /*------------------*/
 /*	SITE STRUCTURE
 /*------------------------------------------------------*/
@@ -404,7 +414,7 @@ a.button_slider:hover {
 }
 .sim{font-size: 12px;}
 .starting_in.rank small{font-size: 12px;}
-.starting_in i{color: #BD6767;display:inline-block;position:relative;top:8px;}
+.starting_in i{color:#00BDBD;display:inline-block;position:relative;top:8px;}
 .starting_in .time_until, .starting_in .prize{
     background-color: #666666;
     padding: 5px 10px;
@@ -3979,6 +3989,10 @@ ul.list_empty.form_buttons {
 	padding: 15px 20px 40px 20px;
 	text-align: center;
 }
+.pricing-text-list .bigger{
+	font-size:30px;
+}
+
 
 
 /* testimonials */

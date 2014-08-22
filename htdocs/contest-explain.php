@@ -9,7 +9,7 @@ $query = API::send();
 $content = $query['Content']['getRecord']['results'][0];
 $content1 = $query['Content']['getRecord']['results'][1];
 $content2 = $query['Content']['getRecord']['results'][2];
-$page_title = Lang::string('trading-competition-hello');
+$page_title = strip_tags(Lang::string('trading-competition-hello'));
 
 include 'includes/head.php';
 ?>
@@ -23,25 +23,71 @@ include 'includes/head.php';
 	<? include 'includes/sidebar_topics.php'; ?>
 	<div class="content_right">
 		<h1><?= Lang::string('trading-competition-hello') ?></h1>
-		<div class="sponsored" style="background-color: #000;font-size: 15px;color: #FFF; font-weight: bold;padding: 10px;">
-   		<?= Lang::string('sponsored-by') ?>: <a href="https://cryptocapital.co/"><img style="width: 300px;margin-bottom:-9px" src="images/crypto.png" /></a>
+		<div class="sponsored" style="font-size: 15px;font-weight: bold;padding: 10px;text-align:center;">
+   		<?= Lang::string('sponsored-by') ?>: <a href="https://cryptocapital.co/" target="_blank"><img style="background-color:#25292C;padding:5px 0;margin-left:15px;margin-right:75px;padding-right:10px;border-radius:8px;width: 300px;margin-bottom:-9px" src="images/crypto.png" /></a>
    		</div>
-			<? if (time() < strtotime('2014-09-01 00:00:00')) { ?>
-			<div class="starting_in"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-starting-in') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-01 00:00:00') * 1000) ?>" /></div>
-   			<? } elseif (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-06 00:00:00')) { ?>
-   			<div class="starting_in"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-06 00:00:00') * 1000) ?>" /></div>
-   			<? } else { ?>
-   			<div class="starting_in"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="prize"><?= Lang::string('competition-finished') ?></span></div>
-   			<? } ?>
-   		<div class="one_third">
-			<div class="starting_in"><i class="fa fa-trophy fa-2x"></i> <?= Lang::string('competition-first-place') ?> <span class="prize">5 BTC</span></div>
-   		</div>
-   		<div class="one_third">
-			<div class="starting_in"><i class="fa fa-trophy fa-2x"></i> <?= Lang::string('competition-second-place') ?> <span class="prize">3 BTC</span></div>
-   		</div>
-   		<div class="one_third last">
-			<div class="starting_in"><i class="fa fa-trophy fa-2x"></i> <?= Lang::string('competition-third-place') ?> <span class="prize">2 BTC</span></div>
-   		</div>
+			
+   		<div class="clearfix mar_top5"></div>
+   		<div class="one_fourth">
+			<div class="framed-box">
+				<div class="framed-box-wrap">
+					<div class="pricing-title">
+					<h3><?= Lang::string('competition-first-place') ?></h3>
+					</div>
+					<div class="pricing-text-list">
+                        <ul>
+                        <li class="bigger"><i class="fa fa-btc" style="color:#e7f200;"></i> 5 BTC</li>
+                        </ul>
+						<br>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="one_fourth">
+			<div class="framed-box">
+				<div class="framed-box-wrap">
+					<div class="pricing-title">
+					<h3><?= Lang::string('competition-second-place') ?></h3>
+					</div>
+					<div class="pricing-text-list">
+                        <ul>
+                        <li class="bigger"><i class="fa fa-btc" style="color:#e7f200;"></i> 2 BTC</li>
+                        </ul>
+						<br>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="one_fourth">
+			<div class="framed-box">
+				<div class="framed-box-wrap">
+					<div class="pricing-title">
+					<h3><?= Lang::string('competition-third-place') ?></h3>
+					</div>
+					<div class="pricing-text-list">
+                        <ul>
+                        <li class="bigger"><i class="fa fa-btc" style="color:#e7f200;"></i> 1 BTC</li>
+                        </ul>
+						<br>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="one_fourth last">
+			<div class="framed-box">
+				<div class="framed-box-wrap" style="min-height:190px;">
+					<div class="pricing-title">
+					<h3><?= Lang::string('competition-fourth') ?></h3>
+					</div>
+					<div class="pricing-text-list">
+                        <ul>
+                        <li ><?= Lang::string('competition-fourth-desc') ?></li>
+                        </ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix mar_top5"></div>
    		<div class="testimonials-4">
    			<div class="content">
             	<h3 class="section_label">

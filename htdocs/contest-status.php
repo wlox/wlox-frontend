@@ -9,7 +9,7 @@ $query = API::send();
 
 $leaders = $query['Competition']['get']['results'][0];
 $user_rank = $query['Competition']['getUserRank']['results'][0];
-$page_title = Lang::string('trading-competition-board');
+$page_title = strip_tags(Lang::string('trading-competition-board'));
 
 include 'includes/head.php';
 ?>
@@ -23,9 +23,6 @@ include 'includes/head.php';
 	<? include 'includes/sidebar_topics.php'; ?>
 	<div class="content_right">
 		<h1><?= Lang::string('trading-competition-board') ?></h1>
-		<div class="sponsored" style="background-color: #000;font-size: 15px;color: #FFF; font-weight: bold;padding: 10px;">
-   		<?= Lang::string('sponsored-by') ?>: <a href="https://cryptocapital.co/"><img style="width: 300px;margin-bottom:-9px" src="images/crypto.png" /></a>
-   		</div>
 		<div class="one_half">
 			<? if (time() < strtotime('2014-08-20 11:30:00')) { ?>
 			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-starting-in') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-08-20 11:30:00') * 1000) ?>" /></div>

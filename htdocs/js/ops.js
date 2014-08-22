@@ -1111,6 +1111,10 @@ $(document).ready(function() {
 		return true;
 	});
 	
+	$('.popup .close').click(function() {
+		$(this).parents('.popup').fadeOut(400);
+	});
+	
 	filtersUpdate();
 	paginationUpdate();
 	switchBuyCurrency();
