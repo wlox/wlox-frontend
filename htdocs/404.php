@@ -20,8 +20,6 @@ include 'includes/head.php';
         <br>
         
         <em><?= Lang::string('404-desc') ?></em>
-
-        <p>Try using the button below to go to main page of the site</p>
         
         <div class="clearfix mar_top3"></div>
     	
