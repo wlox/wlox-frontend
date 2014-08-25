@@ -13,7 +13,7 @@
 	<meta name="description" content="" />
     
     <!-- Favicon --> 
-	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="shortcut icon" href="/favicon.ico">
     
     <!-- this styles only adds some repairs on idevices  -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
