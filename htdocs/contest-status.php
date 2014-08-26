@@ -20,7 +20,6 @@ include 'includes/head.php';
 	</div>
 </div>
 <div class="container">
-	<? include 'includes/sidebar_topics.php'; ?>
 	<div class="content_right">
 		<h1><?= Lang::string('trading-competition-board') ?></h1>
 		<div class="one_half">
@@ -87,6 +86,7 @@ include 'includes/head.php';
 		<? } ?>
 		</ul>
     </div>
+    <? include 'includes/sidebar_topics.php'; ?>
 	<div class="clearfix mar_top8"></div>
 </div>
 <? include 'includes/foot.php'; ?>

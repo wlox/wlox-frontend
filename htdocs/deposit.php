@@ -46,7 +46,6 @@ if (!$_REQUEST['bypass']) {
 	</div>
 </div>
 <div class="container">
-	<? include 'includes/sidebar_account.php'; ?>
 	<div class="content_right">
 		<div class="testimonials-4">
 			<div class="one_half">
@@ -175,6 +174,7 @@ if (!$_REQUEST['bypass']) {
 		</div>
 		<div class="mar_top5"></div>
 	</div>
+	<? include 'includes/sidebar_account.php'; ?>
 </div>
 <? include 'includes/foot.php'; ?>
 <? } ?>

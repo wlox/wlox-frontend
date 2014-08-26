@@ -25,7 +25,6 @@ include 'includes/head.php';
 	</div>
 </div>
 <div class="container">
-	<? include 'includes/sidebar_topics.php'; ?>
 	<div class="content_right">
     	<div class="text1"><?= $content['content'] ?></div>
     	<div class="clearfix mar_top2"></div>
@@ -73,6 +72,7 @@ include 'includes/head.php';
 			</table>
     	</div -->
     </div>
+    <? include 'includes/sidebar_topics.php'; ?>
 	<div class="clearfix mar_top8"></div>
 </div>
 <? include 'includes/foot.php'; ?>

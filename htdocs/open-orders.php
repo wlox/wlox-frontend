@@ -70,7 +70,6 @@ if (!$bypass) {
 	</div>
 </div>
 <div class="container">
-	<? include 'includes/sidebar_account.php'; ?>
 	<div class="content_right">
 		<? Messages::display(); ?>
 		<? Errors::display(); ?>
@@ -214,6 +213,7 @@ if (!$bypass) {
 <? if (!$bypass) { ?>
 		<div class="mar_top5"></div>
 	</div>
+	<? include 'includes/sidebar_account.php'; ?>
 </div>
 <? include 'includes/foot.php'; ?>
 <? } ?>

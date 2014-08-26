@@ -502,7 +502,6 @@ a.show_hide{
 .last {
 	margin-right: 0 !important;
 	clear: right;
-	margin-bottom: 0 !important;
 }
 
 .top_contact_info {
@@ -563,6 +562,27 @@ ul.tci_list_left{
 	line-height: 18px;
 	display:inline;
 }
+h2{ line-height:50px; }
+h3{line-height: 33px;}
+.login_bg .loginform {width:auto;}
+.login_bg .loginform .input_contain {position:relative;}
+.login_bg .loginform .input_contain .fa{position: absolute;top: 10px;}
+.login_bg .loginform .input_contain .login{text-indent:20px;padding: 10px 0;}
+.form ul li label {left:0;position:relative;top:0;display: block;}
+.form ul li input {margin-left:0;}
+.form select {margin-left:0;}
+.form ul li em{left: -10px;top: -3px;}
+.form ul li .checkbox {margin:0;width: auto;position: absolute;top:6px;}
+.form ul li .checkbox_label {left: 21px;}
+.form3 .captcha img { margin-left:0;}
+.mar_top8{margin-top:40px;}
+.balances .one_half{margin-bottom:0;}
+.section_label .left {margin:-10px 5px 0 -10px;float:none;display:inline-block;}
+.section_label .right {float:none;display:inline-block;}
+.section_label {white-space:nowrap;}
+.graph_options span select {margin-top: 20px;}
+.graph_options span {float:left;}
+.pagination_label{display:none;}
 
 a.button_slider {
 	padding: 5px 5px;
@@ -854,7 +874,7 @@ ul.fullimage_box.last {
 	font-size: 18px;
 	float: left;
 	width: 82%;
-	line-height: 27px;
+	line-height:38px;
 }
 .blog_post a.date {
 	float: left;
@@ -1156,7 +1176,6 @@ a.show_hide{
 .last {
 	margin-right: 0 !important;
 	clear: right;
-	margin-bottom: 0 !important;
 }
 
 .top_contact_info {
@@ -1217,7 +1236,28 @@ ul.tci_list_left{
 	line-height: 18px;
 	display:inline;
 }
+h2{ line-height:50px; }
+h3{line-height: 33px;}
 
+.login_bg .loginform {width:auto;}
+.login_bg .loginform .input_contain {position:relative;}
+.login_bg .loginform .input_contain .fa{position: absolute;top: 10px;}
+.login_bg .loginform .input_contain .login{text-indent:20px;padding: 10px 0;}
+.form ul li label {left:0;position:relative;top:0;display: block;}
+.form ul li input {margin-left:0;}
+.form select {margin-left:0;}
+.form ul li em{left: -10px;top: -3px;}
+.form ul li .checkbox {margin:0;width: auto;position: absolute;top:6px;}
+.form ul li .checkbox_label {left: 21px;}
+.form3 .captcha img { margin-left:0;}
+.mar_top8{margin-top:40px;}
+.balances .one_half{margin-bottom:0;}
+.section_label .left {margin:-10px 5px 0 -10px;float:none;display:inline-block;}
+.section_label .right {float:none;display:inline-block;}
+.section_label {white-space:nowrap;}
+.graph_options span select {margin-top: 20px;}
+.graph_options span {float:left;}
+.pagination_label{display:none;}
 
 a.button_slider {
 	padding: 3px 2px;
@@ -1653,7 +1693,7 @@ ul.fullimage_box.last {
 	font-size: 18px;
 	float: left;
 	width: 71%;
-	line-height: 25px;
+	line-height:38px;
 }
 .blog_post a.date {
 	float: left;

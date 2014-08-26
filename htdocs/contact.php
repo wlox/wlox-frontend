@@ -46,7 +46,6 @@ include 'includes/head.php';
 	</div>
 </div>
 <div class="container">
-	<? include 'includes/sidebar_topics.php'; ?>
 	<div class="content_right">
     	<div class="content_fullwidth">
     		<div class="text"><?= $content['content'] ?></div>
@@ -78,6 +77,7 @@ include 'includes/head.php';
 		   	</div>     
 		</div>
     </div>
+    <? include 'includes/sidebar_topics.php'; ?>
 	<div class="clearfix mar_top8"></div>
 </div>
 <? include 'includes/foot.php'; ?>
