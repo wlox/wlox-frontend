@@ -207,18 +207,18 @@ if (!$bypass) {
 <div class="container">
 	<div class="content_right">
 	
-		<? if (time() < strtotime('2014-09-6 00:00:00')) { ?>
+		<? if (time() < strtotime('2014-09-26 00:00:00')) { ?>
 		<h3><?= Lang::string('trading-competition-status') ?></h3>
 		<div class="one_half">
 			<? if (time() < strtotime('2014-09-01 00:00:00')) { ?>
 			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-starting-in') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-01 00:00:00') * 1000) ?>" /></div>
-   			<? } elseif (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-06 00:00:00')) { ?>
-   			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-06 00:00:00') * 1000) ?>" /></div>
-   			<? } elseif (time() >= strtotime('2014-09-06 00:00:00') && time() < strtotime('2014-09-12 00:00:00')) { ?>
+   			<? } elseif (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-16 00:00:00')) { ?>
+   			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-16 00:00:00') * 1000) ?>" /></div>
+   			<? } elseif (time() >= strtotime('2014-09-16 00:00:00') && time() < strtotime('2014-09-26 00:00:00')) { ?>
    			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="prize"><?= Lang::string('competition-finished') ?></span></div>
    			<? } ?>
    		</div>
-   		<? if (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-12 00:00:00')) { ?>
+   		<? if (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-26 00:00:00')) { ?>
    		<div class="one_half last">
    			<div class="starting_in rank"><i class="fa fa-user fa-2x"></i> <?= Lang::string('competition-my-rank') ?>: <span class="prize"><b><?= $user_rank['rank']?></b> <small>(<?= (($user_rank['usd_gain'] >= 0) ? '+' : '').number_format($user_rank['usd_gain'],2) ?> USD)</small></span></div>
    		</div>
@@ -245,7 +245,7 @@ if (!$bypass) {
 						<div class="buyform">
 							<div class="spacer"></div>
 							<div class="calc dotted">
-								<div class="label"><?= str_replace('[currency]','<span class="sell_currency_label">'.$currency_info['currency'].'</span>',Lang::string('buy-fiat-available')).((time() < strtotime('2014-09-12 00:00:00')) ? ' <span class="sim">('.Lang::string('simulation').')</span>' : '') ?></div>
+								<div class="label"><?= str_replace('[currency]','<span class="sell_currency_label">'.$currency_info['currency'].'</span>',Lang::string('buy-fiat-available')).((time() < strtotime('2014-09-16 00:00:00')) ? ' <span class="sim">('.Lang::string('simulation').')</span>' : '') ?></div>
 								<div class="value"><span class="buy_currency_char"><?= $currency_info['fa_symbol'] ?></span><span id="buy_user_available"><?= number_format($user_available[strtoupper($currency1)],2) ?></span></div>
 								<div class="clear"></div>
 							</div>
@@ -332,7 +332,7 @@ if (!$bypass) {
 						<div class="buyform">
 							<div class="spacer"></div>
 							<div class="calc dotted">
-								<div class="label"><?= Lang::string('sell-btc-available').((time() < strtotime('2014-09-12 00:00:00')) ? ' <span class="sim">('.Lang::string('simulation').')</span>' : '') ?></div>
+								<div class="label"><?= Lang::string('sell-btc-available').((time() < strtotime('2014-09-16 00:00:00')) ? ' <span class="sim">('.Lang::string('simulation').')</span>' : '') ?></div>
 								<div class="value"><span id="sell_user_available"><?= number_format($user_available['BTC'],8) ?></span> BTC</div>
 								<div class="clear"></div>
 							</div>

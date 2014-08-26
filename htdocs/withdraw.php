@@ -228,7 +228,7 @@ if (!$_REQUEST['bypass']) {
 					<div class="clear"></div>
 					<form id="buy_form" action="withdraw.php" method="POST">
 						<div class="buyform">
-							<? if (time() < strtotime('2014-09-06 00:00:00')) { ?>
+							<? if (time() < strtotime('2014-09-16 00:00:00')) { ?>
 							<div class="spacer"></div>
 							<div class="calc">
 								<div class="text"><?= Lang::string('competition-feature-disabled') ?></div>
@@ -274,7 +274,7 @@ if (!$_REQUEST['bypass']) {
 					<div class="clear"></div>
 					<form id="buy_form" action="withdraw.php" method="POST">
 						<div class="buyform">
-							<? if (time() < strtotime('2014-09-06 00:00:00')) { ?>
+							<? if (time() < strtotime('2014-09-16 00:00:00')) { ?>
 							<div class="spacer"></div>
 							<div class="calc">
 								<div class="text"><?= Lang::string('competition-feature-disabled') ?></div>

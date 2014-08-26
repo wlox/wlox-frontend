@@ -56,7 +56,7 @@ if (!$_REQUEST['bypass']) {
 					</h3>
 					<div class="clear"></div>
 					<div class="buyform">
-						<? if (time() < strtotime('2014-09-06 00:00:00')) { ?>
+						<? if (time() < strtotime('2014-09-16 00:00:00')) { ?>
 						<div class="spacer"></div>
 						<div class="calc">
 							<div class="text"><?= Lang::string('competition-feature-disabled') ?></div>
@@ -91,7 +91,7 @@ if (!$_REQUEST['bypass']) {
 					</h3>
 					<div class="clear"></div>
 					<div class="buyform">
-						<? if (time() < strtotime('2014-09-06 00:00:00')) { ?>
+						<? if (time() < strtotime('2014-09-16 00:00:00')) { ?>
 						<div class="spacer"></div>
 						<div class="calc">
 							<div class="text"><?= Lang::string('competition-feature-disabled') ?></div>

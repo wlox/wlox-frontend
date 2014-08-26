@@ -56,7 +56,7 @@ if (!User::isLoggedIn()) {
 
 <div class="container_full">
     <div class="fullwidthbanner-container">
-    	<? if (time() < strtotime('2014-09-06 00:00:00')) { ?>
+    	<? if (time() < strtotime('2014-09-16 00:00:00')) { ?>
 	    <div class="popup">
 	    	<div class="contain">
 	    		<div class="contain1">
@@ -66,9 +66,9 @@ if (!User::isLoggedIn()) {
 			    	<div class="starting_in"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-starting-in') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-01 00:00:00') * 1000) ?>" /></div>
 					<div class="text1"><?= Lang::string('contest-catchline') ?></div>
 					<a href="contest-explain.php" class="button_slider"><?= Lang::string('contest-get-started') ?></a>
-					<? } elseif (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-06 00:00:00')) { ?>
+					<? } elseif (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-16 00:00:00')) { ?>
 					<h1><?= Lang::string('contest-started') ?></h1>
-					<div class="starting_in"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-06 00:00:00') * 1000) ?>" /></div>
+					<div class="starting_in"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-16 00:00:00') * 1000) ?>" /></div>
 					<div class="text1"><?= Lang::string('contest-catchline') ?></div>
 					<a href="contest-explain.php" class="button_slider"><?= Lang::string('contest-get-started') ?></a>
 					<? } ?>
@@ -115,8 +115,8 @@ if (!User::isLoggedIn()) {
 <div class="punch_text">
 	<? if (time() < strtotime('2014-09-01 00:00:00')) { ?>
 	<div class="container"><b><i class="fa fa-asterisk"></i> <?= str_replace('[time]','<span class="time_until"></span><input type="hidden" class="time_until_seconds" value="'.(strtotime('2014-09-01 00:00:00')*1000).'" />',Lang::string('trading-competition-banner')) ?></b> <a href="contest-explain.php"><?= Lang::string('contest-get-started') ?></a></div>
-	<? } elseif (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-06 00:00:00')) { ?>
-	<div class="container"><b><i class="fa fa-asterisk"></i> <?= str_replace('[time]','<span class="time_until"></span><input type="hidden" class="time_until_seconds" value="'.(strtotime('2014-09-06 00:00:00')*1000).'" />',Lang::string('trading-competition-started')) ?></b> <a href="contest-status.php"><?= Lang::string('contest-ranking') ?></a></div>
+	<? } elseif (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-16 00:00:00')) { ?>
+	<div class="container"><b><i class="fa fa-asterisk"></i> <?= str_replace('[time]','<span class="time_until"></span><input type="hidden" class="time_until_seconds" value="'.(strtotime('2014-09-16 00:00:00')*1000).'" />',Lang::string('trading-competition-started')) ?></b> <a href="contest-status.php"><?= Lang::string('contest-ranking') ?></a></div>
 	<? } else { ?>
 	<div class="container"><b><?= Lang::string('home-trading') ?></b> <a href="our-security.php"><?= Lang::string('home-more') ?></a></div>
 	<? } ?>

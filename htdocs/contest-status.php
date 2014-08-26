@@ -25,8 +25,8 @@ include 'includes/head.php';
 		<div class="one_half">
 			<? if (time() < strtotime('2014-09-01 00:00:00')) { ?>
 			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-starting-in') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-01 00:00:00') * 1000) ?>" /></div>
-   			<? } elseif (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-06 00:00:00')) { ?>
-   			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-06 00:00:00') * 1000) ?>" /></div>
+   			<? } elseif (time() >= strtotime('2014-09-01 00:00:00') && time() < strtotime('2014-09-16 00:00:00')) { ?>
+   			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-16 00:00:00') * 1000) ?>" /></div>
    			<? } else { ?>
    			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="prize"><?= Lang::string('competition-finished') ?></span></div>
    			<? } ?>
@@ -72,7 +72,7 @@ include 'includes/head.php';
 			<div class="starting_in"><?= Lang::string('competition-typo') ?> <span class="prize">0.02 BTC</span></div>
    		</div>
    		<div class="one_third">
-			<div class="starting_in"><?= Lang::string('competition-func') ?> <span class="prize">0.05 BTC</span></div>
+			<div class="starting_in"><?= Lang::string('competition-func') ?>: <span class="prize">0.05 BTC</span></div>
    		</div>
    		<div class="one_third last">
 			<div class="starting_in"><?= Lang::string('competition-exploits') ?> <span class="prize">0.1 BTC</span></div>

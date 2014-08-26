@@ -22,6 +22,7 @@ include 'includes/head.php';
 <div class="container">
 	<div class="content_right">
 		<h1><?= Lang::string('trading-competition-hello') ?></h1>
+		<div class="starting_in rank"><i class="fa fa-calendar fa-2x"></i> <?= Lang::string('competition-dates') ?></div>
 		<div class="sponsored" style="font-size: 15px;font-weight: bold;padding: 10px;text-align:center;">
    		<?= Lang::string('sponsored-by') ?>: <a href="https://cryptocapital.co/" target="_blank"><img style="background-color:#25292C;padding:5px 0;margin-left:15px;margin-right:75px;padding-right:10px;border-radius:8px;width: 300px;margin-bottom:-9px" src="images/crypto.png" /></a>
    		</div>
