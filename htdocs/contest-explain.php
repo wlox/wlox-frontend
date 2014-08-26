@@ -35,7 +35,7 @@ include 'includes/head.php';
 					</div>
 					<div class="pricing-text-list">
                         <ul>
-                        <li class="bigger"><i class="fa fa-btc" style="color:#F27400;"></i> 5 BTC</li>
+                        <li class="bigger"><i class="fa fa-btc" style="color:#E5E360;"></i> 5 BTC</li>
                         </ul>
 						<br>
 					</div>
@@ -50,7 +50,7 @@ include 'includes/head.php';
 					</div>
 					<div class="pricing-text-list">
                         <ul>
-                        <li class="bigger"><i class="fa fa-btc" style="color:#F27400;"></i> 2 BTC</li>
+                        <li class="bigger"><i class="fa fa-btc" style="color:#E5E360;"></i> 2 BTC</li>
                         </ul>
 						<br>
 					</div>
@@ -65,7 +65,7 @@ include 'includes/head.php';
 					</div>
 					<div class="pricing-text-list">
                         <ul>
-                        <li class="bigger"><i class="fa fa-btc" style="color:#F27400;"></i> 1 BTC</li>
+                        <li class="bigger"><i class="fa fa-btc" style="color:#E5E360;"></i> 1 BTC</li>
                         </ul>
 						<br>
 					</div>

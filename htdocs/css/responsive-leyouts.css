@@ -104,7 +104,6 @@ ul.post_meta_links {
 	font-size: 12px;
 }
 .tci_list li a {
-	width: 22px;
 	height: 22px;
 	line-height: 22px;
 }
@@ -113,7 +112,7 @@ ul.post_meta_links {
 	margin: 0px 1px 0px 0px;
 }
 #access .menu ul li a {
-	font-size: 13px;
+	font-size: 12px;
 	padding: 13px 7px 12px 9px;
 }
 
@@ -1938,4 +1937,12 @@ a.show_hide{
 	font-size: 10px;
 }
 
+}
+
+@media only screen and (max-width: 390px){
+.punch_text b {display:none;}
+.popup .text1 {display:none;}
+.section_label .left {margin:-10px 5px 0 -10px;float:none;display:inline-block;}
+.section_label .right {float:none;display:inline-block;}
+.section_label {white-space:normal;}
 }
