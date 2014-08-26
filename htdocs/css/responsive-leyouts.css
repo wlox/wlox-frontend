@@ -561,6 +561,7 @@ ul.tci_list_left{
 	line-height: 18px;
 	display:inline;
 }
+h1{line-height: 54px;}
 h2{ line-height:50px; }
 h3{line-height: 33px;}
 .login_bg .loginform {width:auto;}
@@ -1113,7 +1114,8 @@ a.show_hide{
 	margin: -35px 43px 10px 0px;
 	float: left;
 }
-
+.balances{margin-left:0;}
+.starting_in.rank {line-height: 36px;}
 .container {
 	width: 300px;
 	margin: auto auto auto auto;
@@ -1235,6 +1237,7 @@ ul.tci_list_left{
 	line-height: 18px;
 	display:inline;
 }
+h1{line-height: 54px;}
 h2{ line-height:50px; }
 h3{line-height: 33px;}
 
@@ -1945,4 +1948,7 @@ a.show_hide{
 .section_label .left {margin:-10px 5px 0 -10px;float:none;display:inline-block;}
 .section_label .right {float:none;display:inline-block;}
 .section_label {white-space:normal;}
+h1{line-height: 54px;}
+.balances{margin-left:0;}
+.starting_in.rank {line-height: 36px;}
 }
