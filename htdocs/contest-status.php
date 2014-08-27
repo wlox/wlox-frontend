@@ -68,10 +68,13 @@ include 'includes/head.php';
    		<div class="clearfix mar_top3"></div>
    		<div class="clear"></div>
    		<h2><?= Lang::string('competition-rewards') ?></h2>
-   		<div class="one_half">
-			<div class="starting_in"><?= Lang::string('competition-func') ?>: <span class="prize">0.05 BTC</span></div>
+   		<div class="one_third">
+			<div class="starting_in"><?= Lang::string('competition-typo') ?> <span class="prize">0.002 BTC</span></div>
+		</div>
+   		<div class="one_third">
+			<div class="starting_in"><?= Lang::string('competition-func') ?> <span class="prize">0.005 BTC</span></div>
    		</div>
-   		<div class="one_half last">
+   		<div class="one_third last">
 			<div class="starting_in"><?= Lang::string('competition-exploits') ?> <span class="prize">0.1 BTC</span></div>
    		</div>
    		<div class="clearfix mar_top3"></div>
