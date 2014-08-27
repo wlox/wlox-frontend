@@ -271,17 +271,17 @@ if (!$bypass) {
 							</div>
 							<div class="param lessbottom">
 								<input class="checkbox" name="buy_market_price" id="buy_market_price" type="checkbox" value="1" <?= ($buy_market_price1 && !$buy_stop) ? 'checked="checked"' : '' ?> <?= (!$asks) ? 'readonly="readonly"' : '' ?> />
-								<label for="buy_market_price"><?= Lang::string('buy-market-price') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="https://1btcxe.freshdesk.com/solution/articles/1000023402-what-are-market-price"><i class="fa fa-question-circle"></i></a></label>
+								<label for="buy_market_price"><?= Lang::string('buy-market-price') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="help.php?url=solution/articles/1000023402-what-are-market-price"><i class="fa fa-question-circle"></i></a></label>
 								<div class="clear"></div>
 							</div>
 							<div class="param lessbottom">
 								<input class="checkbox" name="buy_limit" id="buy_limit" type="checkbox" value="1" <?= ($buy_limit && !$buy_market_price1) ? 'checked="checked"' : '' ?> />
-								<label for="buy_limit"><?= Lang::string('buy-limit') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="https://1btcxe.freshdesk.com/support/solutions/articles/1000101680-what-is-a-limit"><i class="fa fa-question-circle"></i></a></label>
+								<label for="buy_limit"><?= Lang::string('buy-limit') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="help.php?url=support/solutions/articles/1000101680-what-is-a-limit"><i class="fa fa-question-circle"></i></a></label>
 								<div class="clear"></div>
 							</div>
 							<div class="param lessbottom">
 								<input class="checkbox" name="buy_stop" id="buy_stop" type="checkbox" value="1" <?= ($buy_stop && !$buy_market_price1) ? 'checked="checked"' : '' ?> />
-								<label for="buy_stop"><?= Lang::string('buy-stop') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="https://1btcxe.freshdesk.com/support/solutions/articles/1000101669-what-is-a-stop"><i class="fa fa-question-circle"></i></a></label>
+								<label for="buy_stop"><?= Lang::string('buy-stop') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="help.php?url=support/solutions/articles/1000101669-what-is-a-stop"><i class="fa fa-question-circle"></i></a></label>
 								<div class="clear"></div>
 							</div>
 							<div id="buy_price_container" class="param" <?= (!$buy_limit && !$buy_market_price1) ? 'style="display:none;"' : '' ?>>
@@ -358,17 +358,17 @@ if (!$bypass) {
 							</div>
 							<div class="param lessbottom">
 								<input class="checkbox" name="sell_market_price" id="sell_market_price" type="checkbox" value="1" <?= ($sell_market_price1 && !$sell_stop) ? 'checked="checked"' : '' ?> <?= (!$bids) ? 'readonly="readonly"' : '' ?> />
-								<label for="sell_market_price"><?= Lang::string('sell-market-price') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="https://1btcxe.freshdesk.com/solution/articles/1000023402-what-are-market-price"><i class="fa fa-question-circle"></i></a></label>
+								<label for="sell_market_price"><?= Lang::string('sell-market-price') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="help.php?url=solution/articles/1000023402-what-are-market-price"><i class="fa fa-question-circle"></i></a></label>
 								<div class="clear"></div>
 							</div>
 							<div class="param lessbottom">
 								<input class="checkbox" name="sell_limit" id="sell_limit" type="checkbox" value="1" <?= ($sell_limit && !$sell_market_price1) ? 'checked="checked"' : '' ?> />
-								<label for="sell_stop"><?= Lang::string('buy-limit') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="https://1btcxe.freshdesk.com/support/solutions/articles/1000101680-what-is-a-limit"><i class="fa fa-question-circle"></i></a></label>
+								<label for="sell_stop"><?= Lang::string('buy-limit') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="help.php?url=support/solutions/articles/1000101680-what-is-a-limit"><i class="fa fa-question-circle"></i></a></label>
 								<div class="clear"></div>
 							</div>
 							<div class="param lessbottom">
 								<input class="checkbox" name="sell_stop" id="sell_stop" type="checkbox" value="1" <?= ($sell_stop && !$sell_market_price1) ? 'checked="checked"' : '' ?> />
-								<label for="sell_stop"><?= Lang::string('buy-stop') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="https://1btcxe.freshdesk.com/support/solutions/articles/1000101669-what-is-a-stop"><i class="fa fa-question-circle"></i></a></label>
+								<label for="sell_stop"><?= Lang::string('buy-stop') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="help.php?url=support/solutions/articles/1000101669-what-is-a-stop"><i class="fa fa-question-circle"></i></a></label>
 								<div class="clear"></div>
 							</div>
 							<div id="sell_price_container" class="param" <?= (!$sell_limit && !$sell_market_price1) ? 'style="display:none;"' : '' ?>>
@@ -444,7 +444,7 @@ if (!$bypass) {
 							<div class="mar_top1"></div>
 							<div class="param lessbottom">
 								<input disabled="disabled" class="checkbox" name="dummy" id="buy_market_price" type="checkbox" value="1" <?= ($buy_market_price1) ? 'checked="checked"' : '' ?> />
-								<label for="buy_market_price"><?= Lang::string('buy-market-price') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="https://1btcxe.freshdesk.com/solution/articles/1000023402-what-are-market-price"><i class="fa fa-question-circle"></i></a></label>
+								<label for="buy_market_price"><?= Lang::string('buy-market-price') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="help.php?url=solution/articles/1000023402-what-are-market-price"><i class="fa fa-question-circle"></i></a></label>
 								<input type="hidden" name="buy_market_price" value="<?= $buy_market_price1 ?>" />
 								<div class="clear"></div>
 							</div>
@@ -518,7 +518,7 @@ if (!$bypass) {
 							<div class="mar_top1"></div>
 							<div class="param lessbottom">
 								<input disabled="disabled" class="checkbox" name="dummy" id="sell_market_price" type="checkbox" value="1" <?= ($sell_market_price1) ? 'checked="checked"' : '' ?> />
-								<label for="sell_market_price"><?= Lang::string('sell-market-price') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="https://1btcxe.freshdesk.com/solution/articles/1000023402-what-are-market-price"><i class="fa fa-question-circle"></i></a></label>
+								<label for="sell_market_price"><?= Lang::string('sell-market-price') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="help.php?url=solution/articles/1000023402-what-are-market-price"><i class="fa fa-question-circle"></i></a></label>
 								<input type="hidden" name="sell_market_price" value="<?= $sell_market_price1 ?>" />
 								<div class="clear"></div>
 							</div>

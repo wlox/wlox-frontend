@@ -19,7 +19,7 @@ include 'includes/head.php';
 	<div class="content_right">
     <div class="text1"><?= $content['content'] ?></div>
     </div>
-    <? include 'includes/sidebar_account.php'; ?>
+    <? include 'includes/sidebar_topics.php'; ?>
 	<div class="clearfix mar_top8"></div>
 </div>
 <? include 'includes/foot.php'; ?>

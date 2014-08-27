@@ -57,7 +57,6 @@
             <ul class="list">   
                 <li><a href="what-are-bitcoins.php"><?= Lang::string('what-are-bitcoins') ?></a></li>
                 <li><a href="how-bitcoin-works.php"><?= Lang::string('how-bitcoin-works') ?></a></li>
-                <li><a href="trading-bitcoins.php"><?= Lang::string('trading-bitcoins') ?></a></li>
                 <li><a href="how-to-register.php"><?= Lang::string('how-to-register') ?></a></li>
             </ul>
          </div>
@@ -75,19 +74,9 @@
     
         <div class="one_half">
         
-            <b>Copyright &copy; 2014 1BTCXE. All rights reserved.  <a href="terms.php">Terms of Use</a> | <a href="privacy.php">Privacy Policy</a></b>
+            <b>Copyright &copy; 2014 1BTCXE. All rights reserved.</b>
             
         </div>
-    
-    	<div class="one_half last">
-     		
-            <ul class="footer_social_links">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-                
-    	</div>
-    
     </div>
     
 </div><!-- end copyright info -->
