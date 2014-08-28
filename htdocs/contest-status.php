@@ -67,7 +67,7 @@ include 'includes/head.php';
    		</div>
    		<div class="clearfix mar_top3"></div>
    		<div class="clear"></div>
-   		<h2><?= Lang::string('competition-rewards') ?></h2>
+   		<h2><?= Lang::string('competition-rewards') ?>*</h2>
    		<div class="one_third">
 			<div class="starting_in"><?= Lang::string('competition-typo') ?> <span class="prize">0.002 BTC</span></div>
 		</div>
@@ -77,6 +77,7 @@ include 'includes/head.php';
    		<div class="one_third last">
 			<div class="starting_in"><?= Lang::string('competition-exploits') ?> <span class="prize">0.1 BTC</span></div>
    		</div>
+   		<p>* <?= Lang::string('competition-contingency') ?></p>
    		<div class="clearfix mar_top3"></div>
    		<ul class="list_empty">
    		<? if (!User::isLoggedIn()) { ?>
