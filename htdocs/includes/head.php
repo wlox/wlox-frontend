@@ -7,6 +7,7 @@
 
 <head>
 	<title><?= $page_title ?></title>
+	<base href="<?= $CFG->baseurl ?>" />
 	
 	<meta charset="utf-8">
 	<meta name="keywords" content="" />

@@ -303,7 +303,7 @@ if (!$bypass) {
 								<div class="clear"></div>
 							</div>
 							<div class="calc">
-								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="fee-schedule.php"><i class="fa fa-question-circle"></i></a></div>
+								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="fee-schedule.php" target="_blank"><i class="fa fa-question-circle"></i></a></div>
 								<div class="value"><span id="buy_user_fee"><?= $user_fee_bid ?></span>%</div>
 								<div class="clear"></div>
 							</div>
@@ -390,7 +390,7 @@ if (!$bypass) {
 								<div class="clear"></div>
 							</div>
 							<div class="calc">
-								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="fee-schedule.php"><i class="fa fa-question-circle"></i></a></div>
+								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="fee-schedule.php" target="_blank"><i class="fa fa-question-circle"></i></a></div>
 								<div class="value"><span id="sell_user_fee"><?= $user_fee_ask ?></span>%</div>
 								<div class="clear"></div>
 							</div>
@@ -474,7 +474,7 @@ if (!$bypass) {
 								<div class="clear"></div>
 							</div>
 							<div class="calc">
-								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="fee-schedule.php"><i class="fa fa-question-circle"></i></a></div>
+								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="fee-schedule.php" target="_blank"><i class="fa fa-question-circle"></i></a></div>
 								<div class="value"><span id="sell_user_fee"><?= $user_fee_bid ?></span>%</div>
 								<div class="clear"></div>
 							</div>
@@ -548,7 +548,7 @@ if (!$bypass) {
 								<div class="clear"></div>
 							</div>
 							<div class="calc">
-								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="fee-schedule.php"><i class="fa fa-question-circle"></i></a></div>
+								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="fee-schedule.php" target="_blank"><i class="fa fa-question-circle"></i></a></div>
 								<div class="value"><span id="sell_user_fee"><?= $user_fee_ask ?></span>%</div>
 								<div class="clear"></div>
 							</div>

@@ -1,0 +1,9 @@
+RewriteEngine on
+RewriteRule ^([^/]*)-to-btc\.php$ btc_to_currency.php?currency=$1&lang=en [L]
+RewriteRule ^((?!en)[a-z]*)/([^/]*)-to-btc\.php$ btc_to_currency.php?lang=$1&currency=$2 [L]
+RewriteCond %{THE_REQUEST} !/[a-z]{2}/
+RewriteRule ^index\.php$ index.php?lang=en [L]
+RewriteRule ^((?!en)[a-z]*)/index\.php$ index.php?lang=$1 [L]
+RewriteCond %{THE_REQUEST} !/[a-z]{2}/
+RewriteRule ^order-book\.php$ order-book.php?lang=en [L]
+RewriteRule ^((?!en)[a-z]*)/libreta-de-ordenes\.php$ order-book.php?lang=$1 [L]
