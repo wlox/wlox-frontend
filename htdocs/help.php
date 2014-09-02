@@ -4,7 +4,7 @@ include '../cfg/cfg.php';
 if (User::$awaiting_token)
 	Link::redirect('verify-token.php');
 elseif (!User::isLoggedIn())
-	Link::redirect('http://support.1btcxe.com/');
+	Link::redirect('https://support.1btcxe.com/');
 
 API::add('User','getInfo',array($_SESSION['session_id']));
 $query = API::send();
