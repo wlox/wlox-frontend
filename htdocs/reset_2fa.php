@@ -12,7 +12,7 @@ include 'includes/head.php';
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= $page_title ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="reset-2fa.php"><?= Lang::string('reset-2fa') ?></a></div>
+        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="reset_2fa.php"><?= Lang::string('reset-2fa') ?></a></div>
 	</div>
 </div>
 <div class="container">
