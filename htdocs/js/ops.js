@@ -1072,19 +1072,20 @@ $(document).ready(function() {
 	}
 	
 	$('#language_selector').bind("keyup change", function(){
-		window.location.href = 'index.php?lang='+$(this).val();
+		if ($(this).val() == 'en')
+			window.location.href = 'index.php';
+		else if ($(this).val() == 'es')
+			window.location.href = 'es/index.php';
 	});
 	
 	$('#currency_selector').bind("keyup change", function(){
-		window.location.href = 'index.php?currency='+$(this).val();
+		var lang = $('#language_selector').val();
+		var url = $('#url_'+'index_php'+'_'+lang).val();
+		window.location.href = url+'?currency='+$(this).val();
 	});
 	
 	$('#fee_currency').bind("keyup change", function(){
 		window.location.href = 'fee-schedule.php?currency='+$(this).val();
-	});
-	
-	$('#language_selector').bind("keyup change", function(){
-		window.location.href = 'index.php?lang='+$(this).val();
 	});
 	
 	$('#ob_currency').bind("keyup change", function(){

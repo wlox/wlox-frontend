@@ -90,7 +90,8 @@
     
     <!--  script type="text/javascript" src="../shared2/js/form.js"></script -->
 	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-
+	<?= Lang::url($CFG->self,1); ?>
+	
 </head>
 
 <body>
@@ -113,6 +114,7 @@
 <input type="hidden" id="cfg_orders_delete" value="<?= Lang::string('orders-delete') ?>" />
 <input type="hidden" id="buy_errors_no_compatible" value="<?= Lang::string('buy-errors-no-compatible') ?>" />
 <input type="hidden" id="orders_converted_from" value="<?= Lang::string('orders-converted-from') ?>" />
+<?= Lang::url(false,false,1); ?>
 <div class="site_wrapper">
    
 <!-- HEADER -->
