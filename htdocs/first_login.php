@@ -19,7 +19,12 @@ $query = API::send();
 $personal = new Form('settings',false,false,'form1','site_users');
 $personal->verify();
 $personal->get($query['User']['getInfo']['results'][0]);
-$personal->info['pass'] = ereg_replace("[^0-9a-zA-Z!@#$%&*?\.\-\_]", "",$personal->info['pass']);
+
+$match = preg_match_all("/[^0-9a-zA-Z!@#$%&*?\.\-\_]/",$personal->info['pass'],$matches);
+if ($match)
+	$personal->errors[] = htmlentities(str_replace('[characters]',implode(',',array_unique($matches[0])),Lang::string('login-pass-chars-error')));
+
+$personal->info['pass'] = preg_replace("/[^0-9a-zA-Z!@#$%&*?\.\-\_]/", "",$personal->info['pass']);
 
 if ($_REQUEST['settings'] && is_array($personal->errors)) {
 	$errors = array();
@@ -40,10 +45,6 @@ elseif (($_REQUEST['settings']) && !is_array($personal->errors)) {
 	API::add('User','disableNeverLoggedIn',array($personal->info['pass']));
 	API::send();
 	
-	//User::logOut(1);
-	//User::logIn(User::$info['user'],$personal->info['pass']);
-
-	//$_SESSION['token_verified'] = 1;
 	Link::redirect('account.php?message=settings-personal-message');
 }
 else {

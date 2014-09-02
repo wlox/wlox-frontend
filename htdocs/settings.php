@@ -49,11 +49,17 @@ $personal->info['last_name'] = ereg_replace("/[^\da-z ]/i", "",$personal->info['
 $personal->info['country'] = ereg_replace("[^0-9]", "",$personal->info['country']);
 $personal->info['email'] = ereg_replace("[^0-9a-zA-Z@\.\!#\$%\&\*+_\~\?\-]", "",$personal->info['email']);
 
+$match = preg_match_all("/[^0-9a-zA-Z!@#$%&*?\.\-\_]/",$personal->info['pass'],$matches);
+if ($match)
+	$personal->errors[] = htmlentities(str_replace('[characters]',implode(',',array_unique($matches[0])),Lang::string('login-pass-chars-error')));
+
+$personal->info['pass'] = preg_replace("/[^0-9a-zA-Z!@#$%&*?\.\-\_]/", "",$personal->info['pass']);
+
 if (!$personal->info['email'])
 	unset($personal->info['email']);
 
 $personal->verify();
-	
+
 if ($_REQUEST['submitted'] && !$token1 && !is_array($personal->errors)) {
 	if ($_REQUEST['request_2fa']) {
 		if (!($token1 > 0)) {
@@ -76,8 +82,7 @@ if ($_REQUEST['submitted'] && !$token1 && !is_array($personal->errors)) {
 		API::add('User','settingsEmail2fa',array($_REQUEST));
 		$query = API::send();
 		
-		if ($query['User']['settingsEmail2fa']['results'][0])
-			Link::redirect('settings.php?notice=email');
+		Link::redirect('settings.php?notice=email');
 	}
 }
 
