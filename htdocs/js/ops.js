@@ -1072,10 +1072,10 @@ $(document).ready(function() {
 	}
 	
 	$('#language_selector').bind("keyup change", function(){
-		if ($(this).val() == 'en')
-			window.location.href = 'index.php';
-		else if ($(this).val() == 'es')
-			window.location.href = 'es/index.php';
+		var lang = $(this).val();
+		var url = $('#url_'+'index_php'+'_'+lang).val();
+		
+		window.location.href = url;
 	});
 	
 	$('#currency_selector').bind("keyup change", function(){
@@ -1085,11 +1085,15 @@ $(document).ready(function() {
 	});
 	
 	$('#fee_currency').bind("keyup change", function(){
-		window.location.href = 'fee-schedule.php?currency='+$(this).val();
+		var lang = $('#language_selector').val();
+		var url = $('#url_'+'fee-schedule_php'+'_'+lang).val();
+		window.location.href = url+'?currency='+$(this).val();
 	});
 	
 	$('#ob_currency').bind("keyup change", function(){
-		window.location.href = 'order-book.php?currency='+$(this).val();
+		var lang = $('#language_selector').val();
+		var url = $('#url_'+'order-book_php'+'_'+lang).val();
+		window.location.href = url+'?currency='+$(this).val();
 	});
 	
 	if ($("#transactions_timestamp").length > 0) {

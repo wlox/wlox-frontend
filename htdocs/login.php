@@ -45,7 +45,7 @@ include 'includes/head.php';
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= Lang::string('home-login') ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="login.php"><?= Lang::string('home-login') ?></a></div>
+        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="login.php"><?= Lang::string('home-login') ?></a></div>
 	</div>
 </div>
 <div class="fresh_projects login_bg">
@@ -91,7 +91,7 @@ include 'includes/head.php';
 	    		<input type="submit" name="submit" value="<?= Lang::string('home-login') ?>" class="but_user" />
 	    	</div>
     	</form>
-    	<a class="forgot" href="register.php"><?= Lang::string('login-dont-have') ?></a>
+    	<a class="forgot" href="<?= Lang::url('register.php') ?>"><?= Lang::string('login-dont-have') ?></a>
     </div>
     <div class="clearfix mar_top8"></div>
 </div>

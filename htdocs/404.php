@@ -8,7 +8,7 @@ include 'includes/head.php';
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= Lang::string('404') ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="404.php"><?= Lang::string('404') ?></a></div>
+        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="404.php"><?= Lang::string('404') ?></a></div>
 	</div>
 </div>
 <div class="container">

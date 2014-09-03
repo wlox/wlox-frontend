@@ -47,7 +47,7 @@ include 'includes/head.php';
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= $page_title ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="account.php"><?= $page_title ?></a></div>
+        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="account.php"><?= $page_title ?></a></div>
 	</div>
 </div>
 <div class="container">
@@ -161,11 +161,11 @@ include 'includes/head.php';
 				<div class="balances">
 					<div class="one_half">
 						<div class="label"><?= Lang::string('account-fee-bracket1') ?>:</div>
-						<div class="amount"><?= $fee_bracket['fee1'] ?>% <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="fee-schedule.php"><i class="fa fa-question-circle"></i></a></div>
+						<div class="amount"><?= $fee_bracket['fee1'] ?>% <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="<?= Lang::url('fee-schedule.php') ?>"><i class="fa fa-question-circle"></i></a></div>
 	                </div>
 	                <div class="one_half last">
 						<div class="label"><?= Lang::string('account-fee-bracket') ?>:</div>
-						<div class="amount"><?= $fee_bracket['fee'] ?>% <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="fee-schedule.php"><i class="fa fa-question-circle"></i></a></div>
+						<div class="amount"><?= $fee_bracket['fee'] ?>% <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="<?= Lang::url('fee-schedule.php') ?>"><i class="fa fa-question-circle"></i></a></div>
 	                </div>
 	                <div class="one_half">
 	                	<div class="label"><?= Lang::string('account-30-day-vol') ?>:</div>

@@ -36,7 +36,7 @@ else
     	<h1 style="margin-bottom:5px;"><?= str_replace('[currency]','<strong>'.$currency_symbol.'</strong>',Lang::string('home-landing-currency')) ?></h1>
         <p class="explain"><?= str_replace('[currency]','<strong>'.$currency_symbol.'</strong>',Lang::string('home-landing-currency-explain')) ?></p>
          <div class="mar_top3"></div>
-        <a class="but_user" href="register.php"><i class="fa fa-user"></i> <?= str_replace('[currency]','<strong>'.$currency_symbol.'</strong>',Lang::string('home-landing-sign-up')) ?></a>
+        <a class="but_user" href="<?= Lang::url('register.php') ?>"><i class="fa fa-user"></i> <?= str_replace('[currency]','<strong>'.$currency_symbol.'</strong>',Lang::string('home-landing-sign-up')) ?></a>
         <div class="mar_top3"></div>
         <div class="one_fifth">
         	<h6><?= Lang::string('home-stats-last-price') ?></h6>
@@ -124,7 +124,7 @@ else
         	</div>
         </div>
         <div class="one_half last">
-        	<h3><?= Lang::string('home-live-orders') ?> <a href="order-book.php" class="highlight gray"><i class="fa fa-plus-square"></i> <?= Lang::string('order-book-see') ?></a></h3>
+        	<h3><?= Lang::string('home-live-orders') ?> <a href="<?= Lang::url('order-book.php') ?>" class="highlight gray"><i class="fa fa-plus-square"></i> <?= Lang::string('order-book-see') ?></a></h3>
         	<div class="one_half">
         		<div class="table-style">
         			<table class="table-list trades" id="bids_list">

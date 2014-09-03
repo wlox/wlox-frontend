@@ -12,7 +12,7 @@ include 'includes/head.php';
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= $page_title ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="about.php"><?= Lang::string('about') ?></a></div>
+        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="<?= Lang::url('about.php') ?>"><?= Lang::string('about') ?></a></div>
 	</div>
 </div>
 <div class="container">

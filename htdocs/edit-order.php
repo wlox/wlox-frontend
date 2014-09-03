@@ -182,7 +182,7 @@ if (!$bypass) {
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= $page_title ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="account.php"><?= Lang::string('account') ?></a> <i>/</i> <a href="buy-sell.php"><?= $page_title ?></a></div>
+        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="account.php"><?= Lang::string('account') ?></a> <i>/</i> <a href="buy-sell.php"><?= $page_title ?></a></div>
 	</div>
 </div>
 <div class="container">
@@ -265,7 +265,7 @@ if (!$bypass) {
 								<div class="clear"></div>
 							</div>
 							<div class="calc">
-								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="fee-schedule.php"><i class="fa fa-question-circle"></i></a></div>
+								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="<?= Lang::url('fee-schedule.php') ?>"><i class="fa fa-question-circle"></i></a></div>
 								<div class="value"><span id="buy_user_fee"><?= $user_fee_bid ?></span>%</div>
 								<div class="clear"></div>
 							</div>
@@ -353,7 +353,7 @@ if (!$bypass) {
 								<div class="clear"></div>
 							</div>
 							<div class="calc">
-								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="fee-schedule.php"><i class="fa fa-question-circle"></i></a></div>
+								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="<?= Lang::url('fee-schedule.php') ?>"><i class="fa fa-question-circle"></i></a></div>
 								<div class="value"><span id="sell_user_fee"><?= $user_fee_ask ?></span>%</div>
 								<div class="clear"></div>
 							</div>

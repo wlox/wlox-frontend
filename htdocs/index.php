@@ -92,13 +92,13 @@ if (!User::isLoggedIn()) {
                                 
                                 <div class="caption lfb h_line"  data-x="10" data-y="214" data-speed="900" data-start="2000" data-easing="easeOutExpo"></div>
                                 
-                                <p class="caption lfb small_text"  data-x="10" data-y="238" data-speed="900" data-start="2700" data-easing="easeOutExpo"><?= wordwrap(strip_tags($content['content']),80,'<br/>') ?> <a class="morestuff" href="about.php">>></a></p>
+                                <p class="caption lfb small_text"  data-x="10" data-y="238" data-speed="900" data-start="2700" data-easing="easeOutExpo"><?= wordwrap(strip_tags($content['content']),80,'<br/>') ?> <a class="morestuff" href="<?= Lang::url('about.php') ?>">>></a></p>
                                 
                                 <div class="caption lfb h_line"  data-x="10" data-y="344" data-speed="900" data-start="3400" data-easing="easeOutExpo"></div>
                                 
                                 <div class="caption lfb"  data-x="10" data-y="378" data-speed="900" data-start="4000" data-easing="easeOutExpo"><a href="login.php" class="button_slider"><i class="fa fa-key"></i>&nbsp;&nbsp;<?= Lang::string('home-login') ?></a></div>
                                 
-                                <div class="caption lfb"  data-x="180" data-y="378" data-speed="900" data-start="4500" data-easing="easeOutExpo"><a href="register.php" class="button_slider"><i class="fa fa-user"></i>&nbsp;&nbsp;<?= Lang::string('home-register') ?></a></div>
+                                <div class="caption lfb"  data-x="180" data-y="378" data-speed="900" data-start="4500" data-easing="easeOutExpo"><a href="<?= Lang::url('register.php') ?>" class="button_slider"><i class="fa fa-user"></i>&nbsp;&nbsp;<?= Lang::string('home-register') ?></a></div>
                                
 							</li>
 						</ul>
@@ -118,7 +118,7 @@ if (!User::isLoggedIn()) {
 	<? } elseif (time() >= strtotime('2014-09-09 00:00:00') && time() < strtotime('2014-09-19 00:00:00')) { ?>
 	<div class="container"><b><i class="fa fa-asterisk"></i> <?= str_replace('[time]','<span class="time_until"></span><input type="hidden" class="time_until_seconds" value="'.(strtotime('2014-09-19 00:00:00')*1000).'" />',Lang::string('trading-competition-started')) ?></b> <a href="contest-status.php"><?= Lang::string('contest-ranking') ?></a></div>
 	<? } else { ?>
-	<div class="container"><b><?= Lang::string('home-trading') ?></b> <a href="our-security.php"><?= Lang::string('home-more') ?></a></div>
+	<div class="container"><b><?= Lang::string('home-trading') ?></b> <a href="<?= Lang::url('our-security.php') ?>"><?= Lang::string('home-more') ?></a></div>
 	<? } ?>
 
 </div><!-- end punch text -->
@@ -294,7 +294,7 @@ else
         	</div>
         </div>
         <div class="one_half last">
-        	<h3><?= Lang::string('home-live-orders') ?> <a href="order-book.php" class="highlight gray"><i class="fa fa-plus-square"></i> <?= Lang::string('order-book-see') ?></a></h3>
+        	<h3><?= Lang::string('home-live-orders') ?> <a href="<?= Lang::url('order-book.php') ?>" class="highlight gray"><i class="fa fa-plus-square"></i> <?= Lang::string('order-book-see') ?></a></h3>
         	<div class="one_half">
         		<div class="table-style">
         			<table class="table-list trades" id="bids_list">
@@ -378,7 +378,7 @@ else
 		}
         ?>
         <div class="clearfix mar_top5"></div>
-        <a href="news.php" class="highlight gray bigger"><i class="fa fa-plus-square"></i> <?= Lang::string('news-see-all') ?></a>
+        <a href="<?= Lang::url('news.php') ?>" class="highlight gray bigger"><i class="fa fa-plus-square"></i> <?= Lang::string('news-see-all') ?></a>
     </div>
 	<div class="clearfix mar_top8"></div>
 </div><!-- end features section 3 -->

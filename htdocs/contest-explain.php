@@ -16,7 +16,7 @@ include 'includes/head.php';
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= Lang::string('trading-competition') ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="contest-explain.php"><?= Lang::string('trading-competition') ?></a></div>
+        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="contest-explain.php"><?= Lang::string('trading-competition') ?></a></div>
 	</div>
 </div>
 <div class="container">
@@ -149,7 +149,7 @@ include 'includes/head.php';
    		<? if (!User::isLoggedIn()) {?>
    		<div class="clearfix mar_top3"></div>
    		<ul class="list_empty">
-			<li><a href="register.php" class="but_user"><i class="fa fa-user fa-lg"></i> <?= Lang::string('home-register') ?></a></li>
+			<li><a href="<?= Lang::url('register.php') ?>" class="but_user"><i class="fa fa-user fa-lg"></i> <?= Lang::string('home-register') ?></a></li>
 			<li><a href="login.php" class="but_user"><i class="fa fa-key fa-lg"></i> <?= Lang::string('home-login') ?></a></li>
 		</ul>
 		<? } else { ?>

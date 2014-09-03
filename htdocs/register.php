@@ -5,7 +5,7 @@ if ($_REQUEST['register']) {
 	$_REQUEST['is_caco'] = (!$_REQUEST['is_caco']) ? array('register'=>1) : $_REQUEST['is_caco'];
 }
 
-$register = new Form('register',false,false,'form3');
+$register = new Form('register',Lang::url('register.php'),false,'form3');
 //$register->get(User::$info['id']);
 $register->info['first_name'] = preg_replace("/[^\p{Hebrew} \p{Cyrillic} a-zA-Z0-9@\._-\s]/u", "",$register->info['first_name']);
 $register->info['last_name'] = preg_replace("/[^\p{Hebrew} \p{Cyrillic} a-zA-Z0-9@\._-\s]/u", "",$register->info['last_name']);
@@ -68,7 +68,7 @@ include 'includes/head.php';
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= $page_title ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="register.php"><?= Lang::string('home-register') ?></a></div>
+        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="<?= Lang::url('register.php') ?>"><?= Lang::string('home-register') ?></a></div>
 	</div>
 </div>
 <div class="container">
