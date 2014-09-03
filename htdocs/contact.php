@@ -13,6 +13,7 @@ $query = API::send();
 $content = $query['Content']['getRecord']['results'][0];
 $content1 = $query['Content']['getRecord']['results'][1];
 $page_title = $content['title'];
+$meta_desc = String::substring(strip_tags($content['content']),300);
 $countries = $query['User']['getCountries']['results'][0];
 
 $contact = new Form('contact',Lang::url('contact.php'),false,'form2');

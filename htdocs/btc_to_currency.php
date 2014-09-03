@@ -20,6 +20,7 @@ $bids = $query['Orders']['get']['results'][0];
 $asks = $query['Orders']['get']['results'][1];
 $currencies = $CFG->currencies;
 $page_title = strip_tags(str_replace('[currency]',$currency_symbol,Lang::string('home-landing-currency')));
+$meta_desc = String::substring(strip_tags(Lang::string('home-landing-currency-explain')),300);
 
 include 'includes/head.php';
 
@@ -59,7 +60,7 @@ else
         	<p class="stat1"><?= '<span id="stats_traded">'.number_format($stats['total_btc_traded'],2).'</span>' ?> BTC</p>
         </div>
         <div class="mar_top3"></div>
-        <div class="one_third">
+        <div class="one_third" style="clear:left;">
         	<h5><?= Lang::string('home-stats-market-cap') ?>: <em class="stat2">$<?= '<span id="stats_market_cap">'.number_format($stats['market_cap']).'</span>'?></em></h5>
         </div>
         <div class="one_third">

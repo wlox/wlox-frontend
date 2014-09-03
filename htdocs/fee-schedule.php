@@ -16,6 +16,7 @@ $content = $query['Content']['getRecord']['results'][0];
 $page_title = $content['title'];
 $fee_schedule = $query['FeeSchedule']['get']['results'][0];
 
+
 include 'includes/head.php';
 ?>
 <div class="page_title">
