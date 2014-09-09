@@ -3579,17 +3579,15 @@ h3 .highlight{
 .trades td .oco{color:#727272;font-size: 11px;}
 .trades td .fa-exchange{color:#727272;font-size: 10px;margin-left: 2px;}
 .trades td.inactive{background-color:#FFF;}
-<<<<<<< HEAD
+.trades td.api-key{font-size: 16px;color:#00BDBD;font-weight: bold;}
+.trades td.api-label{text-decoration: underline;color:#727272;font-weight: 700;}
+.trades td.api-label.first{color:#FFF;background-color:#aaaaaa;}
 
 .competition{font-size: 18px;}
 .competition th{padding:15px;}
 .competition td{padding:15px;}
 
-=======
-.trades td.api-key{font-size: 16px;color:#00BDBD;font-weight: bold;}
-.trades td.api-label{text-decoration: underline;color:#727272;font-weight: 700;}
-.trades td.api-label.first{color:#FFF;background-color:#aaaaaa;}
->>>>>>> 7b753d58b3bc135c8ce4599306492c08e908caf7
+
 ul.list_empty {
 	float: left;
 	padding: 0px;
