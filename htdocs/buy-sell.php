@@ -31,7 +31,7 @@ API::add('Orders','get',array(false,false,10,$currency1,false,false,1));
 API::add('Orders','get',array(false,false,10,$currency1,false,false,false,false,1));
 API::add('BankAccounts','get',array($currency_info['id']));
 
-if (time() < strtotime('2014-09-6 00:00:00'))
+if (time() < strtotime('2014-09-19 11:00:00'))
 	API::add('Competition','getUserRank');
 
 if ($_REQUEST['buy'] && !$_REQUEST['buy_market_price']) {
