@@ -13,6 +13,10 @@ if ($authcode1 && !$_REQUEST['step']) {
 	API::add('User','getSettingsChangeRequest',array(urlencode($authcode1)));
 	$query = API::send();
 	$response = unserialize(base64_decode($query['User']['getSettingsChangeRequest']['results'][0]));
+	
+	if (User::$info['using_sms'] == 'Y')
+		User::sendSMS();
+	
 	if ($response) {
 		if ($response['authy'])
 			$step1 = true;
@@ -81,15 +85,14 @@ if ($_REQUEST['step'] == 1) {
 			if (!$response || !is_array($response))
 				Errors::merge(Lang::string('security-com-error'));
 			
-			if ($response['success'] == 'false')
+			if ($response['success'] == false)
 				Errors::merge($response['errors']);
 		}
 		
 		if (!is_array(Errors::$errors)) {
 			if ($_REQUEST['method'] != 'google') {
 				if ($_REQUEST['method'] == 'sms') {
-					if (User::sendSMS($authy_id))
-						$using_sms = 'Y';
+					$using_sms = 'Y';
 				}
 				else
 					$using_sms = 'N';
@@ -370,7 +373,7 @@ include 'includes/head.php';
 								<select name="method" id="method">
 									<option <?= ($_REQUEST['method'] == 'google') ? 'selected="selected"' : false ?> value="google">Google Authenticator</option>
 									<option <?= ($_REQUEST['method'] == 'authy') ? 'selected="selected"' : false ?> value="authy">Authy</option>
-									<option <?= ($_REQUEST['method'] == 'SMS') ? 'selected="selected"' : false ?> value="SMS">SMS</option>
+									<option <?= ($_REQUEST['method'] == 'sms') ? 'selected="selected"' : false ?> value="sms">SMS</option>
 								</select>
 								<div class="clear"></div>
 							</div>
