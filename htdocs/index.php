@@ -39,7 +39,6 @@ API::add('News','get',array(false,false,3));
 $query = API::send();
 
 $stats = $query['Stats']['getCurrent']['results'][0];
-print_ar($stats);
 $transactions = $query['Transactions']['get']['results'][0];
 $bids = $query['Orders']['get']['results'][0];
 $asks = $query['Orders']['get']['results'][1];
