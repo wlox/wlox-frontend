@@ -41,6 +41,8 @@
 .popup .button_slider{float:none;background-color:#00BDBD;border:none;color:#000;padding:10px 55px;}
 .popup .text1{font-size:20px;margin-bottom:48px;margint-top:35px;}
 .popup h1{color:#FFF;font-weight:400;font-size:50px;}
+.text .bigger{font-size:18px;color:#00BDBD; font-weight:bold;font-weight: bold;margin: 10px 0;display: inline-block;}
+.text.dotted{border: 3px dashed #FF4949;padding: 10px 15px;margin-bottom: 15px;	}
 
 /*------------------*/
 /*	SITE STRUCTURE
@@ -3577,11 +3579,17 @@ h3 .highlight{
 .trades td .oco{color:#727272;font-size: 11px;}
 .trades td .fa-exchange{color:#727272;font-size: 10px;margin-left: 2px;}
 .trades td.inactive{background-color:#FFF;}
+<<<<<<< HEAD
 
 .competition{font-size: 18px;}
 .competition th{padding:15px;}
 .competition td{padding:15px;}
 
+=======
+.trades td.api-key{font-size: 16px;color:#00BDBD;font-weight: bold;}
+.trades td.api-label{text-decoration: underline;color:#727272;font-weight: 700;}
+.trades td.api-label.first{color:#FFF;background-color:#aaaaaa;}
+>>>>>>> 7b753d58b3bc135c8ce4599306492c08e908caf7
 ul.list_empty {
 	float: left;
 	padding: 0px;
