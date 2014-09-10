@@ -20,7 +20,7 @@ $bids = $query['Orders']['get']['results'][0];
 $asks = $query['Orders']['get']['results'][1];
 $currencies = $CFG->currencies;
 $page_title = strip_tags(str_replace('[currency]',$currency_symbol,Lang::string('home-landing-currency')));
-$meta_desc = String::substring(strip_tags(Lang::string('home-landing-currency-explain')),300);
+$meta_desc = String::substring(strip_tags(str_replace('[currency]','<strong>'.$currency_symbol.'</strong>',Lang::string('home-landing-currency-explain'))),300);
 
 include 'includes/head.php';
 
