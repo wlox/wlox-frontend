@@ -92,6 +92,7 @@ include 'includes/head.php';
             Errors::display(); 
             Messages::display();
             ?>
+            <? /* 
             <div class="content">
             	<h3 class="section_label">
                     <span class="left"><i class="fa fa-user fa-2x"></i></span>
@@ -111,6 +112,7 @@ include 'includes/head.php';
                 ?>
             	<div class="clear"></div>
             </div>
+             */ ?>
             <div class="mar_top8"></div>
         </div>
 	</div>

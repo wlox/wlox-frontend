@@ -65,12 +65,12 @@ if (!User::isLoggedIn()) {
 			    	<h1><?= Lang::string('contest-join') ?></h1>
 			    	<div class="starting_in"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-starting-in') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-09 11:00:00') * 1000) ?>" /></div>
 					<div class="text1"><?= Lang::string('contest-catchline') ?></div>
-					<a href="contest-explain.php" class="button_slider"><?= Lang::string('contest-get-started') ?></a>
+					<a href="register.php" class="button_slider"><?= Lang::string('contest-get-started') ?></a>
 					<? } elseif (time() >= strtotime('2014-09-09 11:00:00') && time() < strtotime('2014-09-19 11:00:00')) { ?>
 					<h1><?= Lang::string('contest-started') ?></h1>
 					<div class="starting_in"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-19 11:00:00') * 1000) ?>" /></div>
 					<div class="text1"><?= Lang::string('contest-catchline') ?></div>
-					<a href="contest-explain.php" class="button_slider"><?= Lang::string('contest-get-started') ?></a>
+					<a href="register.php" class="button_slider"><?= Lang::string('contest-get-started') ?></a>
 					<? } ?>
 				</div>
 			</div>
