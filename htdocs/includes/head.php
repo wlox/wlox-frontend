@@ -114,7 +114,9 @@
 <input type="hidden" id="cfg_orders_delete" value="<?= Lang::string('orders-delete') ?>" />
 <input type="hidden" id="buy_errors_no_compatible" value="<?= Lang::string('buy-errors-no-compatible') ?>" />
 <input type="hidden" id="orders_converted_from" value="<?= Lang::string('orders-converted-from') ?>" />
+<input type="hidden" id="your_order" value="<?= Lang::string('home-your-order') ?>" />
 <?= Lang::url(false,false,1); ?>
+
 <div class="site_wrapper">
    
 <!-- HEADER -->
