@@ -99,7 +99,7 @@ include 'includes/head.php';
                 </h3>
                 <div class="clear"></div>
                 <?
-                if (time() < strtotime('2014-09-19 11:00:00')) {
+                if (time() >= strtotime('2014-09-19 11:00:00')) {
 	                $register->textInput('first_name',Lang::string('settings-first-name'),1);
 	                $register->textInput('last_name',Lang::string('settings-last-name'),1);
 	                $register->selectInput('country',Lang::string('settings-country'),1,false,$countries,false,array('name'));
