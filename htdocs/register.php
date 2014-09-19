@@ -52,7 +52,7 @@ if (time() < strtotime('2014-09-09 11:00:00')) {
 elseif (time() >= strtotime('2014-09-09 11:00:00') && time() < strtotime('2014-09-19 11:00:00')) {
 	API::add('Content','getRecord',array('trading-competition-register2'));
 }
-elseif (time() >= strtotime('2014-09-19 11:00:00') && time() < strtotime('2014-09-29 00:00:00')) {
+elseif (time() >= strtotime('2014-09-19 11:00:00') && time() < strtotime('2014-10-01 12:00:00')) {
 	API::add('Content','getRecord',array('trading-competition-register3'));
 }
 
@@ -92,7 +92,6 @@ include 'includes/head.php';
             Errors::display(); 
             Messages::display();
             ?>
-            <? /* 
             <div class="content">
             	<h3 class="section_label">
                     <span class="left"><i class="fa fa-user fa-2x"></i></span>
@@ -100,19 +99,20 @@ include 'includes/head.php';
                 </h3>
                 <div class="clear"></div>
                 <?
-                $register->textInput('first_name',Lang::string('settings-first-name'),1);
-                $register->textInput('last_name',Lang::string('settings-last-name'),1);
-                $register->selectInput('country',Lang::string('settings-country'),1,false,$countries,false,array('name'));
-                $register->textInput('email',Lang::string('settings-email'),'email');
-                $register->selectInput('default_currency',Lang::string('default-currency'),1,false,$CFG->currencies,false,array('currency'));
-                $register->checkBox('terms',Lang::string('settings-terms-accept'),false,false,false,false,false,false,'checkbox_label');
-                $register->captcha(Lang::string('settings-capcha'));
-                $register->HTML('<div class="form_button"><input type="submit" name="submit" value="'.Lang::string('home-register').'" class="but_user" /></div>');
-                $register->display();
+                if (time() < strtotime('2014-09-19 11:00:00')) {
+	                $register->textInput('first_name',Lang::string('settings-first-name'),1);
+	                $register->textInput('last_name',Lang::string('settings-last-name'),1);
+	                $register->selectInput('country',Lang::string('settings-country'),1,false,$countries,false,array('name'));
+	                $register->textInput('email',Lang::string('settings-email'),'email');
+	                $register->selectInput('default_currency',Lang::string('default-currency'),1,false,$CFG->currencies,false,array('currency'));
+	                $register->checkBox('terms',Lang::string('settings-terms-accept'),false,false,false,false,false,false,'checkbox_label');
+	                $register->captcha(Lang::string('settings-capcha'));
+	                $register->HTML('<div class="form_button"><input type="submit" name="submit" value="'.Lang::string('home-register').'" class="but_user" /></div>');
+	                $register->display();
+                }
                 ?>
             	<div class="clear"></div>
             </div>
-             */ ?>
             <div class="mar_top8"></div>
         </div>
 	</div>

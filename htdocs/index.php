@@ -77,6 +77,20 @@ if (!User::isLoggedIn()) {
 			<div class="bg"></div>
 			<div class="clear"></div>
 		</div>
+	    <? } elseif (time() < strtotime('2014-10-01 12:00:00')) { ?>
+	    <div class="popup">
+	    	<div class="contain">
+	    		<div class="contain1">
+			    	<a href="#" onclick="return false;" class="close">&#10006;</a>
+					<h1><?= Lang::string('pre-open') ?></h1>
+					<div class="starting_in"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('pre-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-19 11:00:00') * 1000) ?>" /></div>
+					<div class="text1"><?= Lang::string('pre-catchline') ?></div>
+					<a href="register.php" class="button_slider"><?= Lang::string('pre-get-account') ?></a>
+				</div>
+			</div>
+			<div class="bg"></div>
+			<div class="clear"></div>
+		</div>
 	    <? } ?>
 		<div class="fullwidthbanner">
         

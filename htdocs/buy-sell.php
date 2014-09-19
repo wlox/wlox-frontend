@@ -108,6 +108,8 @@ if ($_REQUEST['buy']) {
 		Errors::add(Lang::string('buy-limit-under-stops').(($currency_info['id'] != $self_stops_currency) ? str_replace('[price]',$currency_info['fa_symbol'].number_format($self_stops,2),' '.Lang::string('limit-min-price')) : ''));
 	if (time() < strtotime('2014-09-09 11:00:00'))
 		Errors::add(Lang::string('competition-feature-before-start'));
+	if (time() < strtotime('2014-10-01 12:00:00') && time() >= strtotime('2014-09-19 11:00:00'))
+		Errors::add(Lang::string('pre-feature-disabled'));
 	
 	if (!is_array(Errors::$errors) && !$cancel) {
 		if ($confirmed) {
@@ -163,6 +165,8 @@ if ($_REQUEST['sell']) {
 		Errors::add(Lang::string('sell-limit-under-stops').(($currency_info['id'] != $self_limits_currency) ? str_replace('[price]',$currency_info['fa_symbol'].number_format($self_limits,2),' '.Lang::string('limit-max-price')) : ''));
 	if (time() < strtotime('2014-09-09 11:00:00'))
 		Errors::add(Lang::string('competition-feature-before-start'));
+	if (time() < strtotime('2014-10-01 12:00:00') && time() >= strtotime('2014-19-09 11:00:00'))
+		Errors::add(Lang::string('pre-feature-disabled'));
 	
 	if (!is_array(Errors::$errors) && !$cancel) {
 		if ($confirmed) {
