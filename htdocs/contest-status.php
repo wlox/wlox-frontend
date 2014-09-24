@@ -45,24 +45,50 @@ include 'includes/head.php';
         			<th><?= Lang::string('competition-top-10') ?></th>
         			<th><?= Lang::string('competition-profit') ?></th>
         		</tr>
-        		<? 
-        		if ($leaders && time() >= strtotime('2014-09-09 11:00:00')) {
-					$i = 1;
-					foreach ($leaders as $leader) {
-						$trophy = ($i == 1) ? '<i class="fa fa-trophy"></i> ' : '';
-						$me = ($leader['me']) ? '<i class="fa fa-user"></i> ' : '';
-						echo '
-					<tr>
-						<td>'.$trophy.' '.$me.' <img src="images/flags/'.$leader['country'].'.png"/>&nbsp;&nbsp;<b>'.$leader['f'].'. '.$leader['l'].'.</b></td>
-						<td>$'.number_format($leader['usd_gain'],2).'</td>
-					</tr>';
-						$i++;
-					}
-				}
-				else {
-					echo '<tr><td colspan="2">'. Lang::string('competition-not-started').'</td></tr>';
-				}
+        		<?php 
+        		$trophy = ($i == 1) ? '<i class="fa fa-trophy"></i> ' : '';
+        		$me = ($leader['me']) ? '<i class="fa fa-user"></i> ' : '';
         		?>
+				<tr>
+					<td><img src="images/flags/hr.png"/>&nbsp;&nbsp;<b>D. K.</b></td>
+					<td>$32,808.94</td>
+				</tr>
+				<tr>
+					<td><img src="images/flags/id.png"/>&nbsp;&nbsp;<b>M. S.</b></td>
+					<td>$18,935.85</td>
+				</tr>
+				<tr>
+					<td><img src="images/flags/de.png"/>&nbsp;&nbsp;<b>T. W.</b></td>
+					<td>$15,852.91</td>
+				</tr>
+				<tr>
+					<td><img src="images/flags/il.png"/>&nbsp;&nbsp;<b>A. E.</b></td>
+					<td>$10,122.24</td>
+				</tr>
+				<tr>
+					<td><img src="images/flags/us.png"/>&nbsp;&nbsp;<b>S. B.</b></td>
+					<td>$8,295.79</td>
+				</tr>
+				<tr>
+					<td><img src="images/flags/ca.png"/>&nbsp;&nbsp;<b>J. Z.</b></td>
+					<td>$6,073.16</td>
+				</tr>
+				<tr>
+					<td><img src="images/flags/us.png"/>&nbsp;&nbsp;<b>E. C.</b></td>
+					<td>$5,838.83</td>
+				</tr>
+				<tr>
+					<td><img src="images/flags/gt.png"/>&nbsp;&nbsp;<b>D. C.</b></td>
+					<td>$4,021.95</td>
+				</tr>
+				<tr>
+					<td><img src="images/flags/us.png"/>&nbsp;&nbsp;<b>T. H.</b></td>
+					<td>$3,569.00</td>
+				</tr>
+				<tr>
+					<td><img src="images/flags/id.png"/>&nbsp;&nbsp;<b>S. S.</b></td>
+					<td>$3,321.25</td>
+				</tr>
         	</table>
    		</div>
    		<div class="clearfix mar_top3"></div>
