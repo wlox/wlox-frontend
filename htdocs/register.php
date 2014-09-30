@@ -52,7 +52,7 @@ if (time() < strtotime('2014-09-09 11:00:00')) {
 elseif (time() >= strtotime('2014-09-09 11:00:00') && time() < strtotime('2014-09-19 11:00:00')) {
 	API::add('Content','getRecord',array('trading-competition-register2'));
 }
-elseif (time() >= strtotime('2014-09-19 11:00:00') && time() < strtotime('2014-10-01 12:00:00')) {
+elseif (time() >= strtotime('2014-09-19 11:00:00') && time() < strtotime('2014-10-20 12:00:00')) {
 	API::add('Content','getRecord',array('trading-competition-register3'));
 }
 

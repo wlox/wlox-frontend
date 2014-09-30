@@ -63,7 +63,7 @@ if (!$_REQUEST['bypass']) {
 							<div class="mar_top2"></div>
 							<div class="clear"></div>
 						</div>
-						<? } elseif (time() < strtotime('2014-10-01 12:00:00')) { ?>
+						<? } elseif (time() < strtotime('2014-10-20 12:00:00')) { ?>
 						<div class="spacer"></div>
 						<div class="calc">
 							<div class="text"><?= Lang::string('pre-feature-disabled') ?></div>
@@ -105,7 +105,7 @@ if (!$_REQUEST['bypass']) {
 							<div class="mar_top2"></div>
 							<div class="clear"></div>
 						</div>
-						<? } elseif (time() < strtotime('2014-10-01 12:00:00')) { ?>
+						<? } elseif (time() < strtotime('2014-10-20 12:00:00')) { ?>
 						<div class="spacer"></div>
 						<div class="calc">
 							<div class="text"><?= Lang::string('pre-feature-disabled') ?></div>
