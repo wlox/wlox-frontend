@@ -9,11 +9,16 @@ elseif (!User::isLoggedIn())
 	Link::redirect('login.php');
 
 if ($_REQUEST['currency'])
-	$_SESSION['currency'] = ereg_replace("[^a-z]", "",$_REQUEST['currency']);
+	$_SESSION['currency'] = preg_replace("/[^a-z]/", "",$_REQUEST['currency']);
 elseif (!$_SESSION['currency'])
 	$_SESSION['currency'] = (User::$info['default_currency_abbr']) ? strtolower(User::$info['default_currency_abbr']) : 'usd';
 
-$currency1 = ereg_replace("[^a-z]", "",$_SESSION['currency']);
+if ($_REQUEST['buy'] || $_REQUEST['sell']) {
+	if (!in_array($_REQUEST['uniq'],$_SESSION["buysell_uniq"]))
+		Errors::add('Page expired.');
+}
+
+$currency1 = preg_replace("/[^a-z]/", "",$_SESSION['currency']);
 $currency_info = $CFG->currencies[strtoupper($currency1)];
 $confirmed = $_REQUEST['confirmed'];
 $cancel = $_REQUEST['cancel'];
@@ -62,24 +67,24 @@ $user_fee_ask = (($_REQUEST['sell_amount'] > 0 && $_REQUEST['sell_price'] <= $bi
 $user_rank = $query['Competition']['getUserRank']['results'][0];
 
 
-$buy_amount1 = ($_REQUEST['buy_amount'] > 0) ? ereg_replace("[^0-9.]", "",$_REQUEST['buy_amount']) : 0;
-$buy_price1 = ($_REQUEST['buy_price'] > 0) ? ereg_replace("[^0-9.]", "",$_REQUEST['buy_price']) : $current_ask;
+$buy_amount1 = ($_REQUEST['buy_amount'] > 0) ? preg_replace("/[^0-9.]/", "",$_REQUEST['buy_amount']) : 0;
+$buy_price1 = ($_REQUEST['buy_price'] > 0) ? preg_replace("/[^0-9.]/", "",$_REQUEST['buy_price']) : $current_ask;
 $buy_subtotal1 = $buy_amount1 * $buy_price1;
 $buy_fee_amount1 = ($user_fee_bid * 0.01) * $buy_subtotal1;
 $buy_total1 = $buy_subtotal1 + $buy_fee_amount1;
 
-$sell_amount1 = ($_REQUEST['sell_amount'] > 0) ? ereg_replace("[^0-9.]", "",$_REQUEST['sell_amount']) : 0;
-$sell_price1 = ($_REQUEST['sell_price'] > 0) ? ereg_replace("[^0-9.]", "",$_REQUEST['sell_price']) : $current_bid;
+$sell_amount1 = ($_REQUEST['sell_amount'] > 0) ? preg_replace("/[^0-9.]/", "",$_REQUEST['sell_amount']) : 0;
+$sell_price1 = ($_REQUEST['sell_price'] > 0) ? preg_replace("/[^0-9.]/", "",$_REQUEST['sell_price']) : $current_bid;
 $sell_subtotal1 = $sell_amount1 * $sell_price1;
 $sell_fee_amount1 = ($user_fee_ask * 0.01) * $sell_subtotal1;
 $sell_total1 = $sell_subtotal1 - $sell_fee_amount1;
 
 if ($_REQUEST['buy']) {
-	$buy_market_price1 = ereg_replace("[^0-9]", "",$_REQUEST['buy_market_price']);
+	$buy_market_price1 = preg_replace("/[^0-9]/", "",$_REQUEST['buy_market_price']);
 	$buy_price1 = ($buy_market_price1) ? $current_ask : $buy_price1;
-	$buy_stop = ereg_replace("[^0-9]", "",$_REQUEST['buy_stop']);
-	$buy_stop_price1 = ($buy_stop) ? ereg_replace("[^0-9.]", "",$_REQUEST['buy_stop_price']) : false;
-	$buy_limit = ereg_replace("[^0-9]", "",$_REQUEST['buy_limit']);
+	$buy_stop = preg_replace("/[^0-9]/", "",$_REQUEST['buy_stop']);
+	$buy_stop_price1 = ($buy_stop) ? preg_replace("/[^0-9.]/", "",$_REQUEST['buy_stop_price']) : false;
+	$buy_limit = preg_replace("/[^0-9]/", "",$_REQUEST['buy_limit']);
 	$buy_limit = (!$buy_stop && !$buy_market_price1) ? 1 : $buy_limit;
 
 	if (!($buy_amount1 > 0))
@@ -134,11 +139,11 @@ if ($_REQUEST['buy']) {
 }
 
 if ($_REQUEST['sell']) {
-	$sell_market_price1 = ereg_replace("[^0-9]", "",$_REQUEST['sell_market_price']);
+	$sell_market_price1 = preg_replace("/[^0-9]/", "",$_REQUEST['sell_market_price']);
 	$sell_price1 = ($sell_market_price1) ? $current_bid : $sell_price1;
-	$sell_stop = ereg_replace("[^0-9]", "",$_REQUEST['sell_stop']);
-	$sell_stop_price1 = ($sell_stop) ? ereg_replace("[^0-9.]", "",$_REQUEST['sell_stop_price']) : false;
-	$sell_limit = ereg_replace("[^0-9]", "",$_REQUEST['sell_limit']);
+	$sell_stop = preg_replace("/[^0-9]/", "",$_REQUEST['sell_stop']);
+	$sell_stop_price1 = ($sell_stop) ? preg_replace("/[^0-9.]/", "",$_REQUEST['sell_stop_price']) : false;
+	$sell_limit = preg_replace("/[^0-9]/", "",$_REQUEST['sell_limit']);
 	$sell_limit = (!$sell_stop && !$sell_market_price1) ? 1 : $sell_limit;
 	
 	if (!($sell_amount1 > 0))
@@ -198,6 +203,12 @@ if ($ask_confirm && $_REQUEST['sell']) {
 	
 	if (($buy_limit && $buy_stop) || ($sell_limit && $sell_stop))
 		$notice .= '<div class="message-box-wrap">'.Lang::string('buy-notify-two-orders').'</div>';
+}
+
+$uniq_time = time();
+$_SESSION["buysell_uniq"][$uniq_time] = md5(uniqid(mt_rand(),true));
+if (count($_SESSION["buysell_uniq"]) > 3) {
+	unset($_SESSION["buysell_uniq"][min(array_keys($_SESSION["buysell_uniq"]))]);
 }
 
 $page_title = Lang::string('buy-sell');
@@ -322,6 +333,7 @@ if (!$bypass) {
 								<div class="clear"></div>
 							</div>
 							<input type="hidden" name="buy" value="1" />
+							<input type="hidden" name="uniq" value="<?= $_SESSION["buysell_uniq"][$uniq_time] ?>" />
 							<input type="submit" name="submit" value="<?= Lang::string('buy-bitcoins') ?>" class="but_user" />
 						</div>
 					</form>
@@ -409,6 +421,7 @@ if (!$bypass) {
 								<div class="clear"></div>
 							</div>
 							<input type="hidden" name="sell" value="1" />
+							<input type="hidden" name="uniq" value="<?= $_SESSION["buysell_uniq"][$uniq_time] ?>" />
 							<input type="submit" name="submit" value="<?= Lang::string('sell-bitcoins') ?>" class="but_user" />
 						</div>
 					</form>
@@ -494,6 +507,7 @@ if (!$bypass) {
 								<div class="clear"></div>
 							</div>
 							<input type="hidden" name="buy" value="1" />
+							<input type="hidden" name="uniq" value="<?= $_SESSION["buysell_uniq"][$uniq_time] ?>" />
 						</div>
 						<ul class="list_empty">
 							<li style="margin-bottom:0;"><input type="submit" name="submit" value="<?= Lang::string('confirm-buy') ?>" class="but_user" /></li>
@@ -567,6 +581,7 @@ if (!$bypass) {
 								<div class="clear"></div>
 							</div>
 							<input type="hidden" name="sell" value="1" />
+							<input type="hidden" name="uniq" value="<?= $_SESSION["buysell_uniq"][$uniq_time] ?>" />
 						</div>
 						<ul class="list_empty">
 							<li style="margin-bottom:0;"><input type="submit" name="submit" value="<?= Lang::string('confirm-sale') ?>" class="but_user" /></li>
