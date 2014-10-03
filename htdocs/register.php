@@ -86,7 +86,7 @@ include 'includes/head.php';
    		<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-19 11:00:00') * 1000) ?>" /></div>
    		<div class="info"><div class="message-box-wrap"><?= $content['content'] ?></div></div>
    		<div class="clearfix mar_top3"></div>
-   		<? } elseif (time() >= strtotime('2014-09-19 11:00:00') && time() < strtotime('2014-09-29 00:00:00')) { ?>
+   		<? } elseif (time() >= strtotime('2014-09-19 11:00:00') && time() < strtotime('2014-10-20 12:00:00')) { ?>
    		<div class="info"><div class="message-box-wrap"><?= $content['content'] ?></div></div>
    		<div class="clearfix mar_top3"></div>
    		<? } ?>
