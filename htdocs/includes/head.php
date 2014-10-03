@@ -135,6 +135,8 @@
                 <li><a href="<?= (User::isLoggedIn()) ? 'help.php' : 'https://support.1btcxe.com' ?>"><?= Lang::string('help') ?></a></li>
                 <li>|</li>
                 <li><a href="<?= Lang::url('contact.php') ?>"><?= Lang::string('contact') ?></a></li>
+                <li>|</li>
+                <li><a href="https://github.com/wlox/wlox/"><i class="fa fa-github"></i> GitHub</a></li>
             </ul>
         
             <ul class="tci_list">
