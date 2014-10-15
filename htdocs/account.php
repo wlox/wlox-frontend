@@ -87,7 +87,7 @@ include 'includes/head.php';
             <div class="content">
             	<h3 class="section_label">
                     <span class="left"><i class="fa fa-check fa-2x"></i></span>
-                    <span class="right"><?= Lang::string('account-balance').((time() < strtotime('2014-10-20 12:00:00')) ? ' <span class="sim">('.Lang::string('simulation').')</span>' : '') ?></span>
+                    <span class="right"><?= Lang::string('account-balance').((time() < strtotime('2014-10-27 12:00:00')) ? ' <span class="sim">('.Lang::string('simulation').')</span>' : '') ?></span>
                 </h3>
                 <div class="clear"></div>
                 <div class="balances">
