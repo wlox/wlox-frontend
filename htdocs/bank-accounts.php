@@ -86,7 +86,7 @@ include 'includes/head.php';
     	<? Errors::display(); ?>
     	<? Messages::display(); ?>
     	<div class="clear"></div>
-    	<? if (time() >= strtotime('2014-10-27 12:00:00')) { ?>
+    	<? if (time() >= strtotime('2014-11-03 12:00:00')) { ?>
     	<ul class="list_empty">
 			<li><a href="bank-accounts.php?action=add" class="but_user"><i class="fa fa-plus fa-lg"></i> <?= Lang::string('bank-accounts-add') ?></a></li>
 		</ul>
@@ -103,7 +103,7 @@ include 'includes/head.php';
 				if (time() < strtotime('2014-09-19 11:00:00')) {
 					echo '<tr><td colspan="4">'.Lang::string('competition-feature-disabled').'</td></tr>';
 				}
-				elseif (time() < strtotime('2014-10-27 12:00:00')) {
+				elseif (time() < strtotime('2014-11-03 12:00:00')) {
 					echo '<tr><td colspan="4">'.Lang::string('pre-feature-disabled').'</td></tr>';
 				}
 				else {

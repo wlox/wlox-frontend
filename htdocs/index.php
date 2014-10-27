@@ -56,7 +56,7 @@ if (!User::isLoggedIn()) {
 
 <div class="container_full">
     <div class="fullwidthbanner-container">
-	    <? if (time() < strtotime('2014-10-27 12:00:00')) { ?>
+	    <? if (time() < strtotime('2014-11-03 12:00:00')) { ?>
 	    <div class="popup">
 	    	<div class="contain">
 	    		<div class="contain1">
