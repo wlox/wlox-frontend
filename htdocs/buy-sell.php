@@ -36,9 +36,6 @@ API::add('Orders','get',array(false,false,10,$currency1,false,false,1));
 API::add('Orders','get',array(false,false,10,$currency1,false,false,false,false,1));
 API::add('BankAccounts','get',array($currency_info['id']));
 
-if (time() < strtotime('2014-09-19 11:00:00'))
-	API::add('Competition','getUserRank');
-
 if ($_REQUEST['buy'] && !$_REQUEST['buy_market_price']) {
 	API::add('Orders','checkOutbidSelf',array($_REQUEST['buy_price'],$currency1));
 	API::add('Orders','checkOutbidStops',array($_REQUEST['buy_price'],$currency1));
@@ -111,10 +108,6 @@ if ($_REQUEST['buy']) {
 		Errors::add(str_replace('[percent]',$CFG->orders_under_market_percent,Lang::string('buy-errors-under-market')));
 	if ($self_stops)
 		Errors::add(Lang::string('buy-limit-under-stops').(($currency_info['id'] != $self_stops_currency) ? str_replace('[price]',$currency_info['fa_symbol'].number_format($self_stops,2),' '.Lang::string('limit-min-price')) : ''));
-	if (time() < strtotime('2014-09-09 11:00:00'))
-		Errors::add(Lang::string('competition-feature-before-start'));
-	if (time() < strtotime('2014-11-03 12:00:00') && time() >= strtotime('2014-09-19 11:00:00'))
-		Errors::add(Lang::string('pre-feature-disabled'));
 	
 	if (!is_array(Errors::$errors) && !$cancel) {
 		if ($confirmed) {
@@ -168,10 +161,6 @@ if ($_REQUEST['sell']) {
 		Errors::add(Lang::string('buy-errors-no-stop'));
 	if ($self_limits)
 		Errors::add(Lang::string('sell-limit-under-stops').(($currency_info['id'] != $self_limits_currency) ? str_replace('[price]',$currency_info['fa_symbol'].number_format($self_limits,2),' '.Lang::string('limit-max-price')) : ''));
-	if (time() < strtotime('2014-09-09 11:00:00'))
-		Errors::add(Lang::string('competition-feature-before-start'));
-	if (time() < strtotime('2014-11-03 12:00:00') && time() >= strtotime('2014-19-09 11:00:00'))
-		Errors::add(Lang::string('pre-feature-disabled'));
 	
 	if (!is_array(Errors::$errors) && !$cancel) {
 		if ($confirmed) {
@@ -223,28 +212,6 @@ if (!$bypass) {
 </div>
 <div class="container">
 	<div class="content_right">
-	
-		<? if (time() < strtotime('2014-09-29 00:00:00')) { ?>
-		<h3><?= Lang::string('trading-competition-status') ?></h3>
-		<div class="one_half">
-			<? if (time() < strtotime('2014-09-09 11:00:00')) { ?>
-			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-starting-in') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-09 11:00:00') * 1000) ?>" /></div>
-   			<? } elseif (time() >= strtotime('2014-09-09 11:00:00') && time() < strtotime('2014-09-19 11:00:00')) { ?>
-   			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-19 11:00:00') * 1000) ?>" /></div>
-   			<? } elseif (time() >= strtotime('2014-09-19 11:00:00') && time() < strtotime('2014-09-29 00:00:00')) { ?>
-   			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="prize"><?= Lang::string('competition-finished') ?></span></div>
-   			<? } ?>
-   		</div>
-   		<? if (time() >= strtotime('2014-09-09 11:00:00') && time() < strtotime('2014-09-29 00:00:00')) { ?>
-   		<div class="one_half last">
-   			<div class="starting_in rank"><i class="fa fa-user fa-2x"></i> <?= Lang::string('competition-my-rank') ?>: <span class="prize"><b><?= $user_rank['rank']?></b> <small>(<?= (($user_rank['usd_gain'] >= 0) ? '+' : '').number_format($user_rank['usd_gain'],2) ?> USD)</small></span></div>
-   		</div>
-   		<? } ?>
-   		<div class="clear"></div>
-	   	<a href="contest-status.php" style="font-size:15px;text-decoration:underline;"><?= Lang::string('competition-status') ?></a>
-   		<div class="clearfix mar_top2"></div><div class="clear"></div>
-   		<? } ?>
-	
 		<? Errors::display(); ?>
 		<?= ($notice) ? '<div class="notice">'.$notice.'</div>' : '' ?>
 		<div class="testimonials-4">
@@ -262,7 +229,7 @@ if (!$bypass) {
 						<div class="buyform">
 							<div class="spacer"></div>
 							<div class="calc dotted">
-								<div class="label"><?= str_replace('[currency]','<span class="sell_currency_label">'.$currency_info['currency'].'</span>',Lang::string('buy-fiat-available')).((time() < strtotime('2014-09-19 11:00:00')) ? ' <span class="sim">('.Lang::string('simulation').')</span>' : '') ?></div>
+								<div class="label"><?= str_replace('[currency]','<span class="sell_currency_label">'.$currency_info['currency'].'</span>',Lang::string('buy-fiat-available')) ?></div>
 								<div class="value"><span class="buy_currency_char"><?= $currency_info['fa_symbol'] ?></span><span id="buy_user_available"><?= number_format($user_available[strtoupper($currency1)],2) ?></span></div>
 								<div class="clear"></div>
 							</div>
@@ -350,7 +317,7 @@ if (!$bypass) {
 						<div class="buyform">
 							<div class="spacer"></div>
 							<div class="calc dotted">
-								<div class="label"><?= Lang::string('sell-btc-available').((time() < strtotime('2014-09-19 11:00:00')) ? ' <span class="sim">('.Lang::string('simulation').')</span>' : '') ?></div>
+								<div class="label"><?= Lang::string('sell-btc-available') ?></div>
 								<div class="value"><span id="sell_user_available"><?= number_format($user_available['BTC'],8) ?></span> BTC</div>
 								<div class="clear"></div>
 							</div>

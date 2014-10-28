@@ -46,11 +46,9 @@ include 'includes/head.php';
     	<? Errors::display(); ?>
     	<? Messages::display(); ?>
     	<div class="clear"></div>
-    	<? if (time() >= strtotime('2014-11-03 12:00:00')) { ?>
     	<ul class="list_empty">
 			<li><a href="bitcoin-addresses.php?action=add" class="but_user"><i class="fa fa-plus fa-lg"></i> <?= Lang::string('bitcoin-addresses-add') ?></a></li>
 		</ul>
-		<? } ?>
 		<div id="filters_area">
 	    	<div class="table-style">
 	    		<table class="table-list trades">
@@ -59,26 +57,18 @@ include 'includes/head.php';
 						<th><?= Lang::string('bitcoin-addresses-address') ?></th>
 					</tr>
 					<? 
-					if (time() < strtotime('2014-09-19 11:00:00')) {
-						echo '<tr><td colspan="3">'.Lang::string('competition-feature-disabled').'</td></tr>';
-					}
-					elseif (time() < strtotime('2014-11-03 12:00:00')) {
-						echo '<tr><td colspan="3">'.Lang::string('pre-feature-disabled').'</td></tr>';
-					}
-					else {
-						if ($bitcoin_addresses) {
-							foreach ($bitcoin_addresses as $address) {
+					if ($bitcoin_addresses) {
+						foreach ($bitcoin_addresses as $address) {
 					?>
 					<tr>
 						<td><input type="hidden" class="localdate" value="<?= (strtotime($address['date']) + $CFG->timezone_offset) ?>" /></td>
 						<td><?= $address['address'] ?></td>
 					</tr>
 					<?
-							}
 						}
-						else {
-							echo '<tr><td colspan="3">'.Lang::string('bitcoin-addresses-no').'</td></tr>';
-						}
+					}
+					else {
+						echo '<tr><td colspan="3">'.Lang::string('bitcoin-addresses-no').'</td></tr>';
 					}
 					?>
 				</table>

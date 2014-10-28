@@ -18,8 +18,6 @@ API::add('User','getAvailable');
 API::add('User','getVolume');
 API::add('FeeSchedule','getRecord',array(User::$info['fee_schedule']));
 API::add('Stats','getBTCTraded');
-if (time() >= strtotime('2014-09-09 11:00:00') && time() < strtotime('2014-09-29 00:00:00'))
-	API::add('Competition','getUserRank');
 $query = API::send();
 
 $currencies = $CFG->currencies;
@@ -63,31 +61,10 @@ include 'includes/head.php';
 				<li><a href="withdraw.php" class="but_user"><i class="fa fa-upload fa-lg"></i> <?= Lang::string('withdraw') ?></a></li>
 			</ul>
 			<div class="clear"></div>
-			<? if (time() < strtotime('2014-09-29 00:00:00')) { ?>
-			<div class="clearfix divider_line4"></div>
-			<h3><?= Lang::string('trading-competition-status') ?></h3>
-			<div class="one_half">
-				<? if (time() < strtotime('2014-09-09 11:00:00')) { ?>
-				<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-starting-in') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-09 11:00:00') * 1000) ?>" /></div>
-	   			<? } elseif (time() >= strtotime('2014-09-09 11:00:00') && time() < strtotime('2014-09-19 11:00:00')) { ?>
-	   			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-19 11:00:00') * 1000) ?>" /></div>
-	   			<? } elseif (time() >= strtotime('2014-09-19 11:00:00') && time() < strtotime('2014-09-29 00:00:00')) { ?>
-	   			<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="prize"><?= Lang::string('competition-finished') ?></span></div>
-	   			<? } ?>
-	   		</div>
-	   		<? if (time() >= strtotime('2014-09-09 11:00:00') && time() < strtotime('2014-09-29 00:00:00')) { ?>
-	   		<div class="one_half last">
-	   			<div class="starting_in rank"><i class="fa fa-user fa-2x"></i> <?= Lang::string('competition-my-rank') ?>: <span class="prize"><b><?= $user_rank['rank']?></b> <small>(<?= (($user_rank['usd_gain'] >= 0) ? '+' : '').number_format($user_rank['usd_gain'],2) ?> USD)</small></span></div>
-	   		</div>
-	   		<? } ?>
-	   		<div class="clear"></div>
-	   		<a href="contest-status.php" style="font-size:15px;text-decoration:underline;"><?= Lang::string('competition-status') ?></a>
-	   		<div class="clearfix mar_top2"></div><div class="clear"></div>
-	   		<? } ?>
             <div class="content">
             	<h3 class="section_label">
                     <span class="left"><i class="fa fa-check fa-2x"></i></span>
-                    <span class="right"><?= Lang::string('account-balance').((time() < strtotime('2014-11-03 12:00:00')) ? ' <span class="sim">('.Lang::string('simulation').')</span>' : '') ?></span>
+                    <span class="right"><?= Lang::string('account-balance') ?></span>
                 </h3>
                 <div class="clear"></div>
                 <div class="balances">

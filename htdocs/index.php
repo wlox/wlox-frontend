@@ -56,21 +56,6 @@ if (!User::isLoggedIn()) {
 
 <div class="container_full">
     <div class="fullwidthbanner-container">
-	    <? if (time() < strtotime('2014-11-03 12:00:00')) { ?>
-	    <div class="popup">
-	    	<div class="contain">
-	    		<div class="contain1">
-			    	<a href="#" onclick="return false;" class="close">&#10006;</a>
-					<h1><?= Lang::string('pre-open') ?></h1>
-					<div class="starting_in"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('pre-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('+5 day') * 1000) ?>" /> <a href="#news">(<?= Lang::string('halted') ?>*)</a></div>
-					<div class="text1"><?= Lang::string('pre-catchline') ?></div>
-					<a href="register.php" class="button_slider"><?= Lang::string('pre-get-account') ?></a>
-				</div>
-			</div>
-			<div class="bg"></div>
-			<div class="clear"></div>
-		</div>
-	    <? } ?>
 		<div class="fullwidthbanner">
         
 						<ul>    
@@ -106,13 +91,7 @@ if (!User::isLoggedIn()) {
 <div class="clearfix"></div>
 
 <div class="punch_text">
-	<? if (time() < strtotime('2014-09-09 11:00:00')) { ?>
-	<div class="container"><b><i class="fa fa-asterisk"></i> <?= str_replace('[time]','<span class="time_until"></span><input type="hidden" class="time_until_seconds" value="'.(strtotime('2014-09-09 11:00:00')*1000).'" />',Lang::string('trading-competition-banner')) ?></b> <a href="contest-explain.php"><?= Lang::string('contest-get-started') ?></a></div>
-	<? } elseif (time() >= strtotime('2014-09-09 11:00:00') && time() < strtotime('2014-09-19 11:00:00')) { ?>
-	<div class="container"><b><i class="fa fa-asterisk"></i> <?= str_replace('[time]','<span class="time_until"></span><input type="hidden" class="time_until_seconds" value="'.(strtotime('2014-09-19 11:00:00')*1000).'" />',Lang::string('trading-competition-started')) ?></b> <a href="contest-status.php"><?= Lang::string('contest-ranking') ?></a></div>
-	<? } else { ?>
 	<div class="container"><b><?= Lang::string('home-trading') ?></b> <a href="<?= Lang::url('our-security.php') ?>"><?= Lang::string('home-more') ?></a></div>
-	<? } ?>
 
 </div><!-- end punch text -->
 

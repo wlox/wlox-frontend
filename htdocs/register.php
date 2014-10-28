@@ -49,16 +49,6 @@ elseif ($_REQUEST['register'] && !is_array($register->errors)) {
 	Link::redirect('login.php?message=registered');
 }
 
-if (time() < strtotime('2014-09-09 11:00:00')) {
-	API::add('Content','getRecord',array('trading-competition-register1'));
-}
-elseif (time() >= strtotime('2014-09-09 11:00:00') && time() < strtotime('2014-09-19 11:00:00')) {
-	API::add('Content','getRecord',array('trading-competition-register2'));
-}
-elseif (time() >= strtotime('2014-09-19 11:00:00') && time() < strtotime('2014-11-03 12:00:00')) {
-	API::add('Content','getRecord',array('trading-competition-register3'));
-}
-
 API::add('User','getCountries');
 $query = API::send();
 $countries = $query['User']['getCountries']['results'][0];
@@ -77,20 +67,6 @@ include 'includes/head.php';
 </div>
 <div class="container">
 	<div class="content_right">
-		<? if (time() < strtotime('2014-09-09 11:00:00')) { ?>
-		<h2><?= $content['title'] ?></h2>
-		<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-starting-in') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-09 11:00:00') * 1000) ?>" /></div>
-   		<div class="info"><div class="message-box-wrap"><?= $content['content'] ?></div></div>
-   		<div class="clearfix mar_top3"></div>
-   		<? } elseif (time() >= strtotime('2014-09-09 11:00:00') && time() < strtotime('2014-09-19 11:00:00')) { ?>
-   		<h2><?= $content['title'] ?></h2>
-   		<div class="starting_in rank"><i class="fa fa-clock-o fa-2x"></i> <?= Lang::string('competition-time-left') ?>: <span class="time_until"></span><input type="hidden" class="time_until_seconds" value="<?= (strtotime('2014-09-19 11:00:00') * 1000) ?>" /></div>
-   		<div class="info"><div class="message-box-wrap"><?= $content['content'] ?></div></div>
-   		<div class="clearfix mar_top3"></div>
-   		<? } elseif (time() >= strtotime('2014-09-19 11:00:00') && time() < strtotime('2014-11-03 12:00:00')) { ?>
-   		<div class="info"><div class="message-box-wrap"><?= $content['content'] ?></div></div>
-   		<div class="clearfix mar_top3"></div>
-   		<? } ?>
 		<div class="testimonials-4">
 			<? 
             Errors::display(); 
