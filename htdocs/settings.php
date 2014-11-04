@@ -85,8 +85,7 @@ if ($_REQUEST['submitted'] && !$token1 && !is_array($personal->errors)) {
 		API::add('User','settingsEmail2fa',array($_REQUEST));
 		$query = API::send();
 		
-		if ($query['User']['settingsEmail2fa']['results'][0])
-			Link::redirect('settings.php?notice=email');
+		Link::redirect('settings.php?notice=email');
 	}
 }
 
@@ -320,11 +319,10 @@ include 'includes/head.php';
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= $page_title ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="account.php"><?= Lang::string('account') ?></a> <i>/</i> <a href="settings.php"><?= $page_title ?></a></div>
+        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="account.php"><?= Lang::string('account') ?></a> <i>/</i> <a href="settings.php"><?= $page_title ?></a></div>
 	</div>
 </div>
 <div class="container">
-	<? include 'includes/sidebar_account.php'; ?>
 	<div class="content_right">
 		<div class="testimonials-4">
 			<? 
@@ -514,5 +512,6 @@ include 'includes/head.php';
             <div class="mar_top8"></div>
         </div>
 	</div>
+	<? include 'includes/sidebar_account.php'; ?>
 </div>
 <? include 'includes/foot.php'; ?>

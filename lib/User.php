@@ -154,7 +154,7 @@ class User {
 		
 		if (!$response || !is_array($response))
 			Errors::add(Lang::string('security-com-error'));
-		elseif ($response['success'] === false)
+		elseif ($response['success'] == false)
 			Errors::merge($response['errors']);
 		else {
 			return true;

@@ -2,6 +2,9 @@
 
 include '../cfg/cfg.php';
 
+if (stristr($_SERVER["SERVER_NAME"],'www.'))
+	Link::redirect('http://1btcxe.com/login.php',$_REQUEST);
+
 $page_title = Lang::string('home-login');
 $user1 = ereg_replace("[^0-9]", "",$_REQUEST['login']['user']);
 $pass1 = ereg_replace("[^0-9a-zA-Z!@#$%&*?\.\-\_]", "",$_REQUEST['login']['pass']);
@@ -42,7 +45,7 @@ include 'includes/head.php';
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= Lang::string('home-login') ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="login.php"><?= Lang::string('home-login') ?></a></div>
+        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="login.php"><?= Lang::string('home-login') ?></a></div>
 	</div>
 </div>
 <div class="fresh_projects login_bg">
@@ -88,7 +91,7 @@ include 'includes/head.php';
 	    		<input type="submit" name="submit" value="<?= Lang::string('home-login') ?>" class="but_user" />
 	    	</div>
     	</form>
-    	<a class="forgot" href="how-to-register.php"><?= Lang::string('login-dont-have') ?></a>
+    	<a class="forgot" href="<?= Lang::url('register.php') ?>"><?= Lang::string('login-dont-have') ?></a>
     </div>
     <div class="clearfix mar_top8"></div>
 </div>

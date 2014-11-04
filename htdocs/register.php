@@ -10,7 +10,7 @@ if ($_REQUEST['register']) {
 	$_REQUEST['is_caco'] = (!$_REQUEST['is_caco']) ? array('register'=>1) : $_REQUEST['is_caco'];
 }
 
-$register = new Form('register',false,false,'form3');
+$register = new Form('register',Lang::url('register.php'),false,'form3');
 unset($register->info['uniq']);
 $register->verify();
 
@@ -52,6 +52,7 @@ elseif ($_REQUEST['register'] && !is_array($register->errors)) {
 API::add('User','getCountries');
 $query = API::send();
 $countries = $query['User']['getCountries']['results'][0];
+$content = $query['Content']['getRecord']['results'][0];
 
 $page_title = Lang::string('home-register');
 
@@ -61,11 +62,10 @@ include 'includes/head.php';
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= $page_title ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="register.php"><?= Lang::string('register') ?></a></div>
+        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="<?= Lang::url('register.php') ?>"><?= Lang::string('home-register') ?></a></div>
 	</div>
 </div>
 <div class="container">
-	<? include 'includes/sidebar_account.php'; ?>
 	<div class="content_right">
 		<div class="testimonials-4">
 			<? 
@@ -79,7 +79,7 @@ include 'includes/head.php';
                 </h3>
                 <div class="clear"></div>
                 <?
-                $register->textInput('first_name',Lang::string('settings-first-name'),1);
+				$register->textInput('first_name',Lang::string('settings-first-name'),1);
                 $register->textInput('last_name',Lang::string('settings-last-name'),1);
                 $register->selectInput('country',Lang::string('settings-country'),1,false,$countries,false,array('name'));
                 $register->textInput('email',Lang::string('settings-email'),'email');
@@ -95,5 +95,6 @@ include 'includes/head.php';
             <div class="mar_top8"></div>
         </div>
 	</div>
+	<? include 'includes/sidebar_account.php'; ?>
 </div>
 <? include 'includes/foot.php'; ?>

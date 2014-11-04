@@ -11,7 +11,7 @@
     
    		<div class="one_fourth">
             
-            <div class="footer_logo"><img src="images/logo2.png" alt="" /></div>
+            <div class="footer_logo"><img src="images/logo2b.png" alt="" /></div>
             
             <ul class="contact_address">
                 <li><img src="images/footer-wmap.png" alt="" /></li>
@@ -22,24 +22,24 @@
         <div class="one_fifth">
             <h2><?= Lang::string('home-basic-nav') ?></h2>
             <ul class="list">
-             	<li><a href="index.php"><?= Lang::string('home') ?></a></li>
-                <li><a href="order-book.php"><?= Lang::string('order-book') ?></a></li>
-                <li><a href="help.php"><?= Lang::string('help') ?></a></li>
-                <li><a href="news.php"><?= Lang::string('news') ?></a></li>
-                <li><a href="contact.php"><?= Lang::string('contact') ?></a></li>
-                <li><a href="terms.php"><?= Lang::string('terms') ?></a></li>
+             	<li><a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a></li>
+                <li><a href="<?= Lang::url('order-book.php') ?>"><?= Lang::string('order-book') ?></a></li>
+                <li><a href="<?= (User::isLoggedIn()) ? 'help.php' : 'https://support.1btcxe.com' ?>"><?= Lang::string('help') ?></a></li>
+                <li><a href="<?= Lang::url('contact.php') ?>"><?= Lang::string('contact') ?></a></li>
+                <li><a href="<?= Lang::url('terms.php') ?>"><?= Lang::string('terms') ?></a></li>
             </ul>
          </div>
          <div class="one_fifth">
-            <h2><?= Lang::string('home-about-bitcoin') ?></h2>
-            <ul class="list">   
-                <li><a href="what-are-bitcoins.php"><?= Lang::string('what-are-bitcoins') ?></a></li>
-                <li><a href="how-bitcoin-works.php"><?= Lang::string('how-bitcoin-works') ?></a></li>
-                <li><a href="trading-bitcoins.php"><?= Lang::string('trading-bitcoins') ?></a></li>
-                <li><a href="how-to-register.php"><?= Lang::string('how-to-register') ?></a></li>
-                <li><a href="fee-schedule.php"><?= Lang::string('fee-schedule') ?></a></li>
+            <h2><?= Lang::string('about') ?></h2>
+            <ul class="list">
+             	<li><a href="<?= Lang::url('about.php') ?>"><?= Lang::string('about') ?></a></li>
+             	<li><a href="<?= Lang::url('our-security.php') ?>"><?= Lang::string('our-security') ?></a></li>
+             	<li><a href="<?= Lang::url('news.php') ?>"><?= Lang::string('news') ?></a></li>
+             	<li><a href="<?= Lang::url('fee-schedule.php') ?>"><?= Lang::string('fee-schedule') ?></a></li>
+             	<li><a href="https://github.com/wlox/wlox/"><?= Lang::string('home-github') ?></a></li>
             </ul>
          </div>
+         <? if (User::isLoggedIn()) { ?>
          <div class="one_fifth last">
             <h2><?= Lang::string('home-account-functions') ?></h2>
             <ul class="list"> 
@@ -52,6 +52,16 @@
                 <li><a href="withdraw.php"><?= Lang::string('withdraw') ?></a></li>
             </ul>
         </div>
+        <? } else { ?>
+         <div class="one_fifth last">
+            <h2><?= Lang::string('home-about-bitcoin') ?></h2>
+            <ul class="list">   
+                <li><a href="<?= Lang::url('what-are-bitcoins.php') ?>"><?= Lang::string('what-are-bitcoins') ?></a></li>
+                <li><a href="<?= Lang::url('how-bitcoin-works.php') ?>"><?= Lang::string('how-bitcoin-works') ?></a></li>
+                <li><a href="<?= Lang::url('how-to-register.php') ?>"><?= Lang::string('how-to-register') ?></a></li>
+            </ul>
+         </div>
+         <? } ?>
     </div>
 	
     <div class="clearfix mar_top5"></div>
@@ -65,19 +75,9 @@
     
         <div class="one_half">
         
-            <b>Copyright &copy; 2014 WLOX. All rights reserved.  <a href="terms.php">Terms of Use</a> | <a href="privacy.php">Privacy Policy</a></b>
+            <b>Copyright &copy; 2014 1BTCXE. All rights reserved.</b>
             
         </div>
-    
-    	<div class="one_half last">
-     		
-            <ul class="footer_social_links">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-                
-    	</div>
-    
     </div>
     
 </div><!-- end copyright info -->

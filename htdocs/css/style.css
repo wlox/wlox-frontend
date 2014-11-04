@@ -6,18 +6,41 @@
 #trueHeader #logo{
 	float:left;
 	display:block;
-	width:100%;
+	width: 186px;
 	height:34px;
 	margin-top:20px;
 	text-indent:-999em;
-	background:url(../images/logo1.png) no-repeat left bottom !important;
+	background:url(../images/logo1b.png) no-repeat left bottom !important;
 }
 
 .clear{clear:both;}
 .text{}
 .text p{margin-bottom: 10px;}
+.text1{font-size: 16px;line-height: 28px;}
+.text1 p{margin-bottom: 28px;font-size: 16px;line-height: 28px;}
 .text ul{margin-left: 20px;}
 .text ul li {list-style-type: disc;}
+.text1 h1,.text1 h2,.text1 h3,.text1 h4,.text1 h5 {margin-bottom: 28px;}
+.text1 a,.text a{text-decoration:underline;}
+.text1 ol { font-style:italic;font-weight:bold; margin-left:35px;color:#00BDBD; }
+.text1 ol li { list-style-position:outside;border-left:3px solid #00BDBD;padding:0 8px;}
+.text1 ol li span { font-style:normal;font-weight:normal;color:#727272; }
+.text1 ol li span em { display:block; }
+.text1 ul { margin-left:5px; }
+.text1 ul li { list-style-position:outside;border-left:3px solid #00BDBD;padding:5px 5px 5px 8px;margin-bottom:8px;border-right:1px solid #E6F7F7;border-bottom:1px solid #d2eeee;border-top:1px solid #d2eeee;background-color:#f3fafa;}
+.text1 ul li span { font-style:normal;font-weight:normal;color:#727272; }
+.text1 ul li span em { display:block; }
+.text1 p s{border-radius: 3px;color: #FFFFFF;padding: 2px 5px;background: none repeat scroll 0 0 #AAAAAA;text-decoration:none;}
+
+.popup{position:absolute;width:100%;height:100%;z-index:1000;}
+.popup .contain{position:relative;}
+.popup .contain1{z-index:2;position:relative;text-align:center;color:#FFF;padding-top:150px;}
+.popup .bg{position:absolute;top:0;right:0;left:0;bottom:0;z-index:1;background-color:#000000;-moz-opacity: 0.8;-khtml-opacity: 0.8;opacity: 0.8;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha"(Opacity=8);filter: progid:DXImageTransform.Microsoft.Alpha(opacity=8);}
+.popup .close{position:absolute;top:0;right:0;color:#FFF;border:1px solid #FFF;font-size:22px;padding:5px 10px;}
+.popup .starting_in{}
+.popup .button_slider{float:none;background-color:#00BDBD;border:none;color:#000;padding:10px 55px;}
+.popup .text1{font-size:20px;margin-bottom:48px;margint-top:35px;}
+.popup h1{color:#FFF;font-weight:400;font-size:50px;}
 .text .bigger{font-size:18px;color:#00BDBD; font-weight:bold;font-weight: bold;margin: 10px 0;display: inline-block;}
 .text.dotted{border: 3px dashed #FF4949;padding: 10px 15px;margin-bottom: 15px;	}
 
@@ -291,7 +314,6 @@ ul.tci_list {
 }
 
 a.button_slider {
-	background-color: #444444;
 	float: left;
 	padding: 13px 30px;
 	margin: 0px 0px 0px 0px;
@@ -382,7 +404,24 @@ a.button_slider:hover {
 	color: #fff;
 	background-color: #454545;
 }
-
+.punch_text .time_until{
+	font-weight: bold;
+}
+.starting_in{
+	font-size: 25px;
+    padding: 10px 0;
+    margin-bottom: 22px;}
+.starting_in.rank{
+	font-size:20px;
+}
+.sim{font-size: 12px;}
+.starting_in.rank small{font-size: 12px;}
+.starting_in i{color:#00BDBD;display:inline-block;position:relative;top:8px;}
+.starting_in .time_until, .starting_in .prize{
+    padding: 5px 10px;
+    border-radius: 3px;
+	border: 1px solid #666666;}
+.one_third .starting_in{font-size: 14px; }
 /* punch text 02 */
 .punch_text02 {
 	float: left;
@@ -3226,7 +3265,11 @@ p.error {
 	border: none;
 }
 .info strong, .error strong, .notice strong, .success strong {
-	font-size: 16px;
+	
+}
+.info a, .error a, .notice a, .success a {
+	font-weight:bold;
+	text-decoration: underline;
 }
 .message-box-wrap {
 	border: 0px solid #fff;
@@ -3237,21 +3280,25 @@ p.error {
 	border-color: #c6e3ff;
 	background-color: #e6f3ff;
 }
+.info a{color: #4a84bc;}
 .error {
 	color: #bd6767;
 	border-color: #f1bdbd;
 	background-color: #ffdddd;
 }
+.error a{color: #bd6767;}
 .notice {
 	color: #a79a30;
 	border-color: #d7d099;
 	background-color: #f6f2d2;
 }
+.notice a{color: #a79a30;}
 .success {
 	color: #1ea133;
 	border-color: #a9ecb4;
 	background-color: #dffbe4;
 }
+.success a{color:#1ea133;}
 .close-but {
 	width: 10px;
 	height: 10px;
@@ -3536,6 +3583,12 @@ h3 .highlight{
 .trades td.api-label{text-decoration: underline;color:#727272;font-weight: 700;}
 .trades td.api-label.first{color:#FFF;background-color:#aaaaaa;}
 .trades tr.blink td{background-color:#A2EEEE;}
+
+.competition{font-size: 18px;}
+.competition th{padding:15px;}
+.competition td{padding:15px;}
+
+
 ul.list_empty {
 	float: left;
 	padding: 0px;
@@ -3961,6 +4014,10 @@ ul.list_empty.form_buttons {
 	padding: 15px 20px 40px 20px;
 	text-align: center;
 }
+.pricing-text-list .bigger{
+	font-size:30px;
+}
+
 
 
 /* testimonials */
@@ -4007,6 +4064,12 @@ ul.list_empty.form_buttons {
     display: block;
     font-size: 28px !important;
     margin: 7px 0 0;
+}
+.section_label .left b{
+	color: #FFF;
+    font-weight: 900;
+    margin-top: -5px;
+    display: block;
 }
 .section_label .right{
 	float: left;
@@ -4326,4 +4389,5 @@ a.knowmore_but:hover {
 	z-index: 999;
 }
 
+.morestuff{color: #FFF;font-weight: bold;}
 

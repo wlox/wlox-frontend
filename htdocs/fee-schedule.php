@@ -16,20 +16,20 @@ $content = $query['Content']['getRecord']['results'][0];
 $page_title = $content['title'];
 $fee_schedule = $query['FeeSchedule']['get']['results'][0];
 
+
 include 'includes/head.php';
 ?>
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= $page_title ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('fee-schedule') ?></a> <i>/</i> <a href="fee-schedule.php"><?= Lang::string('fee-schedule') ?></a></div>
+        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('fee-schedule') ?></a> <i>/</i> <a href="<?= Lang::url('fee-schedule.php') ?>"><?= Lang::string('fee-schedule') ?></a></div>
 	</div>
 </div>
 <div class="container">
-	<? include 'includes/sidebar_topics.php'; ?>
 	<div class="content_right">
-    	<div class="text"><?= $content['content'] ?></div>
+    	<div class="text1"><?= $content['content'] ?></div>
     	<div class="clearfix mar_top2"></div>
-    	<div class="table-style">
+    	<!-- div class="table-style">
     		<table class="table-list trades">
 				<tr>
 					<th><?= Lang::string('fee-schedule-fee1') ?></th>
@@ -71,8 +71,9 @@ include 'includes/head.php';
 				}
 				?>
 			</table>
-    	</div>
+    	</div -->
     </div>
+    <? include 'includes/sidebar_topics.php'; ?>
 	<div class="clearfix mar_top8"></div>
 </div>
 <? include 'includes/foot.php'; ?>

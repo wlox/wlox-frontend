@@ -168,7 +168,7 @@ if ($_REQUEST['sell']) {
 		Errors::add(Lang::string('buy-errors-no-stop'));
 	if ($self_limits)
 		Errors::add(Lang::string('sell-limit-under-stops').(($currency_info['id'] != $self_limits_currency) ? str_replace('[price]',$currency_info['fa_symbol'].number_format($self_limits,2),' '.Lang::string('limit-max-price')) : ''));
-
+	
 	if (!is_array(Errors::$errors)) {
 		API::add('Orders','executeOrder',array(0,$sell_price1,$sell_amount1,$currency1,$user_fee_ask,$sell_market_price1,$order_info['id'],false,false,$sell_stop_price1));
 		$query = API::send();
@@ -198,11 +198,10 @@ if (!$bypass) {
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= $page_title ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="account.php"><?= Lang::string('account') ?></a> <i>/</i> <a href="buy-sell.php"><?= $page_title ?></a></div>
+        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="account.php"><?= Lang::string('account') ?></a> <i>/</i> <a href="buy-sell.php"><?= $page_title ?></a></div>
 	</div>
 </div>
 <div class="container">
-	<? include 'includes/sidebar_account.php'; ?>
 	<div class="content_right">
 		<? Errors::display(); ?>
 		<div class="testimonials-4">
@@ -282,7 +281,7 @@ if (!$bypass) {
 								<div class="clear"></div>
 							</div>
 							<div class="calc">
-								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="fee-schedule.php"><i class="fa fa-question-circle"></i></a></div>
+								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="<?= Lang::url('fee-schedule.php') ?>"><i class="fa fa-question-circle"></i></a></div>
 								<div class="value"><span id="buy_user_fee"><?= $user_fee_bid ?></span>%</div>
 								<div class="clear"></div>
 							</div>
@@ -371,7 +370,7 @@ if (!$bypass) {
 								<div class="clear"></div>
 							</div>
 							<div class="calc">
-								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="fee-schedule.php"><i class="fa fa-question-circle"></i></a></div>
+								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="<?= Lang::url('fee-schedule.php') ?>"><i class="fa fa-question-circle"></i></a></div>
 								<div class="value"><span id="sell_user_fee"><?= $user_fee_ask ?></span>%</div>
 								<div class="clear"></div>
 							</div>
@@ -452,6 +451,7 @@ if (!$bypass) {
 		</div>
 		<div class="mar_top5"></div>
 	</div>
+	<? include 'includes/sidebar_account.php'; ?>
 </div>
 <? include 'includes/foot.php'; ?>
 <? } ?>

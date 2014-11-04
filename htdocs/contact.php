@@ -19,9 +19,10 @@ $query = API::send();
 $content = $query['Content']['getRecord']['results'][0];
 $content1 = $query['Content']['getRecord']['results'][1];
 $page_title = $content['title'];
+$meta_desc = String::substring(strip_tags($content['content']),300);
 $countries = $query['User']['getCountries']['results'][0];
 
-$contact = new Form('contact',false,false,'form2');
+$contact = new Form('contact',Lang::url('contact.php'),false,'form2');
 $contact->verify();
 
 if ($_REQUEST['contact'] && $_SESSION["contact_uniq"] != $_REQUEST['contact']['uniq'])
@@ -57,11 +58,10 @@ include 'includes/head.php';
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= $page_title ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="contact.php"><?= Lang::string('contact') ?></a></div>
+        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="<?= Lang::url('contact.php') ?>"><?= Lang::string('contact') ?></a></div>
 	</div>
 </div>
 <div class="container">
-	<? include 'includes/sidebar_topics.php'; ?>
 	<div class="content_right">
     	<div class="content_fullwidth">
     		<div class="text"><?= $content['content'] ?></div>
@@ -94,6 +94,7 @@ include 'includes/head.php';
 		   	</div>     
 		</div>
     </div>
+    <? include 'includes/sidebar_topics.php'; ?>
 	<div class="clearfix mar_top8"></div>
 </div>
 <? include 'includes/foot.php'; ?>

@@ -990,6 +990,22 @@ function timeSince(elem) {
 	});
 }
 
+function timeUntil(elem) {
+	var miliseconds = $(elem).siblings('.time_until_seconds').val();
+	var date = new Date(parseInt(miliseconds));
+	
+	$(elem).countdown({ 
+	    until: date,
+	    significant: 1,
+	    onExpiry: pageRefresh,
+	    layout: '{o<}{on} {ol}{o>}{w<}{wn} {wl}{w>}{d<}{dn} {dl}{d>}{h<}{hn} {hl}{h>}{m<}{mn} {ml}{m>}{s<}{sn} {sl}{s>}'
+	});
+}
+
+function pageRefresh() {
+	location.reload(); 
+}
+
 function startFileSortable() {
 	
 }
@@ -1101,24 +1117,35 @@ $(document).ready(function() {
 		});
 	}
 	
+	if ($('.time_until').length > 0) {
+		$('.time_until').each(function() {
+			timeUntil(this);
+		});
+	}
+	
 	$('#language_selector').bind("keyup change", function(){
-		window.location.href = 'index.php?lang='+$(this).val();
+		var lang = $(this).val();
+		var url = $('#url_'+'index_php'+'_'+lang).val();
+		
+		window.location.href = url;
 	});
 	
 	$('#currency_selector').bind("keyup change", function(){
-		window.location.href = 'index.php?currency='+$(this).val();
+		var lang = $('#language_selector').val();
+		var url = $('#url_'+'index_php'+'_'+lang).val();
+		window.location.href = url+'?currency='+$(this).val();
 	});
 	
 	$('#fee_currency').bind("keyup change", function(){
-		window.location.href = 'fee-schedule.php?currency='+$(this).val();
-	});
-	
-	$('#language_selector').bind("keyup change", function(){
-		window.location.href = 'index.php?lang='+$(this).val();
+		var lang = $('#language_selector').val();
+		var url = $('#url_'+'fee-schedule_php'+'_'+lang).val();
+		window.location.href = url+'?currency='+$(this).val();
 	});
 	
 	$('#ob_currency').bind("keyup change", function(){
-		window.location.href = 'order-book.php?currency='+$(this).val();
+		var lang = $('#language_selector').val();
+		var url = $('#url_'+'order-book_php'+'_'+lang).val();
+		window.location.href = url+'?currency='+$(this).val();
 	});
 	
 	if ($("#transactions_timestamp").length > 0) {
@@ -1141,6 +1168,10 @@ $(document).ready(function() {
 		return true;
 	});
 	
+	$('.popup .close').click(function() {
+		$(this).parents('.popup').fadeOut(400);
+	});
+	
 	filtersUpdate();
 	paginationUpdate();
 	switchBuyCurrency();
@@ -1151,5 +1182,6 @@ $(document).ready(function() {
 	switchAccount1();
 	//expireSession();
 	updateTransactionsList();
+	timeUntil();
 	blink();
 });
