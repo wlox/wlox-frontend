@@ -80,7 +80,7 @@
     <link href="https://www.authy.com/form.authy.min.css" media="screen" rel="stylesheet" type="text/css">
     <? } ?>
     
-    <? if ($CFG->self == Lang::url('contact.php')) { ?>
+    <? if ($CFG->self == 'contact.php') { ?>
 	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 	<? } ?>
 	

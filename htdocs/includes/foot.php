@@ -94,14 +94,14 @@
 <!-- main js -->
 <script type="text/javascript" src="js/ops.js"></script>
 
-<? if ($CFG->self == Lang::url('index.php') || $CFG->self == Lang::url('order-book.php')) { ?>
+<? if ($CFG->self == 'index.php' || $CFG->self == 'order-book.php') { ?>
 <!-- flot -->
 <script type="text/javascript" src="js/flot/jquery.flot.js"></script>
 <script type="text/javascript" src="js/flot/jquery.flot.time.js"></script>
 <script type="text/javascript" src="js/flot/jquery.flot.crosshairs.js"></script>
 <? } ?>
 
-<? if ($CFG->self == Lang::url('security.php')) { ?>
+<? if ($CFG->self == 'security.php') { ?>
 <!-- authy -->
 <script src="https://www.authy.com/form.authy.min.js" type="text/javascript"></script>
 <? } ?>
