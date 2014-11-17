@@ -16,6 +16,7 @@ if (!$request_2fa && !$no_2fa) {
 	API::add('APIKeys','get');
 	$query = API::send();
 	$api_keys = $query['APIKeys']['get']['results'][0];
+	print_ar($api_keys);
 }
 
 $token1 = preg_replace("/[^0-9]/", "",$_REQUEST['token']);
