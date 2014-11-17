@@ -19,6 +19,7 @@ API::add('User','getVolume');
 API::add('FeeSchedule','getRecord',array(User::$info['fee_schedule']));
 API::add('Stats','getBTCTraded');
 $query = API::send();
+print_ar($query);
 
 $currencies = $CFG->currencies;
 $on_hold = $query['User']['getOnHold']['results'][0];

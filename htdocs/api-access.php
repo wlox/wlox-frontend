@@ -16,7 +16,6 @@ if (!$request_2fa && !$no_2fa) {
 	API::add('APIKeys','get');
 	$query = API::send();
 	$api_keys = $query['APIKeys']['get']['results'][0];
-	print_ar($api_keys);
 }
 
 $token1 = preg_replace("/[^0-9]/", "",$_REQUEST['token']);
@@ -70,7 +69,6 @@ if (($_REQUEST['action'] == 'edit' || $_REQUEST['action'] == 'add' || $_REQUEST[
 				Link::redirect('api-access.php?message=edit');
 			elseif ($_REQUEST['action'] == 'add') {
 				$secret = $query['APIKeys']['add']['results'][0];
-				print_ar($query);
 				Messages::add(Lang::string('api-add-message'));
 				$info_message = str_replace('[secret]',$secret,Lang::string('api-add-show-secret'));
 				
