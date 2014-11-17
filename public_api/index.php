@@ -1,6 +1,6 @@
 <?php 
 include '../cfg/cfg.php';
-echo dirname(__FILE__);
+
 $api_key1 = preg_replace("/[^0-9a-zA-Z]/","",$_POST['api_key']);
 $api_signature1 = preg_replace("/[^0-9a-zA-Z]/","",$_POST['signature']);
 $nonce1 = preg_replace("/[^0-9]/","",$_POST['nonce']);
