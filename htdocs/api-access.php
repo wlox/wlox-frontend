@@ -69,6 +69,7 @@ if (($_REQUEST['action'] == 'edit' || $_REQUEST['action'] == 'add' || $_REQUEST[
 				Link::redirect('api-access.php?message=edit');
 			elseif ($_REQUEST['action'] == 'add') {
 				$secret = $query['APIKeys']['add']['results'][0];
+				print_ar($secret);
 				Messages::add(Lang::string('api-add-message'));
 				$info_message = str_replace('[secret]',$secret,Lang::string('api-add-show-secret'));
 				
