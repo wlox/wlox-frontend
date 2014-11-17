@@ -27,6 +27,7 @@
                 <li><a href="<?= (User::isLoggedIn()) ? 'help.php' : 'https://support.1btcxe.com' ?>"><?= Lang::string('help') ?></a></li>
                 <li><a href="<?= Lang::url('contact.php') ?>"><?= Lang::string('contact') ?></a></li>
                 <li><a href="<?= Lang::url('terms.php') ?>"><?= Lang::string('terms') ?></a></li>
+                <li><a href="api-docs.php"><?= Lang::string('api-docs') ?></a></li>
             </ul>
          </div>
          <div class="one_fifth">
