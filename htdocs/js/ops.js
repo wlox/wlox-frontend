@@ -985,6 +985,7 @@ function timeSince(elem) {
 	});
 }
 
+/*
 function timeUntil(elem) {
 	var miliseconds = $(elem).siblings('.time_until_seconds').val();
 	var date = new Date(parseInt(miliseconds));
@@ -996,6 +997,7 @@ function timeUntil(elem) {
 	    layout: '{o<}{on} {ol}{o>}{w<}{wn} {wl}{w>}{d<}{dn} {dl}{d>}{h<}{hn} {hl}{h>}{m<}{mn} {ml}{m>}{s<}{sn} {sl}{s>}'
 	});
 }
+*/
 
 function pageRefresh() {
 	location.reload(); 
@@ -1186,6 +1188,6 @@ $(document).ready(function() {
 	switchAccount1();
 	//expireSession();
 	updateTransactionsList();
-	timeUntil();
+	//timeUntil();
 	blink();
 });
