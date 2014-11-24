@@ -30,7 +30,7 @@
     <!-- ######### CSS STYLES ######### -->
 	
     <link rel="stylesheet" href="css/reset.css" type="text/css" />
-	<link rel="stylesheet" href="css/style.css" type="text/css" />
+	<link rel="stylesheet" href="css/style.css?v=11242014" type="text/css" />
     
     <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
     
@@ -206,7 +206,7 @@
                         </ul -->
                     </li>
                     <? } else { ?>
-                    <li><a href="account.php" <?= ($CFG->self == 'account.php' || $CFG->self == 'open-orders.php' || $CFG->self == 'transactions.php' || $CFG->self == 'security.php') ? 'class="active"' : '' ?>><?= Lang::string('account') ?> <i class="fa fa-angle-down"></i></a>
+                    <li><a href="account.php" <?= ($CFG->self == 'account.php' || $CFG->self == 'open-orders.php' || $CFG->self == 'transactions.php' || $CFG->self == 'security.php' || $CFG->self == 'settings.php' || $CFG->self == 'bank-accounts.php' || $CFG->self == 'bitcoin-addresses.php' || $CFG->self == 'history.php' || $CFG->self == 'api-access.php') ? 'class="active"' : '' ?>><?= Lang::string('account') ?> <i class="fa fa-angle-down"></i></a>
                         <ul>
                         	<li><a href="open-orders.php"><?= Lang::string('open-orders') ?></a></li>
                             <li><a href="transactions.php"><?= Lang::string('transactions') ?></a></li>
@@ -215,6 +215,7 @@
                             <li><a href="bank-accounts.php"><?= Lang::string('bank-accounts') ?></a></li>
 							<li><a href="bitcoin-addresses.php"><?= Lang::string('bitcoin-addresses') ?></a></li>
 							<li><a href="history.php"><?= Lang::string('history') ?></a></li>
+							<li><a href="api-access.php"><?= Lang::string('api-access') ?></a></li>
                             <li><a href="logout.php?log_out=1"><?= Lang::string('log-out') ?></a></li>
                         </ul>
                     </li>
