@@ -85,7 +85,15 @@ if (!User::isLoggedIn()) {
                     
 				</div>
 
-
+	<div class="mobilebanner">
+		<h1><?= $content['title'] ?></h1>
+		<div class="line"></div>
+		<p class="text"><?= wordwrap(strip_tags($content['content']),80,'<br/>') ?> <a class="morestuff" href="<?= Lang::url('about.php') ?>">>></a></p>   
+		<div class="line"></div>
+		<a href="login.php" class="button_slider"><i class="fa fa-key"></i>&nbsp;&nbsp;<?= Lang::string('home-login') ?></a>       
+		<a href="<?= Lang::url('register.php') ?>" class="button_slider"><i class="fa fa-user"></i>&nbsp;&nbsp;<?= Lang::string('home-register') ?></a>
+		<div class="clear"></div>
+	</div>
 </div><!-- end slider -->
 
 <div class="clearfix"></div>
@@ -97,9 +105,9 @@ if (!User::isLoggedIn()) {
 
 <div class="waves_01"></div>
 
-<div class="clearfix mar_top6"></div>
+<div class="clearfix mar_top6 reasonswhy"></div>
 
-<div class="four_col_fusection container">
+<div class="four_col_fusection container reasonswhy">
 
 	<div class="one_fourth">
     	
@@ -159,7 +167,7 @@ if (!User::isLoggedIn()) {
 
 </div>
 
-<div class="clearfix mar_top6"></div>
+<div class="clearfix mar_top6 reasonswhy"></div>
 <? 
 }
 if ($stats['daily_change'] > 0) 

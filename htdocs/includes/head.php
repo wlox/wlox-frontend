@@ -30,12 +30,12 @@
     <!-- ######### CSS STYLES ######### -->
 	
     <link rel="stylesheet" href="css/reset.css" type="text/css" />
-	<link rel="stylesheet" href="css/style.css?v=11282014" type="text/css" />
+	<link rel="stylesheet" href="css/style.css?v=20141209" type="text/css" />
     
     <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
     
     <!-- responsive devices styles -->
-	<link rel="stylesheet" media="screen" href="css/responsive-leyouts.css" type="text/css" />
+	<link rel="stylesheet" media="screen" href="css/responsive-leyouts.css?v=20141209" type="text/css" />
     
 <!-- just remove the below comments witch color skin you want to use -->
     <!--<link rel="stylesheet" href="css/colors/lightblue.css" />-->
@@ -224,7 +224,6 @@
                     <li><a href="withdraw.php" <?= ($CFG->self == 'withdraw.php') ? 'class="active"' : '' ?>><?= Lang::string('withdraw') ?></a></li>
                     <? } ?>
                 </ul>
-                
             </div>
             
         </nav><!-- end nav menu -->

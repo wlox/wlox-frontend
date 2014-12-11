@@ -429,6 +429,7 @@ a.show_hide{
 /* Enable dropdown menu */
 .selectnav {display: block;}
 .selectnav {display: inline;}
+.reasonswhy{display:none;}
 #access .menu select {
 	border: 1px solid #e3e3e3;
 	border-top: 2px solid #e3e3e3;
@@ -439,7 +440,28 @@ a.show_hide{
 	margin: -35px 45px 10px 0px;
 	float: left;
 }
-
+#header.sticky {height:160px !important;}
+.sticky #trueHeader #logo{
+	display:none;
+}
+.sticky #access .menu select{
+	margin: -35px 25px 10px 0px !important;
+}
+.sticky #access .menu .stickylogo {
+	display:inline-block;
+	float: left;
+    margin: -30px 6px 0 0;
+}
+.sticky .last {
+	margin-bottom:0 !important;
+	height:0;
+}
+.mobilebanner{
+	display:block;
+}
+a.button_slider {
+	margin: 0 0 15px 10px;
+}
 .container {
 	width: 448px;
 	margin: auto auto auto auto;
@@ -583,12 +605,6 @@ h3{line-height: 33px;}
 .graph_options span select {margin-top: 20px;}
 .graph_options span {float:left;}
 .pagination_label{display:none;}
-
-a.button_slider {
-	padding: 5px 5px;
-	font-size: 10px;
-	border-radius: 2px;
-}
 
 .slider_sec_box{
 	width: 100px;
@@ -1104,6 +1120,7 @@ a.show_hide{
 /* Enable dropdown menu */
 .selectnav {display: block;}
 .selectnav {display: inline;}
+.reasonswhy{display:none;}
 #access .menu select {
 	border: 1px solid #e3e3e3;
 	border-top: 2px solid #e3e3e3;
@@ -1113,6 +1130,28 @@ a.show_hide{
 	width: 220px;
 	margin: -35px 43px 10px 0px;
 	float: left;
+}
+#header.sticky {height:160px !important;}
+.sticky #trueHeader #logo{
+	display:none;
+}
+.sticky #access .menu select{
+	margin: -35px 25px 10px 0px !important;
+}
+.sticky #access .menu .stickylogo {
+	display:inline-block;
+	float: left;
+    margin: -30px 6px 0 0;
+}
+.sticky .last {
+	margin-bottom:0 !important;
+	height:0;
+}
+.fullwidthbanner-container, .punch_text{
+	display:none;
+}
+.mobilebanner{
+	display:block;
 }
 .balances{margin-left:0;}
 .starting_in.rank {line-height: 36px;}
@@ -1262,9 +1301,7 @@ h3{line-height: 33px;}
 .pagination_label{display:none;}
 
 a.button_slider {
-	padding: 3px 2px;
-	font-size: 7px;
-	border-radius: 2px;
+	margin: 0 0 15px 10px;
 }
 
 .slider_sec_box{
@@ -1951,4 +1988,5 @@ a.show_hide{
 h1{line-height: 54px;}
 .balances{margin-left:0;}
 .starting_in.rank {line-height: 36px;}
+
 }

@@ -93,7 +93,7 @@
 <script type="text/javascript" src="js/universal/jquery-ui-1.10.3.custom.min.js"></script>
 
 <!-- main js -->
-<script type="text/javascript" src="js/ops.js?v=20141125"></script>
+<script type="text/javascript" src="js/ops.js?v=20141209"></script>
 
 <? if ($CFG->self == 'index.php' || $CFG->self == 'order-book.php') { ?>
 <!-- flot -->
@@ -116,7 +116,7 @@
 <!-- main menu -->
 <script type="text/javascript" src="js/mainmenu/ddsmoothmenu.js"></script>
 <script type="text/javascript" src="js/mainmenu/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="js/mainmenu/selectnav.js"></script>
+<script type="text/javascript" src="js/mainmenu/selectnav.js?v=20141209"></script>
 
 <!-- jquery jcarousel -->
 <script type="text/javascript" src="js/jcarousel/jquery.jcarousel.min.js"></script>
