@@ -50,6 +50,7 @@ elseif (($_REQUEST['settings']) && !is_array($personal->errors)) {
 	API::add('User','disableNeverLoggedIn',array($personal->info['pass']));
 	API::send();
 	
+	$_SESSION["firstlogin_uniq"] = md5(uniqid(mt_rand(),true));
 	Link::redirect('account.php?message=settings-personal-message');
 }
 else {
