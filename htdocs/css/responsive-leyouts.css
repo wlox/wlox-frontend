@@ -441,6 +441,7 @@ a.show_hide{
 	float: left;
 }
 #header.sticky {height:160px !important;}
+#header:not(.sticky) {height:249px !important;}
 .sticky #trueHeader #logo{
 	display:none;
 }
@@ -1132,6 +1133,7 @@ a.show_hide{
 	float: left;
 }
 #header.sticky {height:160px !important;}
+#header:not(.sticky) {height:249px !important;}
 .sticky #trueHeader #logo{
 	display:none;
 }
