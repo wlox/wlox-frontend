@@ -17,13 +17,14 @@ require_once ($CFG->libdir."autoload.php");
 session_start();
 session_regenerate_id();
 
-User::verifyLogIn();
-User::logOut($_REQUEST['log_out']);
-
 API::add('Settings','getAll');
 API::add('Lang','getTable');
 API::add('Currencies','get');
+API::add('User','verifyLogin');
 $query = API::send();
+
+User::verifyLogIn($query);
+User::logOut($_REQUEST['log_out']);
 
 /* Settings */
 Settings::assign($query['Settings']['getAll']['results'][0]);
@@ -39,6 +40,8 @@ $CFG->pass_regex = '/[\p{L}!@#$%&*?+-_.=| ]{8,}/';
 $lang = ereg_replace("[^a-z]", "",$_REQUEST['lang']);
 if ($lang)  {
 	$_SESSION['language'] = $lang;
+	if (User::isLoggedIn())
+		API::add('User','setLang',array($lang));
 }
 $CFG->language = ($lang) ? $lang : ereg_replace("[^a-z]", "",$_SESSION['language']);
 $CFG->language = (empty($CFG->language)) ? 'en' : $CFG->language;
