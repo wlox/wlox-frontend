@@ -43,11 +43,14 @@ class Lang {
 			return $urls[$url][$CFG->language];
 		elseif ($get_alts) {
 			$HTML = '';
-			foreach ($urls[$url] as $lang1 => $url1) {
-				if ($lang1 == $CFG->language)
-					continue;
-				
-				$HTML .= '<link rel="alternate" href="'.$CFG->baseurl.$url1.'" hreflang="'.$lang1.'" />';
+			
+			if (array_key_exists($url,$urls)) {
+				foreach ($urls[$url] as $lang1 => $url1) {
+					if ($lang1 == $CFG->language)
+						continue;
+					
+					$HTML .= '<link rel="alternate" href="'.$CFG->baseurl.$url1.'" hreflang="'.$lang1.'" />';
+				}
 			}
 			return $HTML;
 		}
