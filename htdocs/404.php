@@ -1,5 +1,5 @@
 <?php
-include '../cfg/cfg.php';
+include '../lib/common.php';
 
 $page_title = Lang::string('404');
 

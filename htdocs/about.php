@@ -1,12 +1,11 @@
 <?php
-include '../cfg/cfg.php';
+include '../lib/common.php';
 
 API::add('Content','getRecord',array('about'));
 $query = API::send();
 
 $content = $query['Content']['getRecord']['results'][0];
 $page_title = $content['title'];
-$meta_desc = String::substring(strip_tags($content['content']),300);
 
 include 'includes/head.php';
 ?>

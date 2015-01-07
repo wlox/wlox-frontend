@@ -1,5 +1,5 @@
 <?php
-include '../cfg/cfg.php';
+include '../lib/common.php';
 
 $_SESSION['currency'] = ereg_replace("[^a-z]", "",$_REQUEST['currency']);
 
