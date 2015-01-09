@@ -15,4 +15,4 @@ if ($remote_url) {
 	$remote_url = '&redirect_to='.urlencode('https://support.1btcxe.com/'.$remote_url);
 }
 
-Link::redirect('http://support.1btcxe.com/login/sso?name='.urlencode($user_info['first_name'].' '.$user_info['last_name']).'&email='.urlencode($user_info['email']).'&amp;timestamp='.(time()).'&hash='.hash_hmac('md5',($user_info['first_name'].' '.$user_info['last_name'].$user_info['email'].(time())),$CFG->freshdesk_key).$remote_url);
+Link::redirect('http://support.1btcxe.com/login/sso?name='.urlencode($user_info['first_name'].' '.$user_info['last_name']).'&email='.urlencode($user_info['email']).'&amp;timestamp='.(time()).'&hash='.hash_hmac('md5',($user_info['first_name'].' '.$user_info['last_name'].$user_info['email'].(time())),$CFG->helpdesk_key).$remote_url);
