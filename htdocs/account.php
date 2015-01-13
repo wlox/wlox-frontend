@@ -1,5 +1,5 @@
 <?php
-include '../cfg/cfg.php';
+include '../lib/common.php';
 
 if (User::$info['locked'] == 'Y' || User::$info['deactivated'] == 'Y')
 	Link::redirect('settings.php');
@@ -26,10 +26,11 @@ $available = $query['User']['getAvailable']['results'][0];
 $volume = $query['User']['getVolume']['results'][0];
 $fee_bracket = $query['FeeSchedule']['getRecord']['results'][0];
 $total_btc_volume = $query['Stats']['getBTCTraded']['results'][0][0]['total_btc_traded'];
-$user_rank = $query['Competition']['getUserRank']['results'][0];
 
 $referer = substr($_SERVER['HTTP_REFERER'],strrpos($_SERVER['HTTP_REFERER'],'/')+1);
 if ($referer == 'login.php' || $referer == 'verify-token.php' || $referer == 'first-login.php') {
+	$_SESSION['currency'] = strtolower(User::$info['default_currency_abbr']);
+	
 	API::add('User','notifyLogin');
 	$query = API::send();
 }
@@ -104,14 +105,15 @@ include 'includes/head.php';
 	            	<?
 	            	if ($on_hold) {
 	            		foreach ($on_hold as $currency => $balance) {
+	            			$decimals = ($currency == 'BTC') ? 8 : 2;
 					?>
 					<div class="one_half">
                 		<div class="label"><?= $currency.' '.Lang::string('account-on-order') ?>:</div>
-                		<div class="amount"><?= $CFG->currencies[$currency]['fa_symbol'].number_format($balance['order'],2) ?></div>
+                		<div class="amount"><?= (!empty($CFG->currencies[$currency]['fa_symbol']) ? $CFG->currencies[$currency]['fa_symbol'] : '').(!empty($balance['order']) ? number_format($balance['order'],$decimals) : '0.00') ?></div>
                 	</div>
                 	<div class="one_half last">
                 		<div class="label"><?= $currency.' '.Lang::string('account-on-widthdrawal') ?>:</div>
-                		<div class="amount"><?= $CFG->currencies[$currency]['fa_symbol'].number_format($balance['withdrawal'],2) ?></div>
+                		<div class="amount"><?= (!empty($CFG->currencies[$currency]['fa_symbol']) ? $CFG->currencies[$currency]['fa_symbol'] : '').(!empty($balance['withdrawal']) ? number_format($balance['withdrawal'],$decimals) : '0.00') ?></div>
                 	</div>
 					<?
 						} 

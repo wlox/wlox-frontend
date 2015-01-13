@@ -1,15 +1,18 @@
 <?php
 class Lang {
-	function string($key=false) {
+	public static function string($key=false) {
 		global $CFG;
 		
 		if (empty($key))
 			return false;
 			
-		return $CFG->lang_table[$key][$CFG->language];
+		if (!empty($CFG->lang_table[$key][$CFG->language]))
+			return $CFG->lang_table[$key][$CFG->language];
+		else
+			return false;
 	}
 	
-	function url($url=false,$get_alts=false,$get_js=false) {
+	public static function url($url=false,$get_alts=false,$get_js=false) {
 		global $CFG;
 		
 		$urls['index.php']['en'] = 'index.php';

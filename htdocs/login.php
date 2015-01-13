@@ -1,21 +1,21 @@
 <?php
 
-include '../cfg/cfg.php';
+include '../lib/common.php';
 
 if (stristr($_SERVER["SERVER_NAME"],'www.'))
 	Link::redirect('http://1btcxe.com/login.php',$_REQUEST);
 
 $page_title = Lang::string('home-login');
-$user1 = ereg_replace("[^0-9]", "",$_REQUEST['login']['user']);
-$pass1 = ereg_replace("[^0-9a-zA-Z!@#$%&*?\.\-\_]", "",$_REQUEST['login']['pass']);
+$user1 = (!empty($_REQUEST['login']['user'])) ? preg_replace("/[^0-9]/", "",$_REQUEST['login']['user']) : false;
+$pass1 = (!empty($_REQUEST['login']['pass'])) ? preg_replace($CFG->pass_regex, "",$_REQUEST['login']['pass']) : false;
 
-if ($_REQUEST['submitted']) {
+if (!empty($_REQUEST['submitted'])) {
 	if (empty($user1)) {
-		Errors::add($CFG->login_empty_user);
+		Errors::add(Lang::string('login-user-empty-error'));
 	}
 
 	if (empty($pass1)) {
-		Errors::add($CFG->login_empty_pass);
+		Errors::add(Lang::string('login-password-empty-error'));
 	}
 	
 	if ($_SESSION["register_uniq"] != $_REQUEST['uniq'])
@@ -38,12 +38,12 @@ if ($_REQUEST['submitted']) {
 			}
 		}
 		elseif (!$login || $login['error']) {
-			Errors::add($CFG->login_invalid);
+			Errors::add(Lang::string('login-invalid-login-error'));
 		}
 	}
 }
 
-if ($_REQUEST['message'] == 'registered')
+if (!empty($_REQUEST['message']) && $_REQUEST['message'] == 'registered')
 	Messages::add(Lang::string('register-success'));
 
 $_SESSION["register_uniq"] = md5(uniqid(mt_rand(),true));
@@ -61,17 +61,15 @@ include 'includes/head.php';
     	<h2><?= Lang::string('home-login') ?></h2>
     	<? 
     	if (count(Errors::$errors) > 0) {
-			Lang::string(Errors::$errors[0]);
 			echo '
 		<div class="error" id="div4">
 			<div class="message-box-wrap">
-				'.Lang::string(Errors::$errors[0]).'
+				'.Errors::$errors[0].'
 			</div>
 		</div>';
 		}
 		
 		if (count(Messages::$messages) > 0) {
-			Lang::string(Messages::$messages[0]);
 			echo '
 		<div class="messages" id="div4">
 			<div class="message-box-wrap">

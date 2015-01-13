@@ -1067,7 +1067,7 @@ function expireSession() {
 }
 
 function sortTable(elem_selector,col_num,desc){
-	var rows = $(elem_selector+' tr:not(:first)').get();
+	var rows = $(elem_selector+' tr:not(:first,.double)').get();
 	rows.sort(function(a, b) {
 		if ($(a).children('th').length > 0)
 			return -1;
@@ -1089,6 +1089,8 @@ function sortTable(elem_selector,col_num,desc){
 	
 	$.each(rows, function(index, row) {
 		$(elem_selector).append(row);
+		var id = $(row).attr('id');
+		$('#'+id+'.double').insertAfter(row);
 	});
 }
 

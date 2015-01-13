@@ -1,15 +1,15 @@
 <?php
 
-include '../cfg/cfg.php';
+include '../lib/common.php';
 
 $page_title = Lang::string('login-forgot');
-$email1 = ereg_replace("[^0-9a-zA-Z@\.\!#\$%\&\*+_\~\?\-]", "",$_REQUEST['forgot']['email']);
+$email1 = (!empty($_REQUEST['forgot']['email'])) ? preg_replace("/[^0-9a-zA-Z@\.\!#\$%\&\*+_\~\?\-]/", "",$_REQUEST['forgot']['email']) : false;
 
-if ($_REQUEST['forgot'] && $email1 && $_SESSION["forgot_uniq"] == $_REQUEST['uniq']) {
+if (!empty($_REQUEST['forgot']) && $email1 && $_SESSION["forgot_uniq"] == $_REQUEST['uniq']) {
 	include_once 'securimage/securimage.php';
 	$securimage = new Securimage();
 
-	if ($securimage->check($_REQUEST['forgot']['captcha'])) {
+	if (!empty($_REQUEST['forgot']['captcha']) && $securimage->check($_REQUEST['forgot']['captcha'])) {
 		API::add('User','resetUser',array($email1));
 		$query = API::send();
 
@@ -17,7 +17,7 @@ if ($_REQUEST['forgot'] && $email1 && $_SESSION["forgot_uniq"] == $_REQUEST['uni
 		Messages::add(Lang::string('login-password-sent-message'));
 	}
 	else {
-		Errors::add(Lang::string($CFG->capcha_error));
+		Errors::add(Lang::string('login-capcha-error'));
 	}
 }
 
