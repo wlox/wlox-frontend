@@ -1,13 +1,13 @@
 <?php
 
-include '../cfg/cfg.php';
+include '../lib/common.php';
 
 $page_title = Lang::string('order-book');
 
-if ($_REQUEST['currency'])
-	$_SESSION['currency'] = ereg_replace("[^a-z]", "",$_REQUEST['currency']);
-elseif (!$_SESSION['currency'])
-	$_SESSION['currency'] = (User::$info['default_currency_abbr']) ? strtolower(User::$info['default_currency_abbr']) : 'usd';
+if (!empty($_REQUEST['currency']))
+	$_SESSION['currency'] = preg_replace("/[^a-z]/", "",$_REQUEST['currency']);
+elseif (empty($_SESSION['currency']))
+	$_SESSION['currency'] = 'usd';
 	
 $currency1 = $_SESSION['currency'];
 $currency_symbol = strtoupper($currency1);
@@ -30,7 +30,7 @@ include 'includes/head.php';
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= $page_title ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="order-book.php"><?= $page_title ?></a></div>
+        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="<?= Lang::url('order-book.php') ?>"><?= $page_title ?></a></div>
 	</div>
 </div>
 <div class="container">
@@ -64,7 +64,7 @@ include 'includes/head.php';
 					<li>
 						<label for="last_price"><?= Lang::string('home-stats-last-price') ?></label>
 						<input type="text" id="last_price" class="<?= $last_trans_color ?>" value="<?= $last_transaction['fa_symbol'].number_format($last_transaction['btc_price'],2).$last_trans_currency ?>" disabled="disabled" />
-						<a href="" title="<?= Lang::string('order-book-last-price-explain') ?>"><i class="fa fa-question-circle"></i></a>
+						<a target="_blank" href="https://support.1btcxe.com/support/solutions/articles/1000146628" title="<?= Lang::string('order-book-last-price-explain') ?>"><i class="fa fa-question-circle"></i></a>
 					</li>
 				</ul>
 			</form>

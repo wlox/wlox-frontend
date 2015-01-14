@@ -1,0 +1,5 @@
+User-Agent: *
+Disallow: 
+Disallow: /ckeditor
+Disallow: /phpqrcode
+Disallow: /securimage

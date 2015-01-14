@@ -1,5 +1,5 @@
 <?php
-include '../cfg/cfg.php';
+include '../lib/common.php';
 
 if (User::$awaiting_token)
 	Link::redirect('verify-token.php');
@@ -8,15 +8,18 @@ elseif (!User::isLoggedIn())
 
 $account_deactivated = (User::$info['deactivated'] == 'Y');
 $account_locked = (User::$info['locked'] == 'Y');
-$token1 = ereg_replace("[^0-9]", "",$_REQUEST['token']);
-$authcode1 = $_REQUEST['authcode'];
+$token1 = (!empty($_REQUEST['token'])) ? preg_replace("/[^0-9]/", "",$_REQUEST['token']) : false;
+$authcode1 = (!empty($_REQUEST['authcode'])) ? $_REQUEST['authcode'] : false;
+$match = false;
+$request_2fa = false;
+$too_few_chars = false;
 
 API::add('User','getInfo',array($_SESSION['session_id']));
 API::add('User','getCountries');
 $query = API::send();
 $countries = $query['User']['getCountries']['results'][0];
 
-if ($_REQUEST['ex_request'])
+if (!empty($_REQUEST['ex_request']))
 	$_REQUEST = unserialize(urldecode($_REQUEST['ex_request']));
 
 if ($authcode1) {
@@ -31,7 +34,7 @@ if ($authcode1) {
 		Errors::add(Lang::string('settings-request-expired'));
 }
 
-if (!$_REQUEST['settings']['pass']) {
+if (empty($_REQUEST['settings']['pass'])) {
 	unset($_REQUEST['settings']['pass']);
 	unset($_REQUEST['settings']['pass2']);
 	unset($_REQUEST['verify_fields']['pass']);
@@ -42,10 +45,17 @@ else {
 	$_REQUEST['verify_fields']['pass2'] = 'password';
 }
 
-if ($_REQUEST['settings']) {
-	$match = preg_match_all("/[^0-9a-zA-Z!@#$%&*?\.\-\_]/",$_REQUEST['settings']['pass'],$matches);
-	$_REQUEST['settings']['pass'] = preg_replace("/[^0-9a-zA-Z!@#$%&*?\.\-\_]/", "",$_REQUEST['settings']['pass']);
-	$_REQUEST['settings']['pass2'] = preg_replace("/[^0-9a-zA-Z!@#$%&*?\.\-\_]/", "",$_REQUEST['settings']['pass2']);
+if (!empty($_REQUEST['settings'])) {
+	if (!empty($_REQUEST['settings']['pass'])) {
+		$match = preg_match_all($CFG->pass_regex,$_REQUEST['settings']['pass'],$matches);
+		$too_few_chars = (strlen($_REQUEST['settings']['pass']) < $CFG->pass_min_chars);
+	}
+	
+	if (!empty($_REQUEST['settings']['pass'])) {
+		$_REQUEST['settings']['pass'] = preg_replace($CFG->pass_regex, "",$_REQUEST['settings']['pass']);
+		$_REQUEST['settings']['pass2'] = preg_replace($CFG->pass_regex, "",$_REQUEST['settings']['pass2']);
+	}
+	
 	$_REQUEST['settings']['first_name'] = preg_replace("/[^\da-z  ]/i", "",$_REQUEST['settings']['first_name']);
 	$_REQUEST['settings']['last_name'] = preg_replace("/[^\da-z ]/i", "",$_REQUEST['settings']['last_name']);
 	$_REQUEST['settings']['country'] = preg_replace("/[^0-9]/", "",$_REQUEST['settings']['country']);
@@ -62,9 +72,11 @@ $personal->verify();
 
 if ($match)
 	$personal->errors[] = htmlentities(str_replace('[characters]',implode(',',array_unique($matches[0])),Lang::string('login-pass-chars-error')));
-	
-if ($_REQUEST['submitted'] && !$token1 && !is_array($personal->errors)) {
-	if ($_REQUEST['request_2fa']) {
+if ($too_few_chars)	
+	$personal->errors[] = Lang::string('login-password-error');
+
+if (!empty($_REQUEST['submitted']) && !$token1 && !is_array($personal->errors)) {
+	if (!empty($_REQUEST['request_2fa'])) {
 		if (!($token1 > 0)) {
 			$no_token = true;
 			$request_2fa = true;
@@ -85,12 +97,11 @@ if ($_REQUEST['submitted'] && !$token1 && !is_array($personal->errors)) {
 		API::add('User','settingsEmail2fa',array($_REQUEST));
 		$query = API::send();
 		
-		if ($query['User']['settingsEmail2fa']['results'][0])
-			Link::redirect('settings.php?notice=email');
+		Link::redirect('settings.php?notice=email');
 	}
 }
 
-if ($_REQUEST['settings'] && is_array($personal->errors)) {
+if (!empty($_REQUEST['settings']) && is_array($personal->errors)) {
 	$errors = array();
 	foreach ($personal->errors as $key => $error) {
 		if (stristr($error,'login-required-error')) {
@@ -106,7 +117,7 @@ if ($_REQUEST['settings'] && is_array($personal->errors)) {
 	Errors::$errors = $errors;
 	$request_2fa = false;
 }
-elseif (($_REQUEST['settings']) && !is_array($personal->errors)) {
+elseif (!empty($_REQUEST['settings']) && !is_array($personal->errors)) {
 	if (!$no_token && !$request_2fa) {
 		API::settingsChangeId($authcode1);
 		API::token($token1);
@@ -133,7 +144,7 @@ elseif (($_REQUEST['settings']) && !is_array($personal->errors)) {
 	}
 }
 
-if (!$_REQUEST['prefs']) {
+if (empty($_REQUEST['prefs'])) {
 	$confirm_withdrawal_2fa_btc1 = User::$info['confirm_withdrawal_2fa_btc'];
 	$confirm_withdrawal_email_btc1 = User::$info['confirm_withdrawal_email_btc'];
 	$confirm_withdrawal_2fa_bank1 = User::$info['confirm_withdrawal_2fa_bank'];
@@ -156,7 +167,7 @@ else {
 	$notify_login1 = $_REQUEST['notify_login'];
 }
 
-if ($_REQUEST['prefs']) {
+if (!empty($_REQUEST['prefs'])) {
 	if (!$no_token && !$request_2fa) {
 		API::settingsChangeId($authcode1);
 		API::token($token1);
@@ -183,7 +194,7 @@ if ($_REQUEST['prefs']) {
 	}
 }
 
-if ($_REQUEST['deactivate_account']) {
+if (!empty($_REQUEST['deactivate_account'])) {
 	API::add('User','hasCurrencies');
 	$query = API::send();
 	$found = $query['User']['hasCurrencies']['results'][0];
@@ -220,7 +231,7 @@ if ($_REQUEST['deactivate_account']) {
 	}
 }
 
-if ($_REQUEST['reactivate_account']) {
+if (!empty($_REQUEST['reactivate_account'])) {
 	if (!$no_token && !$request_2fa) {
 		API::settingsChangeId($authcode1);
 		API::token($token1);
@@ -247,7 +258,7 @@ if ($_REQUEST['reactivate_account']) {
 	}
 }
 
-if ($_REQUEST['lock_account']) {
+if (!empty($_REQUEST['lock_account'])) {
 	if (!$no_token && !$request_2fa) {
 		API::settingsChangeId($authcode1);
 		API::token($token1);
@@ -274,7 +285,7 @@ if ($_REQUEST['lock_account']) {
 	}
 }
 
-if ($_REQUEST['unlock_account']) {
+if (!empty($_REQUEST['unlock_account'])) {
 	if (!$no_token && !$request_2fa) {
 		API::settingsChangeId($authcode1);
 		API::token($token1);
@@ -301,41 +312,43 @@ if ($_REQUEST['unlock_account']) {
 	}
 }
 
-if ($_REQUEST['message'] == 'settings-personal-message')
-	Messages::add(Lang::string('settings-personal-message'));
-elseif ($_REQUEST['message'] == 'settings-settings-message')
-	Messages::add(Lang::string('settings-settings-message'));
-elseif ($_REQUEST['notice'] == 'email')
+if (!empty($_REQUEST['message'])) {
+	if ($_REQUEST['message'] == 'settings-personal-message')
+		Messages::add(Lang::string('settings-personal-message'));
+	elseif ($_REQUEST['message'] == 'settings-settings-message')
+		Messages::add(Lang::string('settings-settings-message'));
+	elseif ($_REQUEST['message'] == 'settings-account-deactivated')
+		Messages::add(Lang::string('settings-account-deactivated'));
+	elseif ($_REQUEST['message'] == 'settings-account-reactivated')
+		Messages::add(Lang::string('settings-account-reactivated'));
+	elseif ($_REQUEST['message'] == 'settings-account-locked')
+		Messages::add(Lang::string('settings-account-locked'));
+	elseif ($_REQUEST['message'] == 'settings-account-unlocked')
+		Messages::add(Lang::string('settings-account-unlocked'));
+}
+
+if (!empty($_REQUEST['notice']) && $_REQUEST['notice'] == 'email')
 	$notice = Lang::string('settings-change-notice');
-elseif ($_REQUEST['message'] == 'settings-account-deactivated')
-	Messages::add(Lang::string('settings-account-deactivated'));
-elseif ($_REQUEST['message'] == 'settings-account-reactivated')
-	Messages::add(Lang::string('settings-account-reactivated'));
-elseif ($_REQUEST['message'] == 'settings-account-locked')
-	Messages::add(Lang::string('settings-account-locked'));
-elseif ($_REQUEST['message'] == 'settings-account-unlocked')
-	Messages::add(Lang::string('settings-account-unlocked'));
 
 $page_title = Lang::string('settings');
-//$_SESSION["settings_uniq"] = md5(uniqid(mt_rand(),true));
+$_SESSION["settings_uniq"] = md5(uniqid(mt_rand(),true));
 
 include 'includes/head.php';
 ?>
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= $page_title ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="account.php"><?= Lang::string('account') ?></a> <i>/</i> <a href="settings.php"><?= $page_title ?></a></div>
+        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="account.php"><?= Lang::string('account') ?></a> <i>/</i> <a href="settings.php"><?= $page_title ?></a></div>
 	</div>
 </div>
 <div class="container">
-	<? include 'includes/sidebar_account.php'; ?>
 	<div class="content_right">
 		<div class="testimonials-4">
 			<? 
             Errors::display(); 
             Messages::display();
             ?>
-            <?= ($notice) ? '<div class="notice"><div class="message-box-wrap">'.$notice.'</div></div>' : '' ?>
+            <?= (!empty($notice)) ? '<div class="notice"><div class="message-box-wrap">'.$notice.'</div></div>' : '' ?>
             <? if (!$request_2fa && !$account_deactivated && !$account_locked) { ?>
             <div class="content">
             	<h3 class="section_label">
@@ -528,5 +541,6 @@ include 'includes/head.php';
             <div class="mar_top8"></div>
         </div>
 	</div>
+	<? include 'includes/sidebar_account.php'; ?>
 </div>
 <? include 'includes/foot.php'; ?>

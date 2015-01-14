@@ -1,5 +1,5 @@
 <?php
-include '../cfg/cfg.php';
+include '../lib/common.php';
 
 API::add('Content','getRecord',array('terms'));
 $query = API::send();
@@ -12,14 +12,14 @@ include 'includes/head.php';
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= $page_title ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="terms.php"><?= Lang::string('terms') ?></a></div>
+        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="<?= Lang::url('terms.php') ?>"><?= Lang::string('terms') ?></a></div>
 	</div>
 </div>
 <div class="container">
-	<? include 'includes/sidebar_topics.php'; ?>
 	<div class="content_right">
     <div class="text"><?= $content['content'] ?></div>
     </div>
+    <? include 'includes/sidebar_topics.php'; ?>
 	<div class="clearfix mar_top8"></div>
 </div>
 <? include 'includes/foot.php'; ?>

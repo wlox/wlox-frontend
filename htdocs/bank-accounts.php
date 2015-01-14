@@ -1,5 +1,5 @@
 <?php
-include '../cfg/cfg.php';
+include '../lib/common.php';
 
 if (User::$info['locked'] == 'Y' || User::$info['deactivated'] == 'Y')
 	Link::redirect('settings.php');
@@ -8,17 +8,17 @@ elseif (User::$awaiting_token)
 elseif (!User::isLoggedIn())
 	Link::redirect('login.php');
 
-$account1 = ereg_replace("[^0-9]", "",$_REQUEST['account']);
-$currency1 = ereg_replace("[^0-9]", "",$_REQUEST['currency']);
-$description1 = preg_replace("/[^0-9a-zA-Z!@#$%&*?\.\-\_ ]/", "",$_REQUEST['description']);
-$remove_id1 = ereg_replace("[^0-9]", "",$_REQUEST['remove_id']);
+$account1 = (!empty($_REQUEST['account'])) ? preg_replace("/[^0-9]/", "",$_REQUEST['account']) : false;
+$currency1 = (!empty($_REQUEST['currency'])) ? preg_replace("/[^0-9]/", "",$_REQUEST['currency']) : false;
+$description1 = (!empty($_REQUEST['description'])) ? preg_replace("/[^0-9a-zA-Z!@#$%&*?\.\-\_ ]/", "",$_REQUEST['description']) : false;
+$remove_id1 = (!empty($_REQUEST['remove_id'])) ? preg_replace("/[^0-9]/", "",$_REQUEST['remove_id']) : false;
 
 if ($account1 > 0 || $remove_id1 > 0) {
-	if ($_SESSION["bankaccount_uniq"] != $_REQUEST['uniq'])
+	if (empty($_SESSION["bankaccount_uniq"]) || empty($_REQUEST['uniq']) || $_SESSION["bankaccount_uniq"] != $_REQUEST['uniq'])
 		Errors::add('Page expired.');
 }
 
-API::add('Content','getRecord',array((($_REQUEST['action'] == 'add') ? 'bank-accounts-add' : 'bank-accounts')));
+API::add('Content','getRecord',array(((!empty($_REQUEST['action']) && $_REQUEST['action'] == 'add') ? 'bank-accounts-add' : 'bank-accounts')));
 API::add('BankAccounts','get');
 API::add('BankAccounts','find',array($account1));
 $query = API::send();
@@ -74,13 +74,12 @@ include 'includes/head.php';
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= $page_title ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="account.php"><?= Lang::string('account') ?></a> <i>/</i> <a href="bank-accounts.php"><?= $page_title ?></a></div>
+        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="account.php"><?= Lang::string('account') ?></a> <i>/</i> <a href="bank-accounts.php"><?= $page_title ?></a></div>
 	</div>
 </div>
 <div class="container">
-	<? include 'includes/sidebar_account.php'; ?>
 	<div class="content_right">
-		<? if (!$_REQUEST['action']) { ?>
+		<? if (empty($_REQUEST['action'])) { ?>
     	<div class="text"><?= $content['content'] ?></div>
     	<div class="clearfix mar_top2"></div>
     	<div class="clear"></div>
@@ -117,7 +116,7 @@ include 'includes/head.php';
 				?>
 			</table>
 		</div>
-		<? } elseif ($_REQUEST['action'] == 'add') { ?>
+		<? } elseif (!empty($_REQUEST['action']) && $_REQUEST['action'] == 'add') { ?>
 		<div class="testimonials-4">
 			<div class="text"><?= $content['content'] ?></div>
 			<div class="mar_top2"></div>
@@ -172,6 +171,7 @@ include 'includes/head.php';
 		</div>
 		<? } ?>
     </div>
+    <? include 'includes/sidebar_account.php'; ?>
 	<div class="clearfix mar_top8"></div>
 </div>
 <? include 'includes/foot.php'; ?>
