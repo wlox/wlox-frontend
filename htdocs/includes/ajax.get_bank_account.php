@@ -1,6 +1,6 @@
 <?php
 chdir('..');
-include '../lib/common.php';
+include '../cfg/cfg.php';
 
 API::add('User','getAvailable');
 API::add('BankAccounts','getRecord',array($_REQUEST['account']));
@@ -17,7 +17,7 @@ $return['client_account'] = $bank_account['account_number'];
 $return['escrow_account'] = $bank_account_currency['account_number'];
 $return['escrow_name'] = $bank_account_currency['account_name'];
 
-if (!empty($_REQUEST['avail'])) {
+if ($_REQUEST['avail']) {
 	$return['currency'] = $bank_account_currency['currency'];
 	$return['currency_char'] = $bank_account_currency['fa_symbol'];
 	$return['available'] = number_format($user_available[$bank_account_currency['currency']],2);

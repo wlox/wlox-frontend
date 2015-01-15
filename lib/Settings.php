@@ -1,15 +1,34 @@
 <?php
 
 class Settings {
-	public static function assign($all) {
+	function assign($all) {
 		global $CFG;
 		
-		if (is_array($all) && is_object($CFG)) {
-			foreach ($all as $name => $value) {
-				$name = str_replace('frontend_','',$name);
-				$CFG->$name = $value;
+		if (is_array ( $all )) {
+			if (is_object ( $CFG )) {
+				foreach ( $all as $row ) {
+					$normalized_name = Settings::_normalizeName ( $row['name'] );
+					if (!is_array($row['value']))
+						$CFG->$normalized_name = html_entity_decode($row['value']);
+					else
+						$CFG->$normalized_name = $row['value'];
+				}
+			} else {
+				foreach ( $all as $row ) {
+					$normalized_name = Settings::_normalizeName ( $row ['name'] );
+					if (!is_array($row['value']))
+						$CFG->$normalized_name = html_entity_decode($row['value']);
+					else
+						$CFG->$normalized_name = $row['value'];
+				}
 			}
 		}
+	}
+	
+	function _normalizeName($str) {
+		$str = strtolower ( $str );
+		return $str;
+		//return preg_replace ( '/[^a-z0-9_]/', '', $str );
 	}
 }
 

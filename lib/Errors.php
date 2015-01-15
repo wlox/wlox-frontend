@@ -2,12 +2,12 @@
 class Errors {
 	public static $errors;
 	
-	public static function add($error) {
+	function add($error) {
 		if (!empty($error))
 			self::$errors[] = $error;
 	}
 	
-	public static function merge($error_array) {
+	function merge($error_array) {
 		if (!is_array(self::$errors)) {
 			self::$errors = $error_array;
 		}
@@ -16,7 +16,7 @@ class Errors {
 		}
 	}
 	
-	public static function display() {
+	function display() {
 		if (!empty(self::$errors)) {
 			echo '<ul class="errors">';
 			foreach (self::$errors as $name => $error) {

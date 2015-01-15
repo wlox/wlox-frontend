@@ -2,12 +2,12 @@
 class Messages {
 	public static $messages = array();
 	
-	public static function add($message) {
+	function add($message) {
 		if (!empty($message))
 			self::$messages[] = $message;
 	}
 	
-	public static function merge($message_array) {
+	function merge($message_array) {
 		if (!is_array(self::$messages)) {
 			self::$messages = $message_array;
 		}
@@ -16,7 +16,7 @@ class Messages {
 		}
 	}
 	
-	public static function display() {
+	function display() {
 		if (!empty(self::$messages)) {
 			echo '<ul class="messages">';
 			foreach (self::$messages as $name => $message) {

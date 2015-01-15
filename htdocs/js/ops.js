@@ -272,7 +272,6 @@ function updateTransactions() {
 			$.getJSON("includes/ajax.trades.php?currency="+currency+((notrades) ? '&notrades=1' : '')+((open_orders_user) ? '&user=1' : '&last_price=1')+((get_10) ? '&get10=1' : ''),function(json_data) {
 				if (!notrades && json_data.transactions[0] != null) {
 					var i = 0;
-					var insert_elem = ('#transactions_list tr:first');
 					$.each(json_data.transactions[0],function(i) {
 						if ($('#order_'+this.id).length > 0)
 							return true;
@@ -311,7 +310,7 @@ function updateTransactions() {
 						
 						var elem = $('<tr id="order_'+this.id+'"><td><span class="time_since"></span><input type="hidden" class="time_since_seconds" value="'+this.time_since+'" /></td><td>'+this.btc+' BTC</td><td>'+this.fa_symbol+formatCurrency(this.btc_price)+(((this.currency).toLowerCase() == currency) ? '' : (((this.currency1).toLowerCase() == currency) ? '' : ' ('+this.currency1+')'))+'</td></tr>').insertAfter(insert_elem);
 						insert_elem = elem;
-
+						
 						timeSince($(elem).find('.time_since'));
 						$(elem).children('td').effect("highlight",{color:"#A2EEEE"},2000);
 						$('#stats_traded').html(formatCurrency(json_data.btc_traded));
@@ -995,24 +994,6 @@ function timeSince(elem) {
 	});
 }
 
-/*
-function timeUntil(elem) {
-	var miliseconds = $(elem).siblings('.time_until_seconds').val();
-	var date = new Date(parseInt(miliseconds));
-	
-	$(elem).countdown({ 
-	    until: date,
-	    significant: 1,
-	    onExpiry: pageRefresh,
-	    layout: '{o<}{on} {ol}{o>}{w<}{wn} {wl}{w>}{d<}{dn} {dl}{d>}{h<}{hn} {hl}{h>}{m<}{mn} {ml}{m>}{s<}{sn} {sl}{s>}'
-	});
-}
-*/
-
-function pageRefresh() {
-	location.reload(); 
-}
-
 function startFileSortable() {
 	
 }
@@ -1067,7 +1048,7 @@ function expireSession() {
 }
 
 function sortTable(elem_selector,col_num,desc){
-	var rows = $(elem_selector+' tr:not(:first,.double)').get();
+	var rows = $(elem_selector+' tr:not(:first)').get();
 	rows.sort(function(a, b) {
 		if ($(a).children('th').length > 0)
 			return -1;
@@ -1089,8 +1070,6 @@ function sortTable(elem_selector,col_num,desc){
 	
 	$.each(rows, function(index, row) {
 		$(elem_selector).append(row);
-		var id = $(row).attr('id');
-		$('#'+id+'.double').insertAfter(row);
 	});
 }
 
@@ -1139,35 +1118,24 @@ $(document).ready(function() {
 		});
 	}
 	
-	if ($('.time_until').length > 0) {
-		$('.time_until').each(function() {
-			timeUntil(this);
-		});
-	}
-	
 	$('#language_selector').bind("keyup change", function(){
-		var lang = $(this).val();
-		var url = $('#url_'+'index_php'+'_'+lang).val();
-		
-		window.location.href = url;
+		window.location.href = 'index.php?lang='+$(this).val();
 	});
 	
 	$('#currency_selector').bind("keyup change", function(){
-		var lang = $('#language_selector').val();
-		var url = $('#url_'+'index_php'+'_'+lang).val();
-		window.location.href = url+'?currency='+$(this).val();
+		window.location.href = 'index.php?currency='+$(this).val();
 	});
 	
 	$('#fee_currency').bind("keyup change", function(){
-		var lang = $('#language_selector').val();
-		var url = $('#url_'+'fee-schedule_php'+'_'+lang).val();
-		window.location.href = url+'?currency='+$(this).val();
+		window.location.href = 'fee-schedule.php?currency='+$(this).val();
+	});
+	
+	$('#language_selector').bind("keyup change", function(){
+		window.location.href = 'index.php?lang='+$(this).val();
 	});
 	
 	$('#ob_currency').bind("keyup change", function(){
-		var lang = $('#language_selector').val();
-		var url = $('#url_'+'order-book_php'+'_'+lang).val();
-		window.location.href = url+'?currency='+$(this).val();
+		window.location.href = 'order-book.php?currency='+$(this).val();
 	});
 	
 	if ($("#transactions_timestamp").length > 0) {
@@ -1190,11 +1158,6 @@ $(document).ready(function() {
 		return true;
 	});
 	
-
-	$('.popup .close').click(function() {
-		$(this).parents('.popup').fadeOut(400);
-	});
-
 	var first_text = $('input:text').first();
 	if (first_text.length > 0) {
 		if ($(first_text).val() == '0')
@@ -1213,6 +1176,5 @@ $(document).ready(function() {
 	switchAccount1();
 	//expireSession();
 	updateTransactionsList();
-	//timeUntil();
 	blink();
 });

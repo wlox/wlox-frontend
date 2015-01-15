@@ -1,15 +1,15 @@
 <?php
 
-include '../lib/common.php';
+include '../cfg/cfg.php';
 
 $page_title = Lang::string('login-forgot');
-$email1 = (!empty($_REQUEST['forgot']['email'])) ? preg_replace("/[^0-9a-zA-Z@\.\!#\$%\&\*+_\~\?\-]/", "",$_REQUEST['forgot']['email']) : false;
+$email1 = ereg_replace("[^0-9a-zA-Z@\.\!#\$%\&\*+_\~\?\-]", "",$_REQUEST['forgot']['email']);
 
-if (!empty($_REQUEST['forgot']) && $email1 && $_SESSION["forgot_uniq"] == $_REQUEST['uniq']) {
+if ($_REQUEST['forgot'] && $email1 && $_SESSION["forgot_uniq"] == $_REQUEST['uniq']) {
 	include_once 'securimage/securimage.php';
 	$securimage = new Securimage();
 
-	if (!empty($_REQUEST['forgot']['captcha']) && $securimage->check($_REQUEST['forgot']['captcha'])) {
+	if ($securimage->check($_REQUEST['forgot']['captcha'])) {
 		API::add('User','resetUser',array($email1));
 		$query = API::send();
 
@@ -17,7 +17,7 @@ if (!empty($_REQUEST['forgot']) && $email1 && $_SESSION["forgot_uniq"] == $_REQU
 		Messages::add(Lang::string('login-password-sent-message'));
 	}
 	else {
-		Errors::add(Lang::string('login-capcha-error'));
+		Errors::add(Lang::string($CFG->capcha_error));
 	}
 }
 
@@ -27,7 +27,7 @@ include 'includes/head.php';
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= Lang::string('login-forgot') ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="forgot.php"><?= Lang::string('login-forgot') ?></a></div>
+        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="forgot.php"><?= Lang::string('login-forgot') ?></a></div>
 	</div>
 </div>
 <div class="fresh_projects login_bg">

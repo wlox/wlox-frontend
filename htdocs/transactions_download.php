@@ -1,5 +1,5 @@
 <?php
-include '../lib/common.php';
+include '../cfg/cfg.php';
 
 if (User::$info['locked'] == 'Y' || User::$info['deactivated'] == 'Y')
 	Link::redirect('settings.php');

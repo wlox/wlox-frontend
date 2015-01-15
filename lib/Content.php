@@ -1,7 +1,7 @@
 <?php
 class Content{
 	
-	public static function getRecord($url){
+	function getRecord($url){
 		global $CFG;
 		
 		if(empty($url))

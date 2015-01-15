@@ -6,7 +6,7 @@
 #trueHeader #logo{
 	float:left;
 	display:block;
-	width: 186px;
+	width:100%;
 	height:34px;
 	margin-top:20px;
 	text-indent:-999em;
@@ -18,7 +18,6 @@
 .text p{margin-bottom: 10px;}
 .text1{font-size: 16px;line-height: 28px;}
 .text1 p{margin-bottom: 28px;font-size: 16px;line-height: 28px;}
-
 .text2{font-size: 16px;line-height: 28px;}
 .text2 p{margin-bottom:18px;font-size: 16px;line-height: 28px;}
 .text ul{margin-left: 20px;}
@@ -35,7 +34,6 @@
 .text1 ul li span { font-style:normal;font-weight:normal;color:#727272; }
 .text1 ul li span em { display:block; }
 .text1 p s{border-radius: 3px;color: #FFFFFF;padding: 2px 5px;background: none repeat scroll 0 0 #AAAAAA;text-decoration:none;}
-
 .text2 pre{margin-bottom:18px !important;}
 .text2 h2{margin-top:40px;}
 .text2 ul li strong {color:#128FA5; }
@@ -45,11 +43,6 @@
 .text.dotted{border: 3px dashed #FF4949;padding: 10px 15px;margin-bottom: 15px;	}
 .price-green{color:#0DD84D !important;}
 .price-red{color:#FF5151 !important;}
-
-.mobilebanner{background:url(../images/bg1.jpg) no-repeat left bottom !important;display:none;padding: 20px 0px;}
-.mobilebanner h1{color: #fff;font-family: "Open Sans",sans;font-size:45px;font-weight: bold;letter-spacing: 0;margin: 0 10px 0px 10px;padding: 0;text-shadow: none;text-transform: uppercase;}
-.mobilebanner .line{background: url("../../../../images/opacity-line.png") repeat-x scroll left top rgba(0, 0, 0, 0);height: 1px;}
-.mobilebanner .text{color: #fff;font-size: 15px;margin: 15px 10px 20px 10px;}
 
 /*------------------*/
 /*	SITE STRUCTURE
@@ -125,11 +118,6 @@
 	background-color: #f9f9f9;
 	color: #333;
 }
-
-#access .menu .stickylogo {
-	display:none;
-}
-
 #access .menu ul {
 	margin: 0px;
 	list-style-type: none;
@@ -326,6 +314,7 @@ ul.tci_list {
 }
 
 a.button_slider {
+	background-color: #444444;
 	float: left;
 	padding: 13px 30px;
 	margin: 0px 0px 0px 0px;
@@ -416,24 +405,7 @@ a.button_slider:hover {
 	color: #fff;
 	background-color: #454545;
 }
-.punch_text .time_until{
-	font-weight: bold;
-}
-.starting_in{
-	font-size: 25px;
-    padding: 10px 0;
-    margin-bottom: 22px;}
-.starting_in.rank{
-	font-size:20px;
-}
-.sim{font-size: 12px;}
-.starting_in.rank small{font-size: 12px;}
-.starting_in i{color:#00BDBD;display:inline-block;position:relative;top:8px;}
-.starting_in .time_until, .starting_in .prize{
-    padding: 5px 10px;
-    border-radius: 3px;
-	border: 1px solid #666666;}
-.one_third .starting_in{font-size: 14px; }
+
 /* punch text 02 */
 .punch_text02 {
 	float: left;
@@ -3277,11 +3249,7 @@ p.error {
 	border: none;
 }
 .info strong, .error strong, .notice strong, .success strong {
-	
-}
-.info a, .error a, .notice a, .success a {
-	font-weight:bold;
-	text-decoration: underline;
+	font-size: 16px;
 }
 .message-box-wrap {
 	border: 0px solid #fff;
@@ -3292,25 +3260,21 @@ p.error {
 	border-color: #c6e3ff;
 	background-color: #e6f3ff;
 }
-.info a{color: #4a84bc;}
 .error {
 	color: #bd6767;
 	border-color: #f1bdbd;
 	background-color: #ffdddd;
 }
-.error a{color: #bd6767;}
 .notice {
 	color: #a79a30;
 	border-color: #d7d099;
 	background-color: #f6f2d2;
 }
-.notice a{color: #a79a30;}
 .success {
 	color: #1ea133;
 	border-color: #a9ecb4;
 	background-color: #dffbe4;
 }
-.success a{color:#1ea133;}
 .close-but {
 	width: 10px;
 	height: 10px;
@@ -3595,12 +3559,6 @@ h3 .highlight{
 .trades td.api-label{text-decoration: underline;color:#727272;font-weight: 700;}
 .trades td.api-label.first{color:#FFF;background-color:#aaaaaa;}
 .trades tr.blink td{background-color:#A2EEEE;}
-
-.competition{font-size: 18px;}
-.competition th{padding:15px;}
-.competition td{padding:15px;}
-
-
 ul.list_empty {
 	float: left;
 	padding: 0px;
@@ -4026,10 +3984,6 @@ ul.list_empty.form_buttons {
 	padding: 15px 20px 40px 20px;
 	text-align: center;
 }
-.pricing-text-list .bigger{
-	font-size:30px;
-}
-
 
 
 /* testimonials */
@@ -4076,12 +4030,6 @@ ul.list_empty.form_buttons {
     display: block;
     font-size: 28px !important;
     margin: 7px 0 0;
-}
-.section_label .left b{
-	color: #FFF;
-    font-weight: 900;
-    margin-top: -5px;
-    display: block;
 }
 .section_label .right{
 	float: left;
@@ -4401,5 +4349,4 @@ a.knowmore_but:hover {
 	z-index: 999;
 }
 
-.morestuff{color: #FFF;font-weight: bold;}
 

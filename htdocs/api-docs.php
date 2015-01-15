@@ -1,5 +1,5 @@
 <?php
-include '../lib/common.php';
+include '../cfg/cfg.php';
 
 API::add('Content','getRecord',array('api-docs'));
 $query = API::send();
@@ -36,7 +36,7 @@ $code['api_sign_javascript'] = '// Javascript Example
 // ...and http://crypto-js.googlecode.com/svn/tags/3.0.2/build/components/enc-base64-min.js
 
 var hash = CryptoJS.HmacSHA256(nonce + user_id + api_key, api_secret);
-var hashInBase64 = CryptoJS.enc.Hex.stringify(hash);
+var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
 document.write(hashInBase64);
 ';
 
@@ -46,11 +46,12 @@ $signature = hash_hmac(\'sha256\', $nonce.$user_id.$api_key, $api_secret);';
 $code['api_sign_python'] = '# Python Example
 import hashlib
 import hmac
+import base64
 
 message = bytes(nonce + user_id + api_key).encode(\'utf-8\')
 secret = bytes(api_secrets).encode(\'utf-8\')
 
-signature = hmac.new(secret, message, digestmod=hashlib.sha256).hexdigest()';
+signature = base64.b64encode(hmac.new(secret, message, digestmod=hashlib.sha256).digest())';
 
 $code['api_sign_c#'] = '// C# Example
 using System.Security.Cryptography;
@@ -68,9 +69,7 @@ namespace Test
       using (var hmacsha256 = new HMACSHA256(keyByte))
       {
         byte[] hashmessage = hmacsha256.ComputeHash(messageBytes);
-		var signature = BitConverter.ToString(hashmessage);
-		signature = signature.Replace("-", "");
-        return signature;
+        return Convert.ToBase64String(hashmessage);
       }
     }
   }
@@ -81,7 +80,7 @@ $code['api_sign_java'] = '/* Java Example */
 /* Dependent on Apache Commons Codec to encode in base64. */
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.binary.Base64;
 
 public class ApiSecurityExample {
   public static void main(String[] args) {
@@ -93,7 +92,7 @@ public class ApiSecurityExample {
      SecretKeySpec secret_key = new SecretKeySpec(secret.getBytes(), "HmacSHA256");
      sha256_HMAC.init(secret_key);
 
-     String hash = Hex.encodeHexString(sha256_HMAC.doFinal(message.getBytes()));
+     String hash = Base64.encodeBase64String(sha256_HMAC.doFinal(message.getBytes()));
      System.out.println(hash);
     }
     catch (Exception e){

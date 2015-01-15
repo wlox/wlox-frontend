@@ -1,14 +1,14 @@
 <?php
-include '../lib/common.php';
+include '../cfg/cfg.php';
 
-if (!empty($_REQUEST['contact'])) {
+if ($_REQUEST['contact']) {
 	$_REQUEST['contact']['first_name'] = preg_replace("/[^\da-z ]/i", "",$_REQUEST['contact']['first_name']);
 	$_REQUEST['contact']['last_name'] = preg_replace("/[^\da-z ]/i", "",$_REQUEST['contact']['last_name']);
 	$_REQUEST['contact']['company'] = preg_replace("/[^\da-z ]/i", "",$_REQUEST['contact']['company']);
 	$_REQUEST['contact']['email'] = preg_replace("/[^0-9a-zA-Z@\.\!#\$%\&\*+_\~\?\-]/", "",$_REQUEST['contact']['email']);
 	$_REQUEST['contact']['country'] = preg_replace("/[^0-9]/", "",$_REQUEST['contact']['country']);
 	$_REQUEST['contact']['subject'] = preg_replace("/[^\da-z ]/i", "",$_REQUEST['contact']['subject']);
-	$_REQUEST['is_caco'] = (empty($_REQUEST['is_caco'])) ? array('contact'=>1) : $_REQUEST['is_caco'];
+	$_REQUEST['is_caco'] = (!$_REQUEST['is_caco']) ? array('contact'=>1) : $_REQUEST['is_caco'];
 }
 
 API::add('Content','getRecord',array('contact'));
@@ -21,13 +21,13 @@ $content1 = $query['Content']['getRecord']['results'][1];
 $page_title = $content['title'];
 $countries = $query['User']['getCountries']['results'][0];
 
-$contact = new Form('contact',Lang::url('contact.php'),false,'form2');
+$contact = new Form('contact',false,false,'form2');
 $contact->verify();
 
-if (!empty($_REQUEST['contact']) && $_SESSION["contact_uniq"] != $_REQUEST['contact']['uniq'])
+if ($_REQUEST['contact'] && $_SESSION["contact_uniq"] != $_REQUEST['contact']['uniq'])
 	$contact->errors[] = 'Page expired.';
 
-if (!empty($_REQUEST['contact']) && is_array($contact->errors)) {
+if ($_REQUEST['contact'] && is_array($contact->errors)) {
 	$errors = array();
 	foreach ($contact->errors as $key => $error) {
 		if (stristr($error,'login-required-error')) {
@@ -42,7 +42,7 @@ if (!empty($_REQUEST['contact']) && is_array($contact->errors)) {
 	}
 	Errors::$errors = $errors;
 }
-elseif (!empty($_REQUEST['contact']) && !is_array($contact->errors)) {
+elseif ($_REQUEST['contact'] && !is_array($contact->errors)) {
 	API::add('SiteEmail','contactForm',array($contact->info));
 	$query = API::send();
 	
@@ -57,10 +57,11 @@ include 'includes/head.php';
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= $page_title ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="<?= Lang::url('contact.php') ?>"><?= Lang::string('contact') ?></a></div>
+        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="contact.php"><?= Lang::string('contact') ?></a></div>
 	</div>
 </div>
 <div class="container">
+	<? include 'includes/sidebar_topics.php'; ?>
 	<div class="content_right">
     	<div class="content_fullwidth">
     		<div class="text"><?= $content['content'] ?></div>
@@ -93,7 +94,6 @@ include 'includes/head.php';
 		   	</div>     
 		</div>
     </div>
-    <? include 'includes/sidebar_topics.php'; ?>
 	<div class="clearfix mar_top8"></div>
 </div>
 <? include 'includes/foot.php'; ?>

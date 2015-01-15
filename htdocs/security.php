@@ -1,5 +1,5 @@
 <?php
-include '../lib/common.php';
+include '../cfg/cfg.php';
 
 if (User::$info['locked'] == 'Y' || User::$info['deactivated'] == 'Y')
 	Link::redirect('settings.php');
@@ -8,37 +8,28 @@ elseif (User::$awaiting_token)
 elseif (!User::isLoggedIn())
 	Link::redirect('login.php');
 
-$step1 = false;
-$step2 = false;
-$step3 = false;
-$step4 = false;
-
-$authcode1 = (!empty($_REQUEST['authcode'])) ? $_REQUEST['authcode'] : false;
-if ($authcode1 && empty($_REQUEST['step'])) {
+$authcode1 = $_REQUEST['authcode'];
+if ($authcode1 && !$_REQUEST['step']) {
 	API::add('User','getSettingsChangeRequest',array(urlencode($authcode1)));
 	$query = API::send();
 	$response = unserialize(base64_decode($query['User']['getSettingsChangeRequest']['results'][0]));
-	
-	if (User::$info['using_sms'] == 'Y')
-		User::sendSMS();
-	
 	if ($response) {
-		if (!empty($response['authy']))
+		if ($response['authy'])
 			$step1 = true;
-		elseif (!empty($response['google']))
+		elseif ($response['google'])
 			$step3 = true;
 	}
 	else
 		Errors::add(Lang::string('settings-request-expired'));
 }
 
-$cell1 = (!empty($_REQUEST['cell'])) ? preg_replace("/[^0-9]/", "",$_REQUEST['cell']) : false;
-$country_code1 = (!empty($_REQUEST['country_code'])) ? preg_replace("/[^0-9]/", "",$_REQUEST['country_code']) : false;
-$token1 = (!empty($_REQUEST['token'])) ? preg_replace("/[^0-9]/", "",$_REQUEST['token']) : false;
-$remove = !empty($_REQUEST['remove']);
+$cell1 = ereg_replace("[^0-9]", "",$_REQUEST['cell']);
+$country_code1 = ereg_replace("[^0-9]", "",$_REQUEST['country_code']);
+$token1 = ereg_replace("[^0-9]", "",$_REQUEST['token']);
+$remove = $_REQUEST['remove'];
 
 if ($remove) {
-	if (empty($_REQUEST['submitted']) || (!empty($_REQUEST['method']) && $_REQUEST['method'] == 'sms')) {
+	if (!$_REQUEST['submitted'] || $_REQUEST['method'] == 'sms') {
 		if (User::$info['using_sms'] == 'Y') {
 			if (User::sendSMS()) {
 				$sent_sms = true;
@@ -74,7 +65,7 @@ if ($remove) {
 	}
 }
 
-if (!empty($_REQUEST['step']) && $_REQUEST['step'] == 1) {
+if ($_REQUEST['step'] == 1) {
 	if (!($cell1 > 0) && $_REQUEST['method'] != 'google')
 		Errors::add(Lang::string('security-no-cell'));
 	if (!($country_code1 > 0) && $_REQUEST['method'] != 'google')
@@ -90,14 +81,15 @@ if (!empty($_REQUEST['step']) && $_REQUEST['step'] == 1) {
 			if (!$response || !is_array($response))
 				Errors::merge(Lang::string('security-com-error'));
 			
-			if ($response['success'] == false)
+			if ($response['success'] == 'false')
 				Errors::merge($response['errors']);
 		}
 		
 		if (!is_array(Errors::$errors)) {
 			if ($_REQUEST['method'] != 'google') {
 				if ($_REQUEST['method'] == 'sms') {
-					$using_sms = 'Y';
+					if (User::sendSMS($authy_id))
+						$using_sms = 'Y';
 				}
 				else
 					$using_sms = 'N';
@@ -126,7 +118,7 @@ if (!empty($_REQUEST['step']) && $_REQUEST['step'] == 1) {
 		}
 	}
 }
-elseif (!empty($_REQUEST['step']) && $_REQUEST['step'] == 2) {
+elseif ($_REQUEST['step'] == 2) {
 	if (!($token1 > 0))
 		Errors::add(Lang::string('security-no-token'));
 	
@@ -136,17 +128,15 @@ elseif (!empty($_REQUEST['step']) && $_REQUEST['step'] == 2) {
 		API::add('User','verifiedAuthy');
 		$query = API::send();
 	
-		if (!empty($query['error'])) {
-			if ($query['error'] == 'security-com-error')
-				Errors::add(Lang::string('security-com-error'));
+		if ($query['error'] == 'security-com-error')
+			Errors::add(Lang::string('security-com-error'));
+	
+		if ($query['error'] == 'authy-errors')
+			Errors::merge($query['authy_errors']);
 		
-			if ($query['error'] == 'authy-errors')
-				Errors::merge($query['authy_errors']);
-			
-			if ($query['error'] == 'request-expired')
-				Errors::add(Lang::string('settings-request-expired'));
-		}
-		
+		if ($query['error'] == 'request-expired')
+			Errors::add(Lang::string('settings-request-expired'));
+	
 		if (!is_array(Errors::$errors)) {
 			Messages::add(Lang::string('security-success-message'));
 			
@@ -158,7 +148,7 @@ elseif (!empty($_REQUEST['step']) && $_REQUEST['step'] == 2) {
 	else
 		$step1 = true;
 }
-elseif (!empty($_REQUEST['step']) && $_REQUEST['step'] == 3) {
+elseif ($_REQUEST['step'] == 3) {
 	if (!($token1 > 0))
 		Errors::add(Lang::string('security-no-token'));
 
@@ -186,9 +176,9 @@ elseif (!empty($_REQUEST['step']) && $_REQUEST['step'] == 3) {
 		$step3 = true;
 }
 
-if (!empty($_REQUEST['notice']) && $_REQUEST['notice'] == 'email')
+if ($_REQUEST['notice'] == 'email')
 	$notice = Lang::string('settings-change-notice');
-elseif (!empty($_REQUEST['message']) && $_REQUEST['message'] == 'security-disabled-message')
+elseif ($_REQUEST['message'] == 'security-disabled-message')
 	Messages::add(Lang::string('security-disabled-message'));
 
 if (User::$info['verified_authy'] == 'Y' || $step2)
@@ -206,7 +196,7 @@ else
 
 $query = API::send();
 $content = $query['Content']['getRecord']['results'][0];
-$secret = (!empty($query['User']['getGoogleSecret'])) ? $query['User']['getGoogleSecret']['results'][0] : false;
+$secret = $query['User']['getGoogleSecret']['results'][0];
 $page_title = Lang::string('security');
 
 include 'includes/head.php';
@@ -214,10 +204,11 @@ include 'includes/head.php';
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= $page_title ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="account.php"><?= Lang::string('account') ?></a> <i>/</i> <a href="security.php"><?= $page_title ?></a></div>
+        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="account.php"><?= Lang::string('account') ?></a> <i>/</i> <a href="security.php"><?= $page_title ?></a></div>
 	</div>
 </div>
 <div class="container">
+	<? include 'includes/sidebar_account.php'; ?>
 	<div class="content_right">
 		<div class="testimonials-4">
 		<? if ($remove) { ?>
@@ -354,7 +345,7 @@ include 'includes/head.php';
 	            </div>
             </form>
 		<? } else { ?>
-			<?= (!empty($notice)) ? '<div class="notice"><div class="message-box-wrap">'.$notice.'</div></div>' : '' ?>
+			<?= ($notice) ? '<div class="notice"><div class="message-box-wrap">'.$notice.'</div></div>' : '' ?>
 			<? Errors::display(); ?>
 			<? Messages::display(); ?>
 			<h2><?= $content['title'] ?></h2>
@@ -380,7 +371,7 @@ include 'includes/head.php';
 								<select name="method" id="method">
 									<option <?= ($_REQUEST['method'] == 'google') ? 'selected="selected"' : false ?> value="google">Google Authenticator</option>
 									<option <?= ($_REQUEST['method'] == 'authy') ? 'selected="selected"' : false ?> value="authy">Authy</option>
-									<option <?= ($_REQUEST['method'] == 'sms') ? 'selected="selected"' : false ?> value="sms">SMS</option>
+									<option <?= ($_REQUEST['method'] == 'SMS') ? 'selected="selected"' : false ?> value="SMS">SMS</option>
 								</select>
 								<div class="clear"></div>
 							</div>
@@ -415,6 +406,5 @@ include 'includes/head.php';
 		</div>
 		<div class="mar_top8"></div>
 	</div>
-	<? include 'includes/sidebar_account.php'; ?>
 </div>
 <? include 'includes/foot.php'; ?>

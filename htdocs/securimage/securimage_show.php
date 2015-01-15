@@ -1,7 +1,7 @@
 <?php
 
 chdir('..');
-include '../lib/common.php';
+include '../cfg/cfg.php';
 chdir('securimage');
 include 'securimage.php';
 $img = new Securimage();

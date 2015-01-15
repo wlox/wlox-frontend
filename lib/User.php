@@ -3,7 +3,7 @@ class User {
 	private static $logged_in;
 	public static $awaiting_token, $info;
 	
-	static function logIn($user,$pass) {
+	function logIn($user,$pass) {
 		global $CFG;
 		
 		$ch = curl_init($CFG->auth_login_url);
@@ -16,6 +16,7 @@ class User {
 		curl_close($ch);
 		
 		if (!$result || $result['error']) {
+			Errors::add($CFG->login_invalid);
 			return false;
 		}
 		elseif ($result['message']) {
@@ -26,16 +27,15 @@ class User {
 		}
 	}
 	
-	static function verifyLogin($query) {
+	function verifyLogin($query) {
 		global $CFG;
 
-		if (empty($_SESSION['session_id']))
+		if (!($_SESSION['session_id']) > 0)
 			return false;
 		
-		if (isset($query['User']['verifyLogin']['results'][0]))
-			$result = $query['User']['verifyLogin']['results'][0];
-
-		if (!empty($result['error']) || !empty($query['error']) || !isset($result)) {
+		$result = $query['User']['verifyLogin']['results'][0];
+		if ($result['error'] || $query['error'] || !$result) {
+			Errors::add($CFG->login_invalid);
 			session_destroy();
 			$_SESSION = array();
 			return false;
@@ -53,7 +53,7 @@ class User {
 		}
 	}
 	
-	static function verifyToken($token,$dont_ask=false) {
+	function verifyToken($token,$dont_ask=false) {
 		global $CFG;
 		
 		if (!self::$awaiting_token)
@@ -98,11 +98,11 @@ class User {
 		}
 	}
 	
-	static function isLoggedIn() {
+	function isLoggedIn() {
 		return self::$logged_in;
 	}
 	
-	static function logOut($logout) {
+	function logOut($logout) {
 		if ($logout) {
 			API::add('User','logOut',array($_SESSION['session_id']));
 			API::send();
@@ -115,7 +115,7 @@ class User {
 		}
 	}
 	
-	static function updateNonce() {
+	function updateNonce() {
 		if (!self::$logged_in)
 			return false;
 		
@@ -123,7 +123,7 @@ class User {
 		return true;
 	}
 	
-	static function sendSMS($authy_id=false) {
+	function sendSMS($authy_id=false) {
 		global $CFG;
 		
 		API::add('User','sendSMS',array($authy_id));
@@ -132,7 +132,7 @@ class User {
 		
 		if (!$response || !is_array($response))
 			Errors::add(Lang::string('security-com-error'));
-		elseif ($response['success'] == false)
+		elseif ($response['success'] === false)
 			Errors::merge($response['errors']);
 		else {
 			return true;

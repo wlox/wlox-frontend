@@ -1,5 +1,5 @@
 <?php
-include '../lib/common.php';
+include '../cfg/cfg.php';
 
 if (User::$info['locked'] == 'Y' || User::$info['deactivated'] == 'Y')
 	Link::redirect('settings.php');
@@ -8,22 +8,21 @@ elseif (User::$awaiting_token)
 elseif (!User::isLoggedIn())
 	Link::redirect('login.php');
 
-if (!empty($_REQUEST['currency']))
+if ($_REQUEST['currency'])
 	$_SESSION['currency'] = preg_replace("/[^a-z]/", "",$_REQUEST['currency']);
-elseif (empty($_SESSION['currency']))
+elseif (!$_SESSION['currency'])
 	$_SESSION['currency'] = (User::$info['default_currency_abbr']) ? strtolower(User::$info['default_currency_abbr']) : 'usd';
 
-if (!empty($_REQUEST['buy']) || !empty($_REQUEST['sell'])) {
-	if (empty($_SESSION["buysell_uniq"]) || empty($_REQUEST['uniq']) || !in_array($_REQUEST['uniq'],$_SESSION["buysell_uniq"]))
+if ($_REQUEST['buy'] || $_REQUEST['sell']) {
+	if (!in_array($_REQUEST['uniq'],$_SESSION["buysell_uniq"]))
 		Errors::add('Page expired.');
 }
 
-$ask_confirm = false;
 $currency1 = preg_replace("/[^a-z]/", "",$_SESSION['currency']);
 $currency_info = $CFG->currencies[strtoupper($currency1)];
-$confirmed = (!empty($_REQUEST['confirmed'])) ? $_REQUEST['confirmed'] : false;
-$cancel = (!empty($_REQUEST['cancel'])) ? $_REQUEST['cancel'] : false;
-$bypass = (!empty($_REQUEST['bypass'])) ? $_REQUEST['bypass'] : false;
+$confirmed = $_REQUEST['confirmed'];
+$cancel = $_REQUEST['cancel'];
+$bypass = $_REQUEST['bypass'];
 $buy_market_price1 = 0;
 $sell_market_price1 = 0;
 $buy_limit = 1;
@@ -38,11 +37,11 @@ API::add('Orders','get',array(false,false,10,$currency1,false,false,false,false,
 API::add('BankAccounts','get',array($currency_info['id']));
 API::add('Status','get');
 
-if (!empty($_REQUEST['buy']) && empty($_REQUEST['buy_market_price'])) {
+if ($_REQUEST['buy'] && !$_REQUEST['buy_market_price']) {
 	API::add('Orders','checkOutbidSelf',array($_REQUEST['buy_price'],$currency1));
 	API::add('Orders','checkOutbidStops',array($_REQUEST['buy_price'],$currency1));
 }
-elseif (!empty($_REQUEST['sell']) && empty($_REQUEST['sell_market_price'])) {
+elseif ($_REQUEST['sell'] && !$_REQUEST['sell_market_price']) {
 	API::add('Orders','checkOutbidSelf',array($_REQUEST['sell_price'],$currency1,1));
 	API::add('Orders','checkStopsOverBid',array($_REQUEST['sell_stop_price'],$currency1));
 }
@@ -55,24 +54,24 @@ $current_bid = $query['Orders']['getCurrentBid']['results'][0];
 $current_ask =  $query['Orders']['getCurrentAsk']['results'][0];
 $bids = $query['Orders']['get']['results'][0];
 $asks = $query['Orders']['get']['results'][1];
-$self_orders = (!empty($query['Orders']['checkOutbidSelf'])) ? $query['Orders']['checkOutbidSelf']['results'][0][0]['price'] : false;
-$self_stops =(!empty($query['Orders']['checkOutbidStops'])) ? $query['Orders']['checkOutbidStops']['results'][0][0]['price'] : false;
-$self_limits = (!empty($query['Orders']['checkStopsOverBid'])) ? $query['Orders']['checkStopsOverBid']['results'][0][0]['price'] : false;
-$self_orders_currency = (!empty($query['Orders']['checkOutbidSelf'])) ? $query['Orders']['checkOutbidSelf']['results'][0][0]['currency'] : false;
-$self_stops_currency = (!empty($query['Orders']['checkOutbidStops'])) ? $query['Orders']['checkOutbidStops']['results'][0][0]['currency'] : false;
-$self_limits_currency = (!empty($query['Orders']['checkStopsOverBid'])) ? $query['Orders']['checkStopsOverBid']['results'][0][0]['currency'] : false;
+$self_orders = $query['Orders']['checkOutbidSelf']['results'][0][0]['price'];
+$self_stops = $query['Orders']['checkOutbidStops']['results'][0][0]['price'];
+$self_limits = $query['Orders']['checkStopsOverBid']['results'][0][0]['price'];
+$self_orders_currency = $query['Orders']['checkOutbidSelf']['results'][0][0]['currency'];
+$self_stops_currency = $query['Orders']['checkOutbidStops']['results'][0][0]['currency'];
+$self_limits_currency = $query['Orders']['checkStopsOverBid']['results'][0][0]['currency'];
 $status = $query['Status']['get']['results'][0];
-$user_fee_bid = (!empty($_REQUEST['buy']) && (($_REQUEST['buy_amount'] > 0 && $_REQUEST['buy_price'] >= $asks[0]['btc_price']) || $_REQUEST['buy_market_price'] || !$_REQUEST['buy_amount'])) ? $query['FeeSchedule']['getRecord']['results'][0]['fee'] : $query['FeeSchedule']['getRecord']['results'][0]['fee1'];
-$user_fee_ask = (!empty($_REQUEST['sell']) && (($_REQUEST['sell_amount'] > 0 && $_REQUEST['sell_price'] <= $bids[0]['btc_price']) || $_REQUEST['sell_market_price'] || !$_REQUEST['sell_amount'])) ? $query['FeeSchedule']['getRecord']['results'][0]['fee'] : $query['FeeSchedule']['getRecord']['results'][0]['fee1'];
+$user_fee_bid = (($_REQUEST['buy_amount'] > 0 && $_REQUEST['buy_price'] >= $asks[0]['btc_price']) || $_REQUEST['buy_market_price'] || !$_REQUEST['buy_amount']) ? $query['FeeSchedule']['getRecord']['results'][0]['fee'] : $query['FeeSchedule']['getRecord']['results'][0]['fee1'];
+$user_fee_ask = (($_REQUEST['sell_amount'] > 0 && $_REQUEST['sell_price'] <= $bids[0]['btc_price']) || $_REQUEST['sell_market_price'] || !$_REQUEST['sell_amount']) ? $query['FeeSchedule']['getRecord']['results'][0]['fee'] : $query['FeeSchedule']['getRecord']['results'][0]['fee1'];
 
-$buy_amount1 = (!empty($_REQUEST['buy_amount']) && $_REQUEST['buy_amount'] > 0) ? preg_replace("/[^0-9.]/", "",$_REQUEST['buy_amount']) : 0;
-$buy_price1 = (!empty($_REQUEST['buy_price']) && $_REQUEST['buy_price'] > 0) ? preg_replace("/[^0-9.]/", "",$_REQUEST['buy_price']) : $current_ask;
+$buy_amount1 = ($_REQUEST['buy_amount'] > 0) ? preg_replace("/[^0-9.]/", "",$_REQUEST['buy_amount']) : 0;
+$buy_price1 = ($_REQUEST['buy_price'] > 0) ? preg_replace("/[^0-9.]/", "",$_REQUEST['buy_price']) : $current_ask;
 $buy_subtotal1 = $buy_amount1 * $buy_price1;
 $buy_fee_amount1 = ($user_fee_bid * 0.01) * $buy_subtotal1;
 $buy_total1 = $buy_subtotal1 + $buy_fee_amount1;
 
-$sell_amount1 = (!empty($_REQUEST['sell_amount']) && $_REQUEST['sell_amount'] > 0) ? preg_replace("/[^0-9.]/", "",$_REQUEST['sell_amount']) : 0;
-$sell_price1 = (!empty($_REQUEST['sell_price']) && $_REQUEST['sell_price'] > 0) ? preg_replace("/[^0-9.]/", "",$_REQUEST['sell_price']) : $current_bid;
+$sell_amount1 = ($_REQUEST['sell_amount'] > 0) ? preg_replace("/[^0-9.]/", "",$_REQUEST['sell_amount']) : 0;
+$sell_price1 = ($_REQUEST['sell_price'] > 0) ? preg_replace("/[^0-9.]/", "",$_REQUEST['sell_price']) : $current_bid;
 $sell_subtotal1 = $sell_amount1 * $sell_price1;
 $sell_fee_amount1 = ($user_fee_ask * 0.01) * $sell_subtotal1;
 $sell_total1 = $sell_subtotal1 - $sell_fee_amount1;
@@ -80,7 +79,7 @@ $sell_total1 = $sell_subtotal1 - $sell_fee_amount1;
 if ($status['trading_status'] == 'suspended')
 	Errors::add(Lang::string('buy-trading-disabled'));
 
-if (!empty($_REQUEST['buy'])) {
+if ($_REQUEST['buy']) {
 	$buy_market_price1 = preg_replace("/[^0-9]/", "",$_REQUEST['buy_market_price']);
 	$buy_price1 = ($buy_market_price1) ? $current_ask : $buy_price1;
 	$buy_stop = preg_replace("/[^0-9]/", "",$_REQUEST['buy_stop']);
@@ -145,7 +144,7 @@ if (!empty($_REQUEST['buy'])) {
 	}
 }
 
-if (!empty($_REQUEST['sell'])) {
+if ($_REQUEST['sell']) {
 	$sell_market_price1 = preg_replace("/[^0-9]/", "",$_REQUEST['sell_market_price']);
 	$sell_price1 = ($sell_market_price1) ? $current_bid : $sell_price1;
 	$sell_stop = preg_replace("/[^0-9]/", "",$_REQUEST['sell_stop']);
@@ -230,10 +229,11 @@ if (!$bypass) {
 <div class="page_title">
 	<div class="container">
 		<div class="title"><h1><?= $page_title ?></h1></div>
-        <div class="pagenation">&nbsp;<a href="<?= Lang::url('index.php') ?>"><?= Lang::string('home') ?></a> <i>/</i> <a href="account.php"><?= Lang::string('account') ?></a> <i>/</i> <a href="buy-sell.php"><?= $page_title ?></a></div>
+        <div class="pagenation">&nbsp;<a href="index.php"><?= Lang::string('home') ?></a> <i>/</i> <a href="account.php"><?= Lang::string('account') ?></a> <i>/</i> <a href="buy-sell.php"><?= $page_title ?></a></div>
 	</div>
 </div>
 <div class="container">
+	<? include 'includes/sidebar_account.php'; ?>
 	<div class="content_right">
 		<? Errors::display(); ?>
 		<?= ($notice) ? '<div class="notice">'.$notice.'</div>' : '' ?>
@@ -278,17 +278,17 @@ if (!$bypass) {
 							</div>
 							<div class="param lessbottom">
 								<input class="checkbox" name="buy_market_price" id="buy_market_price" type="checkbox" value="1" <?= ($buy_market_price1 && !$buy_stop) ? 'checked="checked"' : '' ?> <?= (!$asks) ? 'readonly="readonly"' : '' ?> />
-								<label for="buy_market_price"><?= Lang::string('buy-market-price') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="help.php?url=solution/articles/1000023402-what-are-market-price"><i class="fa fa-question-circle"></i></a></label>
+								<label for="buy_market_price"><?= Lang::string('buy-market-price') ?> <a title="<?= Lang::string('buy-market-rates-info') ?>" href=""><i class="fa fa-question-circle"></i></a></label>
 								<div class="clear"></div>
 							</div>
 							<div class="param lessbottom">
 								<input class="checkbox" name="buy_limit" id="buy_limit" type="checkbox" value="1" <?= ($buy_limit && !$buy_market_price1) ? 'checked="checked"' : '' ?> />
-								<label for="buy_limit"><?= Lang::string('buy-limit') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="help.php?url=support/solutions/articles/1000101680-what-is-a-limit"><i class="fa fa-question-circle"></i></a></label>
+								<label for="buy_limit"><?= Lang::string('buy-limit') ?> <a title="<?= Lang::string('buy-market-rates-info') ?>" href=""><i class="fa fa-question-circle"></i></a></label>
 								<div class="clear"></div>
 							</div>
 							<div class="param lessbottom">
 								<input class="checkbox" name="buy_stop" id="buy_stop" type="checkbox" value="1" <?= ($buy_stop && !$buy_market_price1) ? 'checked="checked"' : '' ?> />
-								<label for="buy_stop"><?= Lang::string('buy-stop') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="help.php?url=support/solutions/articles/1000101669-what-is-a-stop"><i class="fa fa-question-circle"></i></a></label>
+								<label for="buy_stop"><?= Lang::string('buy-stop') ?> <a title="<?= Lang::string('buy-market-rates-info') ?>" href=""><i class="fa fa-question-circle"></i></a></label>
 								<div class="clear"></div>
 							</div>
 							<div id="buy_price_container" class="param" <?= (!$buy_limit && !$buy_market_price1) ? 'style="display:none;"' : '' ?>>
@@ -310,7 +310,7 @@ if (!$bypass) {
 								<div class="clear"></div>
 							</div>
 							<div class="calc">
-								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="<?= Lang::url('fee-schedule.php') ?>" target="_blank"><i class="fa fa-question-circle"></i></a></div>
+								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="fee-schedule.php"><i class="fa fa-question-circle"></i></a></div>
 								<div class="value"><span id="buy_user_fee"><?= $user_fee_bid ?></span>%</div>
 								<div class="clear"></div>
 							</div>
@@ -366,17 +366,17 @@ if (!$bypass) {
 							</div>
 							<div class="param lessbottom">
 								<input class="checkbox" name="sell_market_price" id="sell_market_price" type="checkbox" value="1" <?= ($sell_market_price1 && !$sell_stop) ? 'checked="checked"' : '' ?> <?= (!$bids) ? 'readonly="readonly"' : '' ?> />
-								<label for="sell_market_price"><?= Lang::string('sell-market-price') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="help.php?url=solution/articles/1000023402-what-are-market-price"><i class="fa fa-question-circle"></i></a></label>
+								<label for="sell_market_price"><?= Lang::string('sell-market-price') ?> <a title="<?= Lang::string('buy-market-rates-info') ?>" href=""><i class="fa fa-question-circle"></i></a></label>
 								<div class="clear"></div>
 							</div>
 							<div class="param lessbottom">
 								<input class="checkbox" name="sell_limit" id="sell_limit" type="checkbox" value="1" <?= ($sell_limit && !$sell_market_price1) ? 'checked="checked"' : '' ?> />
-								<label for="sell_stop"><?= Lang::string('buy-limit') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="help.php?url=support/solutions/articles/1000101680-what-is-a-limit"><i class="fa fa-question-circle"></i></a></label>
+								<label for="sell_stop"><?= Lang::string('buy-limit') ?> <a title="<?= Lang::string('buy-market-rates-info') ?>" href=""><i class="fa fa-question-circle"></i></a></label>
 								<div class="clear"></div>
 							</div>
 							<div class="param lessbottom">
 								<input class="checkbox" name="sell_stop" id="sell_stop" type="checkbox" value="1" <?= ($sell_stop && !$sell_market_price1) ? 'checked="checked"' : '' ?> />
-								<label for="sell_stop"><?= Lang::string('buy-stop') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="help.php?url=support/solutions/articles/1000101669-what-is-a-stop"><i class="fa fa-question-circle"></i></a></label>
+								<label for="sell_stop"><?= Lang::string('buy-stop') ?> <a title="<?= Lang::string('buy-market-rates-info') ?>" href=""><i class="fa fa-question-circle"></i></a></label>
 								<div class="clear"></div>
 							</div>
 							<div id="sell_price_container" class="param" <?= (!$sell_limit && !$sell_market_price1) ? 'style="display:none;"' : '' ?>>
@@ -398,7 +398,7 @@ if (!$bypass) {
 								<div class="clear"></div>
 							</div>
 							<div class="calc">
-								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="<?= Lang::url('fee-schedule.php') ?>" target="_blank"><i class="fa fa-question-circle"></i></a></div>
+								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="fee-schedule.php"><i class="fa fa-question-circle"></i></a></div>
 								<div class="value"><span id="sell_user_fee"><?= $user_fee_ask ?></span>%</div>
 								<div class="clear"></div>
 							</div>
@@ -453,7 +453,7 @@ if (!$bypass) {
 							<div class="mar_top1"></div>
 							<div class="param lessbottom">
 								<input disabled="disabled" class="checkbox" name="dummy" id="buy_market_price" type="checkbox" value="1" <?= ($buy_market_price1) ? 'checked="checked"' : '' ?> />
-								<label for="buy_market_price"><?= Lang::string('buy-market-price') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="help.php?url=solution/articles/1000023402-what-are-market-price"><i class="fa fa-question-circle"></i></a></label>
+								<label for="buy_market_price"><?= Lang::string('buy-market-price') ?> <a title="<?= Lang::string('buy-market-rates-info') ?>" href="help.php#market_sale"><i class="fa fa-question-circle"></i></a></label>
 								<input type="hidden" name="buy_market_price" value="<?= $buy_market_price1 ?>" />
 								<div class="clear"></div>
 							</div>
@@ -483,7 +483,7 @@ if (!$bypass) {
 								<div class="clear"></div>
 							</div>
 							<div class="calc">
-								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="<?= Lang::url('fee-schedule.php') ?>" target="_blank"><i class="fa fa-question-circle"></i></a></div>
+								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="fee-schedule.php"><i class="fa fa-question-circle"></i></a></div>
 								<div class="value"><span id="sell_user_fee"><?= $user_fee_bid ?></span>%</div>
 								<div class="clear"></div>
 							</div>
@@ -528,7 +528,7 @@ if (!$bypass) {
 							<div class="mar_top1"></div>
 							<div class="param lessbottom">
 								<input disabled="disabled" class="checkbox" name="dummy" id="sell_market_price" type="checkbox" value="1" <?= ($sell_market_price1) ? 'checked="checked"' : '' ?> />
-								<label for="sell_market_price"><?= Lang::string('sell-market-price') ?> <a target="_blank" title="<?= Lang::string('buy-market-rates-info') ?>" href="help.php?url=solution/articles/1000023402-what-are-market-price"><i class="fa fa-question-circle"></i></a></label>
+								<label for="sell_market_price"><?= Lang::string('sell-market-price') ?> <a title="<?= Lang::string('buy-market-rates-info') ?>" href="help.php#market_sale"><i class="fa fa-question-circle"></i></a></label>
 								<input type="hidden" name="sell_market_price" value="<?= $sell_market_price1 ?>" />
 								<div class="clear"></div>
 							</div>
@@ -558,7 +558,7 @@ if (!$bypass) {
 								<div class="clear"></div>
 							</div>
 							<div class="calc">
-								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="<?= Lang::url('fee-schedule.php') ?>" target="_blank"><i class="fa fa-question-circle"></i></a></div>
+								<div class="label"><?= Lang::string('buy-fee') ?> <a title="<?= Lang::string('account-view-fee-schedule') ?>" href="fee-schedule.php"><i class="fa fa-question-circle"></i></a></div>
 								<div class="value"><span id="sell_user_fee"><?= $user_fee_ask ?></span>%</div>
 								<div class="clear"></div>
 							</div>
@@ -647,7 +647,6 @@ if (!$bypass) {
 		</div>
 		<div class="mar_top5"></div>
 	</div>
-	<? include 'includes/sidebar_account.php'; ?>
 </div>
 <? include 'includes/foot.php'; ?>
 <? } ?>

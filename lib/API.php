@@ -2,53 +2,51 @@
 class API{
 	private static $commands,$nonce,$token,$settings_change_id,$request_id,$api_signature,$api_key,$api_update_nonce;
 	
-	static public function add($classname,$method,$arguments=false) {
+	function add($classname,$method,$arguments=false) {
 		API::$commands[$classname][][$method] = $arguments;
 	}
 	
-	static public function token($token) {
+	function token($token) {
 		API::$token = $token;
 	}
 	
-	static public function settingsChangeId($settings_change_id) {
+	function settingsChangeId($settings_change_id) {
 		API::$settings_change_id = $settings_change_id;
 	}
 	
-	static public function requestId($request_id) {
+	function requestId($request_id) {
 		API::$request_id = $request_id;
 	}
 	
-	static public function apiKey($api_key) {
+	function apiKey($api_key) {
 		API::$api_key = $api_key;
 	}
 	
-	static public function apiSignature($api_signature) {
+	function apiSignature($api_signature) {
 		API::$api_signature = $api_signature;
 	}
 	
-	static public function apiUpdateNonce() {
+	function apiUpdateNonce() {
 		API::$api_update_nonce = 1;
 	}
 	
-	static public function send($nonce=false) {
+	function send($nonce=false) {
 		global $CFG;
 		
 		if (!is_array(API::$commands))
 			return false;
 
-		$commands['lang'] = (isset($CFG->language)) ? $CFG->language : false;
+		$commands['session_id'] = $_SESSION['session_id'];
+		$commands['nonce'] = ($nonce > 0) ? $nonce : $_SESSION['nonce'];
+		$commands['lang'] = $CFG->language;
 		$commands['commands'] = json_encode(API::$commands);
 		$commands['token'] = API::$token;
 		$commands['settings_change_id'] = bin2hex(API::$settings_change_id);
 		$commands['request_id'] = API::$request_id;
 		$commands['ip'] = self::getUserIp();
 
-		if (isset($_SESSION['session_key'])) {
-			$commands['session_id'] = $_SESSION['session_id'];
-			$commands['nonce'] = ($nonce > 0) ? $nonce : $_SESSION['nonce'];
-			openssl_sign($commands['commands'],$signature,$_SESSION['session_key']);
-			$commands['signature'] = bin2hex($signature);
-		}
+		if ($_SESSION['session_key']) openssl_sign($commands['commands'],$signature,$_SESSION['session_key']);
+		$commands['signature'] = bin2hex($signature);
 		
 		if (API::$api_key) {
 			$commands['api_key'] = API::$api_key;
@@ -65,14 +63,14 @@ class API{
 		$result = json_decode($result1,true);
 		curl_close($ch);
 		
-		if (!empty($result['nonce_updated']))
+		if ($result['nonce_updated'])
 			User::updateNonce();
 		
 		API::$commands = array();
 		return $result;
 	}
 	
-	static public function getUserIp($force_string=null) {
+	function getUserIp($force_string=null) {
 		$ip_addresses = array();
 		$ip_elements = array(
 				'HTTP_X_FORWARDED_FOR', 'HTTP_FORWARDED_FOR',
