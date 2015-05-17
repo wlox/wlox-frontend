@@ -366,6 +366,7 @@ include 'includes/head.php';
                 $personal->selectInput('country',Lang::string('settings-country'),1,false,$countries,false,array('name'));
                 $personal->textInput('email',Lang::string('settings-email'),'email');
                 $personal->selectInput('default_currency',Lang::string('default-currency'),0,$CFG->currencies['USD']['id'],$CFG->currencies,false,array('currency'));
+                $personal->textArea('pgp',Lang::string('settings-pgp'),false,'pgp');
                 $personal->HTML('<div class="form_button"><input type="submit" name="submit" value="'.Lang::string('settings-save-info').'" class="but_user" /></div><input type="hidden" name="submitted" value="1" />');
                 $personal->hiddenInput('uniq',1,$_SESSION["settings_uniq"]);
                 $personal->display();
