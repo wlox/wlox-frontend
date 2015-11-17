@@ -31,6 +31,11 @@ $endpoint = $_REQUEST['endpoint'];
 $invalid_signature = false;
 $invalid_currency = false;
 
+//api_signature is often considered an array, this obviously checks for this and corrects it.
+if(gettype($api_signature1) == "array")
+{
+	$api_signature1 = $api_signature1[0];
+}
 // check if API key/signature received
 if ($api_key1 && (strlen($api_key1) != 16 || strlen($api_signature1) != 64)) {
 	$return['errors'][] = array('message'=>'Invalid API key or signature.','code'=>'AUTH_INVALID_KEY');
